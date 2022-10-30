@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
 import "./AuthModal.scss";
 
 const AuthModal = (props) => {
@@ -39,9 +41,7 @@ const AuthModal = (props) => {
           </button>
         </div>
       </Modal.Header>
-      <Modal.Body>
-        {showLogin ? <div>Login</div> : <div>Register</div>}
-      </Modal.Body>
+      <Modal.Body>{showLogin ? <Login /> : <Register />}</Modal.Body>
     </Modal>
   );
 };
