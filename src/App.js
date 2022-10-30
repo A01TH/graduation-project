@@ -1,12 +1,11 @@
 import "./App.scss";
-import Button from "react-bootstrap/Button";
 import Navbar from "./components/navbar/Navbar";
+import GetStarted from "./Pages/GetStarted/GetStarted";
 function App() {
   return (
     <div className="App">
-      <>
-        <Navbar />
-      </>
+      <Navbar />
+      <GetStarted />
     </div>
   );
 }
