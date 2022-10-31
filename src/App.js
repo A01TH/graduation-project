@@ -1,5 +1,4 @@
 import "./App.scss";
-import Login from "./components/auth/Login";
 import Navbar from "./components/navbar/Navbar";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import GetStarted from "./Pages/GetStarted/GetStarted";

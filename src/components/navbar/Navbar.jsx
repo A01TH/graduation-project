@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../assets/logo/Logo.png";
+import logo from "../../assets/logo/Logo2.png";
 import user from "../../assets/navbar/nav-user.png";
+import { BsCoin, BsFillChatLeftTextFill } from "react-icons/bs";
+import { FaHome, FaRegSun, FaUserAlt } from "react-icons/fa";
+import { BiCategoryAlt } from "react-icons/bi";
+
 import "./Navbar.scss";
 const Header = () => {
   const [logged, setLogged] = useState(true);
@@ -36,13 +40,22 @@ const Header = () => {
                 }`}
               >
                 <li className="link">
-                  <NavLink to="/home">Home</NavLink>
+                  <NavLink to="/home">
+                    <FaHome className="me-2" />
+                    Home
+                  </NavLink>
                 </li>
                 <li className="link">
-                  <NavLink to="/home">Categories</NavLink>
+                  <NavLink to="/home">
+                    <BiCategoryAlt className="me-2" />
+                    Categories
+                  </NavLink>
                 </li>
                 <li className="link">
-                  <NavLink to="/home">Messages</NavLink>
+                  <NavLink to="/home">
+                    <BsFillChatLeftTextFill className="me-2" />
+                    Messages
+                  </NavLink>
                 </li>
                 <li>
                   <Dropdown>
@@ -55,9 +68,27 @@ const Header = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className="bg-transparent">
-                      <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/action-3">Connects</Dropdown.Item>
+                      <Dropdown.Item
+                        href="#/action-1"
+                        className="d-flex align-items-center justify-content-around"
+                      >
+                        <span>Profile</span>
+                        <FaUserAlt />
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        href="#/action-2"
+                        className="d-flex align-items-center justify-content-around"
+                      >
+                        <span>Settings</span>
+                        <FaRegSun />
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        href="#/action-3"
+                        className="d-flex align-items-center justify-content-around"
+                      >
+                        <span>Connects</span>
+                        <BsCoin />
+                      </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 </li>
