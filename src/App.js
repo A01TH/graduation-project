@@ -10,9 +10,8 @@ import GetStarted from "./Pages/GetStarted/GetStarted";
 function App() {
   return (
     <div className="App">
-      {/* <Navbar />
-      <GetStarted /> */}
-      <Register />
+      <Navbar />
+      <GetStarted />
     </div>
   );
 }
