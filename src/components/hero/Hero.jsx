@@ -1,11 +1,11 @@
 import React from "react";
 import "./Hero.scss";
 
-const Hero = () => {
+const Hero = (props) => {
   return (
-    <div class="hero">
-      <div class="container">
-        <h1>
+    <div className="hero">
+      <div className="container">
+        <h1 className="w-lg-50 w-md-75 w-100">
           Move on <span className="text-uppercase colored">Challenger</span>
           <div>
             and make more{" "}
@@ -13,7 +13,7 @@ const Hero = () => {
           </div>
           <div className="text-uppercase colored">You Can!</div>
         </h1>
-        <button>Start Challenge</button>
+        <button onClick={props.openAuthModal}>Start Challenge</button>
       </div>
     </div>
   );
