@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+.hero {
+  padding-top: 4rem;
+  text-align: start;
+  color: #eee;
+  font-family: "Roboto";
+}
+.hero h1 {
+  width: 60%;
+  font-size: 3rem;
+  padding-top: 4rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+  font-weight: 700;
+}
+.hero button {
+  background: #36175e;
+  color: #eee;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+}/*# sourceMappingURL=Hero.css.map */
