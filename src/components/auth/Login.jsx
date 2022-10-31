@@ -6,7 +6,7 @@ import {
   TbBrandInstagram,
   TbBrandTiktok,
 } from "react-icons/tb";
-import "./Auth.scss";
+import "./auth.scss";
 import { useForm } from "react-hook-form";
 
 const Login = () => {

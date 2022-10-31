@@ -5,9 +5,8 @@ import GetStarted from "./Pages/GetStarted/GetStarted";
 function App() {
   return (
     <div className="App">
-      <Login />
-      {/* <Navbar />
-      <GetStarted /> */}
+      <Navbar />
+      <GetStarted />
     </div>
   );
 }
