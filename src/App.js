@@ -2,6 +2,7 @@ import "./App.scss";
 import Navbar from "./components/navbar/Navbar";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import GetStarted from "./Pages/GetStarted/GetStarted";
+
 function App() {
   return (
     <div className="App">

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
+import Login from "../auth/Login";
+import Register from "../auth/Register";
 import "./AuthModal.scss";
 
 const AuthModal = (props) => {
