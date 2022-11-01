@@ -28,7 +28,7 @@ $link-hover-color: #36175e;
       width: 40px;
     }
   }
-  ul .link::before {
+  ul .link a::before {
     content: "";
     width: 0%;
     height: 4px;
@@ -39,7 +39,9 @@ $link-hover-color: #36175e;
     position: absolute;
     transition: all 0.3s ease-in-out;
   }
-  li:hover::before {
+
+  li:hover a::before,
+  li a.active::before {
     width: 100%;
   }
 }
@@ -78,8 +80,8 @@ $link-hover-color: #36175e;
 #nav-toggle {
   position: absolute;
   display: none;
-  right: 50px;
-  top: 22px;
+  right: 20px;
+  top: 30px;
   cursor: pointer;
   padding: 10px 35px 16px 0px;
   span,

@@ -46,13 +46,13 @@ const Header = () => {
                   </NavLink>
                 </li>
                 <li className="link">
-                  <NavLink to="/home">
+                  <NavLink to="/categoris">
                     <BiCategoryAlt className="me-2" />
                     Categories
                   </NavLink>
                 </li>
                 <li className="link">
-                  <NavLink to="/home">
+                  <NavLink to="/messages">
                     <BsFillChatLeftTextFill className="me-2" />
                     Messages
                   </NavLink>
