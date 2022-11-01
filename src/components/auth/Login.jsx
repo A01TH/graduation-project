@@ -10,8 +10,6 @@ import {
 } from "react-icons/tb";
 import "./auth.scss";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
   const {
@@ -20,21 +18,8 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const nav = useNavigate();
-
-  const { dispatch } = useContext(AuthContext);
-
   const onSubmit = (data) => {
-    signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        dispatch({ type: "LOGIN", payload: user });
-        nav("/Home");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    console.log(data);
   };
   return (
     <div className="login auth">

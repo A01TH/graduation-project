@@ -1,6 +1,5 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import DatePicker from "react-date-picker";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import { FaGoogle } from "react-icons/fa";
@@ -20,16 +19,7 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        // ...
-      })
-      .catch((error) => {
-        console.log(error);
-        // ..
-      });
+    console.log(data);
   };
 
   const [value, setValue] = useState();
