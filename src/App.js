@@ -3,7 +3,6 @@ import Navbar from "./components/navbar/Navbar";
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import GetStarted from "./Pages/GetStarted/GetStarted";
 import { useContext, useEffect } from "react";
-import { AuthContext } from "./context/AuthContext";
 
 function App() {
   return (
