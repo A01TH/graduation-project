@@ -1,7 +1,5 @@
-import React, { useContext } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
-import { RiFacebookCircleLine } from "react-icons/ri";
+import React from "react";
+
 import {
   TbBrandFacebook,
   TbBrandGoogle,
