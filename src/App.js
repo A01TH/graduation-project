@@ -2,8 +2,7 @@ import "./App.scss";
 import Navbar from "./components/navbar/Navbar";
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import GetStarted from "./Pages/GetStarted/GetStarted";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "./context/AuthContext";
+import NotFound from "./Pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -12,6 +11,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<GetStarted />} />
+          <Route path="/not-found" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
