@@ -85,15 +85,35 @@
     top: 50%;
     right: 40px;
   }
-
-  .login-form {
-    margin: auto;
-    max-width: 400px;
-  }
 }
 
 .phone-input {
   input {
     border: none;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.filter {
+  &__menu {
+    margin: 0.125rem auto;
+  }
+
+  &__option {
+    background-color: white;
+
+    &--is-focused {
+      background-color: red;
+    }
+  }
+
+  &__group {
+    padding: 0;
+  }
+
+  &__menu-portal {
+    border: 1px solid darkblue;
   }
 }

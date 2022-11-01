@@ -24,7 +24,7 @@ const AuthModal = (props) => {
       <Modal.Header closeButton className="border-0">
         <div className="d-flex justify-content-center align-items-center w-100">
           <button
-            className={`btn m-2 ${
+            className={`btn mx-2 ${
               showLogin ? "btn-selected" : "btn-unselected"
             }`}
             onClick={loginHandler}
@@ -32,7 +32,7 @@ const AuthModal = (props) => {
             Login
           </button>
           <button
-            className={`btn m-2 ${
+            className={`btn mx-2 ${
               showLogin ? "btn-unselected" : "btn-selected"
             }`}
             onClick={registerHandler}

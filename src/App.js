@@ -1,9 +1,17 @@
 import "./App.scss";
 import Navbar from "./components/navbar/Navbar";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import GetStarted from "./Pages/GetStarted/GetStarted";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
+  const { currentUser } = useContext(AuthContext);
+
+  const RequireAuth = ({ children }) => {
+    return currentUser ? children : <Navigate to="/" />;
+  };
+
   return (
     <div className="App">
       <BrowserRouter>

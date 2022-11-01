@@ -8,6 +8,8 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useState } from "react";
 import "./auth.scss";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const Register = () => {
   const {
@@ -17,11 +19,43 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        console.log(error);
+        // ..
+      });
+  };
 
   const [value, setValue] = useState();
 
   const [date, setDate] = useState();
+
+  const style = {
+    control: (base, state) => ({
+      ...base,
+      // This line disable the blue border
+      border: state.isFocused
+        ? "1px solid rgba(54,23,94, 0.5)"
+        : "1px solid #cccccc",
+      boxShadow: state.isFocused
+        ? "0px 0px 0px 4px rgba(54,23,94, 0.2)"
+        : "none",
+      "&:hover": {
+        border: state.isFocused
+          ? "1px solid rgba(54,23,94, 0.5)"
+          : "1px solid #cccccc",
+        boxShadow: state.isFocused
+          ? "0px 0px 0px 4px rgba(54,23,94, 0.2)"
+          : "none",
+      },
+    }),
+  };
 
   const options = [
     {
@@ -54,7 +88,7 @@ const Register = () => {
   ];
 
   return (
-    <div className=" mx-auto my-5">
+    <div className="px-3">
       <Button variant="warning" type="submit" className="d-block mx-auto w-50 ">
         <FaGoogle className="me-3" /> Signup with Google
       </Button>
@@ -133,7 +167,7 @@ const Register = () => {
           <Form.Group className="mb-3  me-2 w-50" controlId="formBasicPassword">
             <Form.Label>Gender </Form.Label>
 
-            <Select options={options} className="mb-3 w-100" />
+            <Select options={options} styles={style} className="mb-3 w-100" />
           </Form.Group>
 
           <Form.Group className="mb-3 w-50" controlId="formBasicNumber">
@@ -205,14 +239,15 @@ const Register = () => {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Interests </Form.Label>
 
-          <Select options={multiOptions} className="mb-3" isMulti />
+          <Select
+            options={multiOptions}
+            className="mb-3 select-custom"
+            styles={style}
+            isMulti
+          />
         </Form.Group>
 
-        <Button
-          variant="primary"
-          type="submit"
-          className="d-block w-50 mx-auto"
-        >
+        <Button variant="primary" type="submit" className="w-100">
           Signup
         </Button>
       </Form>

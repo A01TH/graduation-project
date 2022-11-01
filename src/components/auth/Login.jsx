@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 import { RiFacebookCircleLine } from "react-icons/ri";
 import {
   TbBrandFacebook,
@@ -8,6 +10,8 @@ import {
 } from "react-icons/tb";
 import "./auth.scss";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
   const {
@@ -15,15 +19,26 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const nav = useNavigate();
+
+  const { dispatch } = useContext(AuthContext);
+
+  const onSubmit = (data) => {
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        dispatch({ type: "LOGIN", payload: user });
+        nav("/Home");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="login auth">
-      <div className="wrapper pt-5">
-        <div className="btn-swticher d-flex justify-content-center gap-5 mb-3">
-          <button className="btn-switch-right">SignUp</button>
-          <button className="btn-switch-left">Login</button>
-        </div>
-        <h1 className="text-center ">Login</h1>
+      <div className="wrapper px-3">
         <div className="text-center login-methods d-flex gap-4 justify-content-center mb-3">
           <a className="text-decoration-none fs-1 font-c-sec" href="#">
             <TbBrandFacebook className=" " />
@@ -53,7 +68,7 @@ const Login = () => {
               })}
             />
             {errors.email && (
-              <p className="text-danger">Please enter a valied email</p>
+              <p className="text-danger">Please enter a valid email</p>
             )}
 
             <label className="form-label">Password</label>
@@ -67,8 +82,9 @@ const Login = () => {
             )}
 
             <input
-              className="btn-sec text-white w-100 rounded-1 py-1 mt-3"
+              className="btn btn-primary text-white w-100 mt-3"
               type="submit"
+              value="Login"
             />
           </form>
         </div>
@@ -77,7 +93,7 @@ const Login = () => {
             className=" text-decoration-none font-c-sec text-center d-block mb-1"
             href="#"
           >
-            Forgat Password?
+            Forget Password?
           </a>
           <div className="d-flex gap-5 justify-content-center">
             <p className="d-d-inline">Don't have an account?</p>
