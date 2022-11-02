@@ -3,16 +3,18 @@ import Navbar from "./components/navbar/Navbar";
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import GetStarted from "./Pages/GetStarted/GetStarted";
 import { useContext, useEffect } from "react";
+import Profile from "./Pages/GetStarted/profile/Profile";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Navbar />
         <Routes>
           <Route path="/" element={<GetStarted />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      <Profile />
     </div>
   );
 }
