@@ -4,11 +4,17 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./custom.scss";
 import reportWebVitals from "./reportWebVitals";
+import FirebaseProvider from "./context/FirebaseContext";
+import CurrentUserProvider from "./context/CurrentUser";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <FirebaseProvider>
+      <CurrentUserProvider>
+        <App />
+      </CurrentUserProvider>
+    </FirebaseProvider>
   </React.StrictMode>
 );
 

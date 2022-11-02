@@ -1,3 +1,5 @@
+import React, { useContext } from "react";
+
 import {
   TbBrandFacebook,
   TbBrandGoogle,
@@ -6,8 +8,17 @@ import {
 } from "react-icons/tb";
 import "./auth.scss";
 import { useForm } from "react-hook-form";
-
+import { FirebaseContext } from "../../context/FirebaseContext";
 const Login = () => {
+  const { auth, firebase } = useContext(FirebaseContext);
+  const handleLoginWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth
+      .signInWithPopup(provider)
+      .then((res) => console.log(res))
+      .catch((err) => err);
+  };
+
   const {
     register,
     handleSubmit,
@@ -17,19 +28,23 @@ const Login = () => {
   const onSubmit = (data) => {
     console.log(data);
   };
+
   return (
     <div className="login auth">
       <div className="wrapper px-3">
         <div className="text-center login-methods d-flex gap-4 justify-content-center mb-3">
           <a className="text-decoration-none fs-1 font-c-sec" href="#">
             <TbBrandFacebook className=" " />
-          </a>{" "}
-          <a className="text-decoration-none fs-1 font-c-sec" href="#">
+          </a>
+          <a
+            className="text-decoration-none fs-1 font-c-sec"
+            onClick={handleLoginWithGoogle}
+          >
             <TbBrandGoogle className=" " />
           </a>
           <a className="text-decoration-none fs-1 font-c-sec" href="#">
             <TbBrandTiktok className=" " />
-          </a>{" "}
+          </a>
           <a className="text-decoration-none fs-1 font-c-sec" href="#">
             <TbBrandInstagram className=" " />
           </a>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo/Logo2.png";
@@ -6,10 +6,22 @@ import user from "../../assets/navbar/nav-user.png";
 import { BsCoin, BsFillChatLeftTextFill } from "react-icons/bs";
 import { FaHome, FaRegSun, FaUserAlt } from "react-icons/fa";
 import { BiCategoryAlt } from "react-icons/bi";
-
+import { currentContext } from "../../context/CurrentUser";
 import "./Navbar.scss";
+import { FirebaseContext } from "../../context/FirebaseContext";
 const Header = () => {
-  const [logged, setLogged] = useState(true);
+  const { userData } = useContext(currentContext);
+  const { auth } = useContext(FirebaseContext);
+  const [logged, setLogged] = useState(false);
+  useEffect(() => {
+    if (userData) {
+      setLogged(true);
+      console.log(userData);
+    } else {
+      setLogged(false);
+    }
+  }, [userData]);
+
   const [mobNav, setMobNav] = useState(false);
   const handleMobileNav = () => {
     setMobNav((prev) => !prev);
@@ -64,7 +76,10 @@ const Header = () => {
                       id="dropdown-basic"
                       className="border-0"
                     >
-                      <img src={user} alt="user" />
+                      <img
+                        src={`${userData ? userData.photoURL : user} `}
+                        alt="user"
+                      />
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className="bg-transparent">
@@ -87,6 +102,13 @@ const Header = () => {
                         className="d-flex align-items-center justify-content-around"
                       >
                         <span>Connects</span>
+                        <BsCoin />
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        onClick={() => auth.signOut()}
+                        className="d-flex align-items-center justify-content-around"
+                      >
+                        <span>Logout</span>
                         <BsCoin />
                       </Dropdown.Item>
                     </Dropdown.Menu>
