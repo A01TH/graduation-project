@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 export const FirebaseContext = createContext();

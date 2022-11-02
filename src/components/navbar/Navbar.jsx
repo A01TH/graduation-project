@@ -12,10 +12,14 @@ import { FirebaseContext } from "../../context/FirebaseContext";
 const Header = () => {
   const { userData } = useContext(currentContext);
   const { auth } = useContext(FirebaseContext);
-
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState(false);
   useEffect(() => {
-    console.log(userData);
+    if (userData) {
+      setLogged(true);
+      console.log(userData);
+    } else {
+      setLogged(false);
+    }
   }, [userData]);
 
   const [mobNav, setMobNav] = useState(false);
@@ -41,7 +45,7 @@ const Header = () => {
                 <span></span>
               </div>
             </div>
-            {userData ? (
+            {logged ? (
               <ul
                 className={`nav-list list-unstyled  d-flex  d-flex gap-4 align-items-center justify-content-center ${
                   mobNav && "show"
@@ -72,7 +76,10 @@ const Header = () => {
                       id="dropdown-basic"
                       className="border-0"
                     >
-                      <img src={user} alt="user" />
+                      <img
+                        src={`${userData ? userData.photoURL : user} `}
+                        alt="user"
+                      />
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className="bg-transparent">
@@ -101,7 +108,7 @@ const Header = () => {
                         onClick={() => auth.signOut()}
                         className="d-flex align-items-center justify-content-around"
                       >
-                        <span>SignOut</span>
+                        <span>Logout</span>
                         <BsCoin />
                       </Dropdown.Item>
                     </Dropdown.Menu>
