@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-
 import {
   TbBrandFacebook,
   TbBrandGoogle,
@@ -9,13 +8,17 @@ import {
 import "./auth.scss";
 import { useForm } from "react-hook-form";
 import { FirebaseContext } from "../../context/FirebaseContext";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
+  const navigate = useNavigate();
   const { auth, firebase } = useContext(FirebaseContext);
   const handleLoginWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth
       .signInWithPopup(provider)
-      .then((res) => console.log(res))
+      .then(() => navigate("/home"))
       .catch((err) => err);
   };
 
@@ -26,6 +29,16 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+
+        // ...
+      })
+      .catch((error) => {
+        return error;
+      });
     console.log(data);
   };
 

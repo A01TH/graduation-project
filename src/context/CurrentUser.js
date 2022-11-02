@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect } from "react";
 import { FirebaseContext } from "./FirebaseContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+
 export const currentContext = createContext();
 
 const CurrentUserProvider = ({ children }) => {
@@ -10,10 +11,11 @@ const CurrentUserProvider = ({ children }) => {
   const query =
     userData?.uid && userCollection.where("uid", "==", userData.uid);
   const [currentUser] = useCollectionData(query);
+  console.log("userData", userData);
   useEffect(() => {
     if (currentUser?.length === 0) {
       userCollection.add({
-        displayName: userData.displayName,
+        displayName: userData.displayName || userData.email,
         photoUrl: userData.photoURL,
         uid: userData.uid,
       });
