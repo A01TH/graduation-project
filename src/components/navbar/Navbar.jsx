@@ -40,7 +40,7 @@ const Header = () => {
               <div
                 id="nav-toggle"
                 onClick={handleMobileNav}
-                className={mobNav && "active"}
+                className={mobNav ? "active" : undefined}
               >
                 <span></span>
               </div>
