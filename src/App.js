@@ -4,6 +4,7 @@ import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import GetStarted from "./Pages/GetStarted/GetStarted";
 import { useContext, useEffect } from "react";
 import NotFound from "./Pages/NotFound/NotFound";
+import TopChallengers from "./Pages/TopChallengers/TopChallengers";
 
 function App() {
   return (
