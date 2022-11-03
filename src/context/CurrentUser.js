@@ -1,27 +1,33 @@
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { FirebaseContext } from "./FirebaseContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+
 export const currentContext = createContext();
 
 const CurrentUserProvider = ({ children }) => {
   const { auth, userCollection } = useContext(FirebaseContext);
   const [userData] = useAuthState(auth);
+  const [userInfo, setUserInfo] = useState();
   const query =
     userData?.uid && userCollection.where("uid", "==", userData.uid);
   const [currentUser] = useCollectionData(query);
+  console.log(userData);
   useEffect(() => {
     if (currentUser?.length === 0) {
       userCollection.add({
-        displayName: userData.displayName,
-        photoUrl: userData.photoURL,
         uid: userData.uid,
+        name: userData.displayName || userInfo.name,
+        email: userData.email || userInfo.email,
+        photoUrl: userData.photoURL,
+        // phoneNum: userData.phoneNumber || userInfo.phoneNumber || null,
       });
+      setUserInfo([]);
     }
   }, [currentUser]);
 
   return (
-    <currentContext.Provider value={{ userData }}>
+    <currentContext.Provider value={{ userData, setUserInfo }}>
       {children}
     </currentContext.Provider>
   );

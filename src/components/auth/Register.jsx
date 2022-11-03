@@ -5,10 +5,18 @@ import Select from "react-select";
 import { FaGoogle } from "react-icons/fa";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./auth.scss";
+import { FirebaseContext } from "../../context/FirebaseContext";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { currentContext } from "../../context/CurrentUser";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { auth, firebase } = useContext(FirebaseContext);
+  const { setUserInfo } = useContext(currentContext);
+
   const {
     register,
     handleSubmit,
@@ -17,9 +25,23 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        navigate("/home");
+        setUserInfo(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-
+  const handleLoginWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth
+      .signInWithPopup(provider)
+      .then(() => navigate("/home"))
+      .catch((err) => err);
+  };
   const [value, setValue] = useState();
 
   const [date, setDate] = useState();
@@ -77,7 +99,12 @@ const Register = () => {
 
   return (
     <div className="px-3">
-      <Button variant="warning" type="submit" className="d-block mx-auto w-50 ">
+      <Button
+        onClick={handleLoginWithGoogle}
+        variant="warning"
+        type="submit"
+        className="d-block mx-auto w-50 "
+      >
         <FaGoogle className="me-3" /> Signup with Google
       </Button>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -145,9 +172,10 @@ const Register = () => {
           <Form.Label>Phone Number</Form.Label>
           <PhoneInput
             placeholder="Enter phone number"
-            value={value}
-            onChange={setValue}
             className="mb-3 phone-input form-control d-flex"
+            {...register("phoneNumber", {
+              required: true,
+            })}
           />
         </Form.Group>
 
@@ -218,7 +246,6 @@ const Register = () => {
             )}
             {errors?.confirmPass?.type === "validate" && (
               <Form.Text className="text-danger">
-                {" "}
                 Passwords don't match
               </Form.Text>
             )}

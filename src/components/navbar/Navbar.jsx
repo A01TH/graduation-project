@@ -2,26 +2,32 @@ import React, { useContext, useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo/Logo2.png";
-import user from "../../assets/navbar/nav-user.png";
+import user from "../../assets/navbar/profile.svg";
 import { BsCoin, BsFillChatLeftTextFill } from "react-icons/bs";
 import { FaHome, FaRegSun, FaUserAlt } from "react-icons/fa";
 import { BiCategoryAlt } from "react-icons/bi";
 import { currentContext } from "../../context/CurrentUser";
 import "./Navbar.scss";
 import { FirebaseContext } from "../../context/FirebaseContext";
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+
 const Header = () => {
   const { userData } = useContext(currentContext);
   const { auth } = useContext(FirebaseContext);
+  const navigate = useNavigate();
   const [logged, setLogged] = useState(false);
   useEffect(() => {
     if (userData) {
       setLogged(true);
-      console.log(userData);
     } else {
       setLogged(false);
     }
   }, [userData]);
-
+  const handleSignOut = () => {
+    auth.signOut();
+    navigate("/");
+  };
   const [mobNav, setMobNav] = useState(false);
   const handleMobileNav = () => {
     setMobNav((prev) => !prev);
@@ -31,7 +37,7 @@ const Header = () => {
       <div className="container">
         <header className="d-flex align-items-center justify-content-between w-100 h-100">
           <div className="brand">
-            <Link to="/">
+            <Link to={`${logged ? "/home" : "/"}`}>
               <img src={logo} alt="" />
             </Link>
           </div>
@@ -58,7 +64,7 @@ const Header = () => {
                   </NavLink>
                 </li>
                 <li className="link">
-                  <NavLink to="/categoris">
+                  <NavLink to="/categories">
                     <BiCategoryAlt className="me-2" />
                     Categories
                   </NavLink>
@@ -77,7 +83,12 @@ const Header = () => {
                       className="border-0"
                     >
                       <img
-                        src={`${userData ? userData.photoURL : user} `}
+                        className="rounded-circle"
+                        src={`${
+                          userData && userData.photoURL
+                            ? userData.photoURL
+                            : user
+                        } `}
                         alt="user"
                       />
                     </Dropdown.Toggle>
@@ -105,7 +116,7 @@ const Header = () => {
                         <BsCoin />
                       </Dropdown.Item>
                       <Dropdown.Item
-                        onClick={() => auth.signOut()}
+                        onClick={handleSignOut}
                         className="d-flex align-items-center justify-content-around"
                       >
                         <span>Logout</span>
@@ -118,10 +129,12 @@ const Header = () => {
             ) : (
               <ul className="nav-list list-unstyled  d-flex gap-4  align-items-center justify-content-center">
                 <li className="link">
-                  <NavLink to="/home">Why Chall.go</NavLink>
+                  <NavLink to="/about">Why Chall.go</NavLink>
                 </li>
                 <li>
-                  <button className="btn btn-light">Get Started</button>
+                  <Button variant="outline-primary" className="text-light">
+                    Get Started
+                  </Button>
                 </li>
               </ul>
             )}
