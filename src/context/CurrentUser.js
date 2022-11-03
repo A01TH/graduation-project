@@ -12,7 +12,6 @@ const CurrentUserProvider = ({ children }) => {
   const query =
     userData?.uid && userCollection.where("uid", "==", userData.uid);
   const [currentUser] = useCollectionData(query);
-  console.log(userData);
   useEffect(() => {
     if (currentUser?.length === 0) {
       userCollection.add({
