@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo/Logo2.png";
-import user from "../../assets/navbar/nav-user.png";
+import user from "../../assets/navbar/profile.svg";
 import { BsCoin, BsFillChatLeftTextFill } from "react-icons/bs";
 import { FaHome, FaRegSun, FaUserAlt } from "react-icons/fa";
 import { BiCategoryAlt } from "react-icons/bi";
@@ -10,6 +10,7 @@ import { currentContext } from "../../context/CurrentUser";
 import "./Navbar.scss";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 const Header = () => {
   const { userData } = useContext(currentContext);
@@ -83,7 +84,11 @@ const Header = () => {
                     >
                       <img
                         className="rounded-circle"
-                        src={`${userData ? userData.photoURL : user} `}
+                        src={`${
+                          userData && userData.photoURL
+                            ? userData.photoURL
+                            : user
+                        } `}
                         alt="user"
                       />
                     </Dropdown.Toggle>
@@ -127,7 +132,9 @@ const Header = () => {
                   <NavLink to="/about">Why Chall.go</NavLink>
                 </li>
                 <li>
-                  <button className="btn btn-light">Get Started</button>
+                  <Button variant="outline-primary" className="text-light">
+                    Get Started
+                  </Button>
                 </li>
               </ul>
             )}
