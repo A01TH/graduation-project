@@ -5,10 +5,11 @@ import GetStarted from "./Pages/GetStarted/GetStarted";
 import { useContext, useEffect } from "react";
 import NotFound from "./Pages/NotFound/NotFound";
 import TopChallengers from "./Pages/TopChallengers/TopChallengers";
+import Category from "./Pages/Category/Category";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App ">
       <BrowserRouter>
         <Navbar />
         <Routes>
