@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import FirebaseProvider from "./context/FirebaseContext";
 import CurrentUserProvider from "./context/CurrentUser";
 import Chat from "./Pages/Chat/Chat";
-
+// import Navbar from "./components/navbar/Navbar";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
@@ -17,7 +17,10 @@ root.render(
   //     </CurrentUserProvider>
   //   </FirebaseProvider>
   // </React.StrictMode>
-  <Chat />
+  <div>
+    {/* <Navbar /> */}
+    <Chat />
+  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function
