@@ -7,6 +7,7 @@ import Home from "./Pages/Home/Home";
 import Categories from "./Pages/Categories/Categories";
 import About from "./Pages/About/About";
 import { RequireAuth } from "./components/ProtectedRoutes/RequireAuth";
+import { LoggedUser } from "./components/ProtectedRoutes/LoggedUser";
 
 function App() {
   return (
@@ -14,7 +15,14 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<GetStarted />} />
+          <Route
+            path="/"
+            element={
+              <LoggedUser>
+                <GetStarted />
+              </LoggedUser>
+            }
+          />
           <Route
             path="/home"
             element={

@@ -10,10 +10,13 @@ import "./auth.scss";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { currentContext } from "../../context/CurrentUser";
 
 const Register = () => {
   const navigate = useNavigate();
   const { auth, firebase } = useContext(FirebaseContext);
+  const { setUserInfo } = useContext(currentContext);
+
   const {
     register,
     handleSubmit,
@@ -26,6 +29,7 @@ const Register = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         navigate("/home");
+        setUserInfo(data);
       })
       .catch((error) => {
         console.log(error);
@@ -168,9 +172,10 @@ const Register = () => {
           <Form.Label>Phone Number</Form.Label>
           <PhoneInput
             placeholder="Enter phone number"
-            value={value}
-            onChange={setValue}
             className="mb-3 phone-input form-control d-flex"
+            {...register("phoneNumber", {
+              required: true,
+            })}
           />
         </Form.Group>
 
@@ -241,7 +246,6 @@ const Register = () => {
             )}
             {errors?.confirmPass?.type === "validate" && (
               <Form.Text className="text-danger">
-                {" "}
                 Passwords don't match
               </Form.Text>
             )}

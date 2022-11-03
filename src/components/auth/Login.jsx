@@ -14,11 +14,13 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
   const { auth, firebase } = useContext(FirebaseContext);
+
   const handleLoginWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth
       .signInWithPopup(provider)
       .then(() => navigate("/home"))
+
       .catch((err) => err);
   };
 
