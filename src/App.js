@@ -10,9 +10,12 @@ import About from "./Pages/About/About";
 import { RequireAuth } from "./components/ProtectedRoutes/RequireAuth";
 import { LoggedUser } from "./components/ProtectedRoutes/LoggedUser";
 import Profile from "./Pages/Profile/Profile";
+import Category from "./Pages/Category/Category"
+import TopChallengers from "./Pages/TopChallengers/TopChallengers"
+
 function App() {
   return (
-    <div className="App">
+    <div className="App ">
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -41,6 +44,8 @@ function App() {
             }
           />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/TopChallengers" element={<TopChallengers />} />
           <Route path="/about" element={<About />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>

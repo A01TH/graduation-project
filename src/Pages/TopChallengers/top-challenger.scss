@@ -1,0 +1,47 @@
+.page-height {
+  height: 100vh;
+  padding-top: 80px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #090016;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+// .bg-color {
+//   background: linear-gradient(to bottom, #f22e52 50%, #8a3266 50%);
+// }
+
+.top-challenge {
+  tbody,
+  td,
+  tfoot,
+  th,
+  thead,
+  tr {
+    border: none !important;
+  }
+
+  .vh-50 {
+    height: 60vh;
+  }
+
+  .scroll {
+    scrollbar-color: #000;
+  }
+}
