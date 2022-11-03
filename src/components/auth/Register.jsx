@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import { FaGoogle } from "react-icons/fa";
 import PhoneInput from "react-phone-number-input";
@@ -22,9 +22,11 @@ const Register = () => {
     handleSubmit,
     watch,
     formState: { errors },
+    control,
   } = useForm();
 
   const onSubmit = (data) => {
+    console.log(data);
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -96,6 +98,14 @@ const Register = () => {
       label: "Cooking",
     },
   ];
+
+  // const handleChangeOnGender = ({ value }) => {
+  //   register("gender", { value: value });
+  // };
+
+  // const handleChangeOnInterest = (data) => {
+  //   register("Interests", { value: data });
+  // };
 
   return (
     <div className="px-3">
@@ -183,7 +193,19 @@ const Register = () => {
           <Form.Group className="mb-3  me-2 w-50" controlId="formBasicPassword">
             <Form.Label>Gender </Form.Label>
 
-            <Select options={options} styles={style} className="mb-3 w-100" />
+            {/* <Select
+              options={options}
+              type="gender"
+              styles={style}
+              className="mb-3 w-100"
+              onChange={handleChangeOnGender}
+            /> */}
+
+            <Controller
+              name="gender"
+              control={control}
+              render={({ field }) => <Select {...field} options={options} />}
+            />
           </Form.Group>
 
           <Form.Group className="mb-3 w-50" controlId="formBasicNumber">
@@ -254,11 +276,12 @@ const Register = () => {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Interests </Form.Label>
 
-          <Select
-            options={multiOptions}
-            className="mb-3 select-custom"
-            styles={style}
-            isMulti
+          <Controller
+            name="intersts"
+            control={control}
+            render={({ field }) => (
+              <Select {...field} options={multiOptions} isMulti />
+            )}
           />
         </Form.Group>
 
