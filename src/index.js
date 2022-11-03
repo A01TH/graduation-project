@@ -6,16 +6,18 @@ import "./custom.scss";
 import reportWebVitals from "./reportWebVitals";
 import FirebaseProvider from "./context/FirebaseContext";
 import CurrentUserProvider from "./context/CurrentUser";
+import Chat from "./Pages/Chat/Chat";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <FirebaseProvider>
-      <CurrentUserProvider>
-        <App />
-      </CurrentUserProvider>
-    </FirebaseProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  //   <FirebaseProvider>
+  //     <CurrentUserProvider>
+  //       <App />
+  //     </CurrentUserProvider>
+  //   </FirebaseProvider>
+  // </React.StrictMode>
+  <Chat />
 );
 
 // If you want to start measuring performance in your app, pass a function

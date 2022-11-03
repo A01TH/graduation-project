@@ -5,10 +5,13 @@ import Select from "react-select";
 import { FaGoogle } from "react-icons/fa";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./auth.scss";
+import { FirebaseContext } from "../../context/FirebaseContext";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Register = () => {
+  const { auth, firebase } = useContext(FirebaseContext);
   const {
     register,
     handleSubmit,
@@ -17,7 +20,17 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
   };
 
   const [value, setValue] = useState();
@@ -178,8 +191,6 @@ const Register = () => {
               placeholder="Password"
               {...register("password", {
                 required: true,
-                pattern:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$/,
               })}
             />
             {errors?.password?.type === "required" && (

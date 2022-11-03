@@ -9,6 +9,7 @@ import {
 import "./auth.scss";
 import { useForm } from "react-hook-form";
 import { FirebaseContext } from "../../context/FirebaseContext";
+import { signInWithEmailAndPassword } from "firebase/auth";
 const Login = () => {
   const { auth, firebase } = useContext(FirebaseContext);
   const handleLoginWithGoogle = () => {
@@ -26,6 +27,18 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+
+    signInWithEmailAndPassword(auth, data.email,data.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
     console.log(data);
   };
 
