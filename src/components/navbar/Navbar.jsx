@@ -94,13 +94,12 @@ const Header = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className="bg-transparent">
-                      <Dropdown.Item
-                        href="#/action-1"
-                        className="d-flex align-items-center justify-content-around"
-                      >
-                        <span>Profile</span>
-                        <FaUserAlt />
-                      </Dropdown.Item>
+                      <Link to="/profile">
+                        <Dropdown.Item className="d-flex align-items-center justify-content-around">
+                          <span>Profile</span>
+                          <FaUserAlt />
+                        </Dropdown.Item>
+                      </Link>
                       <Dropdown.Item
                         href="#/action-2"
                         className="d-flex align-items-center justify-content-around"
