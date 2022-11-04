@@ -1,9 +1,23 @@
+::-webkit-scrollbar-thumb {
+  background-color: #2c2c2c;
+  border-radius: 0.375rem;
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.01);
+}
+::-webkit-scrollbar {
+  background-color: #212121;
+  width: 0.375rem;
+}
+
 .chat {
+  height: calc(100vh - 70px);
+  max-height: calc(100vh - 70px);
+  margin-top: 70px;
+
   .outline-none {
     outline: 0px;
   }
   .chat-search {
-    background-color: #2c2c2c;
+    background-color: #101010;
 
     input {
       // background-color: #2c2c2c;
@@ -15,8 +29,6 @@
     background-size: 500px;
     background-position: center;
   }
-  height: calc(100vh - 70px);
-  margin-top: 70px;
 
   .chat-messages {
     height: calc(100vh - 150px);
@@ -31,7 +43,19 @@
     .message {
       background-color: #766ac8;
       border-radius: 10px 0px 10px 0px;
+      // position: relative;
     }
+    // .message::after {
+    //   position: absolute;
+    //   content: "";
+    //   content: "";
+    //   border-left: 20px solid #cc0000;
+    //   border-bottom: 20px solid #cc0000;
+    //   mask-border: revert;
+    //   border-top-right-radius: 50px;
+    //   top: -10px;
+    //   left: 0;
+    // }
     .message-to {
       flex-direction: row-reverse;
     }
@@ -39,9 +63,23 @@
   p {
     margin: 0;
   }
+
   .chat-sidebar {
+    height: 100%;
+    max-height: calc(100vh - 70px);
     background-color: #212121;
     border-right: 1px solid #343434;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      background-color: transparent;
+      width: 0px;
+      transition: all 1s ease-in-out;
+    }
+
+    &:hover::-webkit-scrollbar {
+      width: 0.375rem;
+    }
 
     .chat-users {
       img {
@@ -59,7 +97,7 @@
     }
   }
 
-  .active-chat-user {
+  .selected {
     margin-inline: 7px;
     background-color: #766ac8;
     border-radius: 20px;
@@ -74,14 +112,14 @@
       background-color: #212121;
       border-radius: 0px 10px;
     }
-    input:after {
-      content: "";
+    input::after {
       z-index: 10 !important;
       position: absolute;
+      content: "aaaaaaa";
       background-color: red;
       width: 100px;
       height: 100px;
-      top: 0;
+      top: 2px;
       left: 0;
     }
     button {

@@ -12,6 +12,7 @@ const Message = () => {
           />
           <div className="message p-1 px-2 mt-3">
             <p>hi how are you</p>
+        
           </div>
         </div>
       </div>
