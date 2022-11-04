@@ -1,6 +1,20 @@
-.profile-info{
-    .profile-img{
-        position: relative;
-        transform: translateY(-25%);
+.profile-info {
+  .profile-img {
+    position: relative;
+    transform: translateY(-25%);
+  }
+
+  .cam-btn {
+    top: 75%;
+    right: 25%;
+  }
+
+  .icon-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+    &:hover {
+      color: white !important;
     }
+  }
 }

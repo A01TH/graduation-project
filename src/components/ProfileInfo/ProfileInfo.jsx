@@ -1,4 +1,3 @@
-import "./ProfileInfo.scss";
 import { ImStarFull, ImStarHalf } from "react-icons/im";
 import { useState } from "react";
 import {
@@ -6,10 +5,14 @@ import {
   AiOutlineMessage,
   AiOutlineStop,
   AiOutlineUserAdd,
+  AiFillCamera,
 } from "react-icons/ai";
+import { Modal } from "react-bootstrap";
+import "./ProfileInfo.scss";
 
 const ProfileInfo = () => {
   const [currentUser, setCurrentUser] = useState(false);
+  const [smShow, setSmShow] = useState(false);
 
   return (
     <div className="profile-info">
@@ -21,6 +24,29 @@ const ProfileInfo = () => {
               alt="user"
               className="img-fluid w-75 border rounded-circle border-4 border-primary"
             />
+
+            <button
+              className="btn btn-primary p-2 py-1 cam-btn text-white rounded-circle me-3 position-absolute"
+              onClick={() => setSmShow(true)}
+            >
+              <AiFillCamera />
+            </button>
+            <Modal
+              size="sm"
+              show={smShow}
+              onHide={() => setSmShow(false)}
+              aria-labelledby="example-modal-sizes-title-sm"
+            >
+              <Modal.Header className="border-0" closeButton></Modal.Header>
+              <Modal.Body>
+                <img
+                  src={require("./Sample.png")}
+                  alt="user"
+                  className="img-fluid w-75 mx-auto d-block border rounded-circle border-4 border-primary"
+                />
+                <input type="file" name="" id="" />
+              </Modal.Body>
+            </Modal>
           </div>
         </div>
         <div className="col-md-9">
@@ -37,13 +63,13 @@ const ProfileInfo = () => {
                   </button>
                 ) : (
                   <>
-                    <button className="btn btn-outline-secondary btn-lg border-0  report-btn">
+                    <button className="icon-btn text-secondary me-3 h4">
                       <AiOutlineStop />
                     </button>
-                    <button className="btn btn-outline-secondary btn-lg border-0  message-btn">
+                    <button className="icon-btn text-secondary me-3 h4">
                       <AiOutlineMessage />
                     </button>
-                    <button className="btn btn-outline-secondary btn-lg border-0  add-friend-btn">
+                    <button className="icon-btn text-secondary me-3 h4">
                       <AiOutlineUserAdd />
                     </button>
                   </>

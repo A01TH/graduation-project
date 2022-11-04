@@ -33,6 +33,7 @@ const ProfileAbout = () => {
       // This line disable the blue border
       background: "#000",
       textColor: "white",
+      width: "100%",
       border: state.isFocused
         ? "1px solid rgba(54,23,94, 0.5)"
         : "1px solid #cccccc",
@@ -49,8 +50,14 @@ const ProfileAbout = () => {
       },
     }),
     option: (base, state) => ({
+      ...base,
       background: "#000",
       textColor: "#fff",
+      cursor: "pointer",
+    }),
+    input: (base, state) => ({
+      ...base,
+      width: "100%",
     }),
   };
 
@@ -68,7 +75,7 @@ const ProfileAbout = () => {
         <div className="info-interests d-flex flex-wrap text-center gap-3 mb-3">
           {!editInterests ? (
             interests.map((interest) => (
-              <div className="interest rounded-4 border px-4">
+              <div className="interest bg-secondary rounded-1 px-4">
                 {interest.label}
               </div>
             ))
@@ -122,7 +129,7 @@ const ProfileAbout = () => {
       </div> */}
 
       <div className="about-contacts">
-        <div className="contacts-label text-center p-3 text-uppercase border bg-body rounded-2 fw-bold mb-4">
+        <div className="contacts-label text-center p-3 text-uppercase border rounded-2 fw-bold mb-4">
           Contacts
         </div>
         <div className="contacts-list">
