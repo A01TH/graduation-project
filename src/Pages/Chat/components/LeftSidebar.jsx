@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
-
+import { FirebaseContext } from "../../../context/FirebaseContext";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import User from "./User";
+import { currentContext } from "../../../context/CurrentUser";
 const LeftSidebar = () => {
+  const { userCollection } = useContext(FirebaseContext);
+  const { userData } = useContext(currentContext);
+  const [users] = useCollectionData(userCollection);
   return (
     <div className="chat-sidebar">
       <div className="wrapper pt-2">
@@ -14,116 +20,11 @@ const LeftSidebar = () => {
           />
         </div>
         <div className="chat-users">
-          <div className="contact-user d-flex gap-2 align-items-center p-2 ps-3 active-chat-user">
-            <img
-              className="rounded-circle"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7GoLl5TulaocWLQ8pi__zObTN8Sj5PmFvec-6NEPb&s"
-              alt=""
-            />
-            <div>
-              <span>Jaane</span>
-              <p>hi how are you</p>
-            </div>
-          </div>{" "}
-          <div className="contact-user d-flex gap-2 align-items-center p-2 ps-3">
-            <img
-              className="rounded-circle"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7GoLl5TulaocWLQ8pi__zObTN8Sj5PmFvec-6NEPb&s"
-              alt=""
-            />
-            <div>
-              <span>Jaane</span>
-              <p>hi how are you</p>
-            </div>
-          </div>{" "}
-          <div className="contact-user d-flex gap-2 align-items-center p-2 ps-3 ">
-            <img
-              className="rounded-circle"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7GoLl5TulaocWLQ8pi__zObTN8Sj5PmFvec-6NEPb&s"
-              alt=""
-            />
-            <div>
-              <span>Jaane</span>
-              <p>hi how are you</p>
-            </div>
-          </div>
-          <div className="contact-user d-flex gap-2 align-items-center p-2 ps-3 ">
-            <img
-              className="rounded-circle"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7GoLl5TulaocWLQ8pi__zObTN8Sj5PmFvec-6NEPb&s"
-              alt=""
-            />
-            <div>
-              <span>Jaane</span>
-              <p>hi how are you</p>
-            </div>
-          </div>{" "}
-          <div className="contact-user d-flex gap-2 align-items-center p-2 ps-3 ">
-            <img
-              className="rounded-circle"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7GoLl5TulaocWLQ8pi__zObTN8Sj5PmFvec-6NEPb&s"
-              alt=""
-            />
-            <div>
-              <span>jake jake</span>
-              <p>hi how rejk mf you</p>
-            </div>
-          </div>{" "}
-          <div className="contact-user d-flex gap-2 align-items-center p-2 ps-3 ">
-            <img
-              className="rounded-circle"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7GoLl5TulaocWLQ8pi__zObTN8Sj5PmFvec-6NEPb&s"
-              alt=""
-            />
-            <div>
-              <span>Jaane jifew</span>
-              <p>hi are you</p>
-            </div>
-          </div>{" "}
-          <div className="contact-user d-flex gap-2 align-items-center p-2 ps-3 ">
-            <img
-              className="rounded-circle"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7GoLl5TulaocWLQ8pi__zObTN8Sj5PmFvec-6NEPb&s"
-              alt=""
-            />
-            <div>
-              <span>Jaane</span>
-              <p>hi how are you</p>
-            </div>
-          </div>{" "}
-          <div className="contact-user d-flex gap-2 align-items-center p-2 ps-3 ">
-            <img
-              className="rounded-circle"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7GoLl5TulaocWLQ8pi__zObTN8Sj5PmFvec-6NEPb&s"
-              alt=""
-            />
-            <div>
-              <span>Jaane</span>
-              <p>hi how are you</p>
-            </div>
-          </div>{" "}
-          <div className="contact-user d-flex gap-2 align-items-center p-2 ps-3 ">
-            <img
-              className="rounded-circle"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7GoLl5TulaocWLQ8pi__zObTN8Sj5PmFvec-6NEPb&s"
-              alt=""
-            />
-            <div>
-              <span>Jaane</span>
-              <p>hi how are you</p>
-            </div>
-          </div>{" "}
-          <div className="contact-user d-flex gap-2 align-items-center p-2 ps-3 ">
-            <img
-              className="rounded-circle"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7GoLl5TulaocWLQ8pi__zObTN8Sj5PmFvec-6NEPb&s"
-              alt=""
-            />
-            <div>
-              <span>Jaane</span>
-              <p>hi how are you</p>
-            </div>
-          </div>
+          {users
+            ?.filter((data) => data.uid !== userData.uid)
+            .map((user) => {
+              return <User user={user} key={user.uid} />;
+            })}
         </div>
       </div>
     </div>

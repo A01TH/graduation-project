@@ -20,13 +20,3 @@ const Chat = () => {
 };
 
 export default Chat;
-
-{
-  /* <ChatNavbar /> */
-}
-{
-  /* <div className="container row text-white g-0">
-        <LeftSidebar className="col-3" />
-        <ChatSection className="col-6" />
-      </div> */
-}

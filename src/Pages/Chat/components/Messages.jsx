@@ -6,8 +6,7 @@ const Messages = () => {
     <div className="chat-messages">
       <div className="wrapper p-3 py-4">
         <Message />
-        <Message />
-        <Message />
+        <Message className={"message-to"} />
       </div>
     </div>
   );

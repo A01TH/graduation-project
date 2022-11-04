@@ -11,6 +11,7 @@ import { LoggedUser } from "./components/ProtectedRoutes/LoggedUser";
 import Profile from "./Pages/Profile/Profile";
 import Category from "./Pages/Category/Category";
 import TopChallengers from "./Pages/TopChallengers/TopChallengers";
+import Chat from "./Pages/Chat/Chat";
 
 function App() {
   return (
@@ -47,6 +48,14 @@ function App() {
             element={
               <RequireAuth>
                 <Profile />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/messages"
+            element={
+              <RequireAuth>
+                <Chat />
               </RequireAuth>
             }
           />
