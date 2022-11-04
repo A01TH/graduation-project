@@ -12,13 +12,16 @@ const ChatFooter = () => {
   const [msgContent, setMsgContent] = useState("");
   const handleSendMsg = (e) => {
     e.preventDefault();
-    messageCollection.add({
-      msg: msgContent,
-      createdBy: userData.uid,
-      sentTo: secondUser.uid,
-      createdAt: new Date(),
-      relation: `${userData.uid}/${secondUser.uid}`,
-    });
+    if (msgContent) {
+      messageCollection.add({
+        msg: msgContent,
+        createdBy: userData.uid,
+        sentTo: secondUser.uid,
+        createdAt: new Date(),
+        relation: `${userData.uid}/${secondUser.uid}`,
+      });
+    }
+
     setMsgContent("");
   };
   return (
