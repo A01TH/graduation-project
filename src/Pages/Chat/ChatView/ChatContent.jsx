@@ -33,6 +33,11 @@ const ChatContent = () => {
             owner={userData.uid === data.createdBy}
             key={index}
             msgData={data.msg}
+            photoUrl={
+              userData.uid === data.createdBy
+                ? userData.photoUrl
+                : secondUser.photoUrl
+            }
           />
         );
       })}

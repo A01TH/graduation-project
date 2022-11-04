@@ -2,6 +2,7 @@ import { createContext } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export const FirebaseContext = createContext();
 
@@ -18,16 +19,8 @@ const FirebaseProvider = ({ children }) => {
   const firestore = firebase.firestore();
   const userCollection = firestore.collection("users");
   const messageCollection = firestore.collection("messages");
-  const users = [];
-  firestore
-    .collection("users")
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        users.push(doc.data());
-      });
-      // console.log(users);
-    });
+  const [users] = useCollectionData(userCollection);
+  console.log(users);
 
   return (
     <FirebaseContext.Provider

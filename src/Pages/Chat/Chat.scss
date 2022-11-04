@@ -57,6 +57,7 @@
   &.active {
     background: var(--active-conversation-bg);
     border-left: 4px solid var(--theme-color);
+    color: red;
   }
   &.online:before {
     content: "";
