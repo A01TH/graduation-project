@@ -15,10 +15,10 @@ const Profile = () => {
         <div className="container">
           <ProfileInfo />
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-3">
               <ProfileAbout />
             </div>
-            <div className="col-md-8">
+            <div className="col-md-9">
               <ProfileTimeline />
             </div>
           </div>

@@ -14,7 +14,7 @@ const ProfileInfo = () => {
   return (
     <div className="profile-info">
       <div className="row">
-        <div className="col-md-4">
+        <div className="col-md-3">
           <div className="profile-img rounded-circle">
             <img
               src={require("./Sample.png")}
@@ -23,7 +23,7 @@ const ProfileInfo = () => {
             />
           </div>
         </div>
-        <div className="col-md-8">
+        <div className="col-md-9">
           <div className="info-content py-3">
             <div className="user d-flex justify-content-between align-items-start">
               <div className="user">
