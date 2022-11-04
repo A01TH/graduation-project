@@ -11,7 +11,7 @@ import { LoggedUser } from "./components/ProtectedRoutes/LoggedUser";
 import Profile from "./Pages/Profile/Profile";
 import Category from "./Pages/Category/Category";
 import TopChallengers from "./Pages/TopChallengers/TopChallengers";
-import Chat from "./Pages/Chat/Chat";
+import ChatView from "./Pages/Chat/ChatView";
 
 function App() {
   return (
@@ -55,7 +55,7 @@ function App() {
             path="/messages"
             element={
               <RequireAuth>
-                <Chat />
+                <ChatView />
               </RequireAuth>
             }
           />

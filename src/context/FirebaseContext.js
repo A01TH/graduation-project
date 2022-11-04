@@ -17,6 +17,7 @@ const FirebaseProvider = ({ children }) => {
   const auth = firebase.auth();
   const firestore = firebase.firestore();
   const userCollection = firestore.collection("users");
+  const messageCollection = firestore.collection("messages");
   const users = [];
   firestore
     .collection("users")
@@ -25,11 +26,13 @@ const FirebaseProvider = ({ children }) => {
       querySnapshot.forEach((doc) => {
         users.push(doc.data());
       });
-      console.log(users);
+      // console.log(users);
     });
 
   return (
-    <FirebaseContext.Provider value={{ firebase, auth, userCollection }}>
+    <FirebaseContext.Provider
+      value={{ firebase, auth, userCollection, messageCollection }}
+    >
       {children}
     </FirebaseContext.Provider>
   );
