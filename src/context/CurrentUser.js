@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { FirebaseContext } from "./FirebaseContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import userImgUrl from "../assets/profile/user-img-1.svg";
 
 export const currentContext = createContext();
 
@@ -18,7 +19,7 @@ const CurrentUserProvider = ({ children }) => {
         uid: userData.uid,
         name: userData.displayName || userInfo.name,
         email: userData.email || userInfo.email,
-        photoUrl: userData.photoURL,
+        photoUrl: userData.photoURL || userImgUrl,
         // phoneNum: userData.phoneNumber || userInfo.phoneNumber || null,
       });
       setUserInfo([]);
