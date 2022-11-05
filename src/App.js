@@ -12,6 +12,8 @@ import Profile from "./Pages/Profile/Profile";
 import Category from "./Pages/Category/Category";
 import TopChallengers from "./Pages/TopChallengers/TopChallengers";
 import ChatView from "./Pages/Chat/ChatView";
+import RecommendedChallengers from "./components/RecommendedChallengers/RecommendedChallengers";
+import RecommendedTopChallenges from "./components/RecommendedTopChallenges/RecommendedTopChallenges";
 
 function App() {
   return (
