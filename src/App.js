@@ -12,6 +12,7 @@ import Profile from "./Pages/Profile/Profile";
 import Category from "./Pages/Category/Category";
 import TopChallengers from "./Pages/TopChallengers/TopChallengers";
 import ChatView from "./Pages/Chat/ChatView";
+import Post from "./components/AddPost/Post";
 
 function App() {
   return (
@@ -62,6 +63,7 @@ function App() {
           <Route path="/category" element={<Category />} />
           <Route path="/TopChallengers" element={<TopChallengers />} />
           <Route path="/about" element={<About />} />
+          <Route path="/post" element={<Post></Post>}></Route>
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
