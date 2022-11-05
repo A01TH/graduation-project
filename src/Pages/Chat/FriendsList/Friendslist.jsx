@@ -9,9 +9,9 @@ const FriendList = () => {
   const [users] = useCollectionData(userCollection);
   const { userData } = useContext(currentContext);
 
-  // console.log(users);
+ 
   return (
-    <div className="conversation-area">
+    <div className="conversation-area  chat-sidebar pt-1">
       {users
         ?.filter((user) => user.uid !== userData.uid)
         .map((user) => {

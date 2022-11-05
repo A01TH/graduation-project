@@ -26,7 +26,7 @@ const ChatContent = () => {
   }, [messages]);
 
   return (
-    <div className="chat-area-main">
+    <div className="chat-area-main chat-section py-3 px-5">
       {sortedMessages.map((data, index) => {
         return (
           <ChatMessage

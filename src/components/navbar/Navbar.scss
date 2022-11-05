@@ -5,6 +5,7 @@ $nav-font-color: #ffffff;
 $link-hover-color: #36175e;
 
 .nav {
+  z-index: 1;
   height: $nav-height;
   background: $nav-background;
   padding-top: 10px;
