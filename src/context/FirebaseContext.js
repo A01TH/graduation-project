@@ -20,7 +20,7 @@ const FirebaseProvider = ({ children }) => {
   const userCollection = firestore.collection("users");
   const messageCollection = firestore.collection("messages");
   const [users] = useCollectionData(userCollection);
-  console.log(users);
+  // console.log(users);
 
   return (
     <FirebaseContext.Provider

@@ -15,7 +15,7 @@ import { currentContext } from "../../context/CurrentUser";
 
 const ProfileInfo = () => {
   const { userId } = useParams();
-  const { userData } = useContext(currentContext);
+  const { userData, currentUser } = useContext(currentContext);
   const [user, setUser] = useState(userData);
 
   const [smShow, setSmShow] = useState(false);
@@ -102,7 +102,7 @@ const ProfileInfo = () => {
           <div className="info-content py-3">
             <div className="user d-flex justify-content-between align-items-start">
               <div className="user">
-                <h2 className="name">{userData?.displayName}</h2>
+                <h2 className="name">{currentUser[0].name}</h2>
                 <div className="username text-muted mb-3">
                   @{userData?.email.split("@")[0]}
                 </div>

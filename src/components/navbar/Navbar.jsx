@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 const Header = () => {
-  const { userData } = useContext(currentContext);
+  const { userData, currentUser, userLoading } = useContext(currentContext);
   const { auth } = useContext(FirebaseContext);
   const navigate = useNavigate();
   const [logged, setLogged] = useState(false);
@@ -32,6 +32,10 @@ const Header = () => {
   const handleMobileNav = () => {
     setMobNav((prev) => !prev);
   };
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
+
   return (
     <section className="nav">
       <div className="container">
@@ -51,7 +55,7 @@ const Header = () => {
                 <span></span>
               </div>
             </div>
-            {logged ? (
+            {logged && !userLoading ? (
               <ul
                 className={`nav-list list-unstyled  d-flex  d-flex gap-4 align-items-center justify-content-center ${
                   mobNav && "show"
@@ -84,20 +88,16 @@ const Header = () => {
                     >
                       <img
                         className="rounded-circle"
-                        src={`${
-                          userData && userData.photoURL
-                            ? userData.photoURL
-                            : user
-                        } `}
+                        src={currentUser[0]?.photoUrl}
                         alt="user"
                       />
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className="bg-transparent">
                       <Dropdown.Item className="d-flex align-items-center justify-content-around">
-                        <Link to="/profile">
+                        <NavLink to="/profile">
                           <span>Profile</span>
-                        </Link>
+                        </NavLink>
                         <FaUserAlt />
                       </Dropdown.Item>
                       <Dropdown.Item
@@ -111,7 +111,7 @@ const Header = () => {
                         href="#/action-3"
                         className="d-flex align-items-center justify-content-around"
                       >
-                        <span>Connects</span>
+                        <span>{currentUser[0]?.points}</span>
                         <BsCoin />
                       </Dropdown.Item>
                       <Dropdown.Item

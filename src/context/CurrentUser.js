@@ -2,7 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { FirebaseContext } from "./FirebaseContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import userImgUrl from "../assets/profile/user-img-1.svg";
+import male from "../assets/profile/male.svg";
+import female from "../assets/profile/female.svg";
 
 export const currentContext = createContext();
 
@@ -12,22 +13,32 @@ const CurrentUserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState();
   const query =
     userData?.uid && userCollection.where("uid", "==", userData.uid);
-  const [currentUser] = useCollectionData(query);
+  const [currentUser, userLoading] = useCollectionData(query);
+
   useEffect(() => {
+    console.log(userData);
     if (currentUser?.length === 0) {
       userCollection.add({
         uid: userData.uid,
         name: userData.displayName || userInfo.name,
         email: userData.email || userInfo.email,
-        // phoneNum: userData.phoneNumber || userInfo.phoneNumber || null,
-        photoUrl: userData.photoURL,
+        photoUrl:
+          userData.photoURL || userInfo?.gender.value === 1 ? male : female,
+        interests: [] || userInfo.interests,
+        // gender: userInfo?.gender.value || 10,
+        points: 50,
+        // birthDate: "" || userInfo.birthDate,
+        ownedChallenges: [],
+        contributedChallenges: [],
       });
-      setUserInfo([]);
     }
+    setUserInfo([]);
   }, [currentUser]);
 
   return (
-    <currentContext.Provider value={{ userData, setUserInfo }}>
+    <currentContext.Provider
+      value={{ userData, setUserInfo, currentUser, userLoading }}
+    >
       {children}
     </currentContext.Provider>
   );

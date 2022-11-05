@@ -30,8 +30,8 @@ const Register = () => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        navigate("/home");
         setUserInfo(data);
+        navigate("/home");
       })
       .catch((error) => {
         console.log(error);
@@ -44,9 +44,6 @@ const Register = () => {
       .then(() => navigate("/home"))
       .catch((err) => err);
   };
-  const [value, setValue] = useState();
-
-  const [date, setDate] = useState();
 
   const style = {
     control: (base, state) => ({
@@ -83,29 +80,21 @@ const Register = () => {
   const multiOptions = [
     {
       value: 1,
-      label: "Reading",
+      label: "Frontend Development",
     },
     {
       value: 2,
-      label: "Training",
+      label: "Backend Development",
     },
     {
       value: 3,
-      label: "Studying",
+      label: "UI/UX",
     },
     {
       value: 4,
-      label: "Cooking",
+      label: "Artifcial Intellegence",
     },
   ];
-
-  // const handleChangeOnGender = ({ value }) => {
-  //   register("gender", { value: value });
-  // };
-
-  // const handleChangeOnInterest = (data) => {
-  //   register("Interests", { value: data });
-  // };
 
   return (
     <div className="px-3">
@@ -158,27 +147,6 @@ const Register = () => {
         </Form.Group>
 
         {/* <Form.Group className="mb-3 " controlId="formBasicNumber">
-          <Form.Label>Phone number</Form.Label>
-          <Form.Control
-            type="phoneNumber"
-            placeholder="Enter your number"
-            {...register("phoneNumber", {
-              required: true,
-              pattern: /^01[0-2]\d{1,8}$/,
-            })}
-          />
-          {errors?.number?.type === "required" && (
-            <Form.Text className="text-danger">
-              Phone number is required
-            </Form.Text>
-          )}
-          {errors?.number?.type === "pattern" && (
-            <Form.Text className="text-danger">Wrong Number</Form.Text>
-          )}
-
-
-        </Form.Group> */}
-        <Form.Group className="mb-3 " controlId="formBasicNumber">
           <Form.Label>Phone Number</Form.Label>
           <PhoneInput
             placeholder="Enter phone number"
@@ -187,19 +155,11 @@ const Register = () => {
               required: true,
             })}
           />
-        </Form.Group>
+        </Form.Group> */}
 
         <div className="d-flex align-items-stretch">
           <Form.Group className="mb-3  me-2 w-50" controlId="formBasicPassword">
             <Form.Label>Gender </Form.Label>
-
-            {/* <Select
-              options={options}
-              type="gender"
-              styles={style}
-              className="mb-3 w-100"
-              onChange={handleChangeOnGender}
-            /> */}
 
             <Controller
               name="gender"
@@ -213,7 +173,7 @@ const Register = () => {
             <div>
               <input
                 type="date"
-                onChange={(e) => setDate(e.target.value)}
+                {...register("birthDate")}
                 className="form-control "
               ></input>
             </div>
