@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./ProfileAbout.scss";
 import userImg from "../../assets/profile/user-img-1.svg";
 import Select from "react-select";
+import { Link } from "react-router-dom";
+import { currentContext } from "../../context/CurrentUser";
+import { Modal } from "react-bootstrap";
 
-const ProfileAbout = () => {
+const ProfileAbout = ({ user }) => {
+  const { userData } = useContext(currentContext);
   const [interests, setIneterests] = useState([]);
   const [editInterests, setEditInterests] = useState(false);
-  const [currentUser, setCurrentUser] = useState(true);
+  const [currentUser, setCurrentUser] = useState(user);
+  const [smShow, setSmShow] = useState(false);
 
   const interestsOptions = [
     {
@@ -55,10 +60,6 @@ const ProfileAbout = () => {
       textColor: "#fff",
       cursor: "pointer",
     }),
-    input: (base, state) => ({
-      ...base,
-      width: "100%",
-    }),
   };
 
   function handleEditInterests() {
@@ -72,7 +73,7 @@ const ProfileAbout = () => {
   return (
     <div className="profile-about">
       <div className="mb-2">
-        <div className="info-interests d-flex flex-wrap text-center gap-3 mb-3">
+        <div className="info-interests d-flex flex-wrap text-center gap-3 mb-3 w-100">
           {!editInterests ? (
             interests.map((interest) => (
               <div className="interest bg-secondary rounded-1 px-4">
@@ -87,11 +88,12 @@ const ProfileAbout = () => {
               options={interestsOptions}
               styles={style}
               onChange={(choice) => setIneterests(choice)}
+              className="w-100"
             />
           )}
         </div>
 
-        {currentUser &&
+        {userData &&
           (!editInterests ? (
             <button
               className="btn btn-primary rounded-2  d-block"
@@ -128,25 +130,151 @@ const ProfileAbout = () => {
         <button className="btn btn-primary rounded-2">Edit</button>
       </div> */}
 
-      <div className="about-contacts">
+      <div className="about-contacts mb-2">
         <div className="contacts-label text-center p-3 text-uppercase border rounded-2 fw-bold mb-4">
           Contacts
         </div>
         <div className="contacts-list">
           <div className="contact m-2">
             <img src={userImg} alt="contact" className="img-fluid me-2" />
-            <a href="">Monica Geller</a>
+            <Link to="" className="text-white fw-bold text-decoration-none">
+              Monica Geller
+            </Link>
           </div>
           <div className="contact m-2">
             <img src={userImg} alt="contact" className="img-fluid me-2" />
-            <a href="">Rachel Green</a>
+            <Link to="" className="text-white fw-bold text-decoration-none">
+              Rachel Green
+            </Link>
           </div>
           <div className="contact m-2">
             <img src={userImg} alt="contact" className="img-fluid me-2" />
-            <a href="">Joey Tribbiani</a>
+            <Link to="" className="text-white fw-bold text-decoration-none">
+              Joey Tribbiani
+            </Link>
           </div>
         </div>
-        <button className="btn btn-primary">See all contacts</button>
+        <button className="btn btn-primary" onClick={() => setSmShow(true)}>
+          See all contacts
+        </button>
+        <Modal
+          size="md"
+          show={smShow}
+          onHide={() => setSmShow(false)}
+          aria-labelledby="example-modal-sizes-title-sm"
+          className="text-white"
+          scrollable={true}
+        >
+          <Modal.Header className="border-0 bg-dark">
+            <h3 className="text-center fw-bold text-uppercase mx-auto">
+              Contacts
+            </h3>
+          </Modal.Header>
+          <Modal.Body className="px-4 text-center bg-dark">
+            <div className="contacts-list row">
+              <div className="contact mb-3 d-flex align-items-center col-lg-6">
+                <img
+                  src={userImg}
+                  alt="contact"
+                  className="img-fluid me-2 w-25"
+                />
+                <Link to="" className="fw-bold text-decoration-none">
+                  Monica Geller
+                </Link>
+              </div>
+              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
+                <img
+                  src={userImg}
+                  alt="contact"
+                  className="img-fluid me-2 w-25"
+                />
+                <Link to="" className="fw-bold text-decoration-none">
+                  Monica Geller
+                </Link>
+              </div>
+              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
+                <img
+                  src={userImg}
+                  alt="contact"
+                  className="img-fluid me-2 w-25"
+                />
+                <Link to="" className="fw-bold text-decoration-none">
+                  Monica Geller
+                </Link>
+              </div>
+              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
+                <img
+                  src={userImg}
+                  alt="contact"
+                  className="img-fluid me-2 w-25"
+                />
+                <Link to="" className="fw-bold text-decoration-none">
+                  Monica Geller
+                </Link>
+              </div>
+              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
+                <img
+                  src={userImg}
+                  alt="contact"
+                  className="img-fluid me-2 w-25"
+                />
+                <Link to="" className="fw-bold text-decoration-none">
+                  Monica Geller
+                </Link>
+              </div>
+              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
+                <img
+                  src={userImg}
+                  alt="contact"
+                  className="img-fluid me-2 w-25"
+                />
+                <Link to="" className="fw-bold text-decoration-none">
+                  Monica Geller
+                </Link>
+              </div>
+              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
+                <img
+                  src={userImg}
+                  alt="contact"
+                  className="img-fluid me-2 w-25"
+                />
+                <Link to="" className="fw-bold text-decoration-none">
+                  Monica Geller
+                </Link>
+              </div>
+              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
+                <img
+                  src={userImg}
+                  alt="contact"
+                  className="img-fluid me-2 w-25"
+                />
+                <Link to="" className="fw-bold text-decoration-none">
+                  Monica Geller
+                </Link>
+              </div>
+              <div className="contact mb-3 d-flex  align-items-center  col-lg-6">
+                <img
+                  src={userImg}
+                  alt="contact"
+                  className="img-fluid me-2 w-25"
+                />
+                <Link to="" className="fw-bold text-decoration-none">
+                  Rachel Green
+                </Link>
+              </div>
+              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
+                <img
+                  src={userImg}
+                  alt="contact"
+                  className="img-fluid me-2 w-25"
+                />
+                <Link to="" className="fw-bold text-decoration-none">
+                  Joey Tribbiani
+                </Link>
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { ImStarFull, ImStarHalf } from "react-icons/im";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   AiOutlineCheck,
   AiOutlineMessage,
@@ -9,20 +9,52 @@ import {
 } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
 import "./ProfileInfo.scss";
+import userImgUrl from "./Sample.png";
+import { useParams } from "react-router-dom";
+import { currentContext } from "../../context/CurrentUser";
 
 const ProfileInfo = () => {
-  const [currentUser, setCurrentUser] = useState(false);
+  const { userId } = useParams();
+  const { userData } = useContext(currentContext);
+  const [user, setUser] = useState(userData);
+
   const [smShow, setSmShow] = useState(false);
+  const [userImg, setUserImg] = useState(null);
+  const [editingImg, setEditingImg] = useState(userImg);
+  useEffect(() => {
+    userData?.photoUrl ? setUserImg(userData.photoUrl) : setUserImg(userImgUrl);
+  }, [userData?.photoUrl]);
+
+  const openFile = function (event) {
+    const input = event.target;
+
+    const reader = new FileReader();
+    reader.onload = function () {
+      const dataURL = reader.result;
+      setEditingImg(dataURL);
+    };
+    reader.readAsDataURL(input.files[0]);
+  };
+
+  const removeImg = function () {
+    setUserImg(userImgUrl);
+    setSmShow(false);
+  };
+
+  const confirmImg = () => {
+    setUserImg(editingImg);
+    setSmShow(false);
+  };
 
   return (
     <div className="profile-info">
       <div className="row">
-        <div className="col-md-3">
+        <div className="col-lg-3">
           <div className="profile-img rounded-circle">
             <img
-              src={require("./Sample.png")}
+              src={userImg}
               alt="user"
-              className="img-fluid w-75 border rounded-circle border-4 border-primary"
+              className="h-100 w-100 border rounded-circle border-4 border-primary"
             />
 
             <button
@@ -32,32 +64,51 @@ const ProfileInfo = () => {
               <AiFillCamera />
             </button>
             <Modal
-              size="sm"
+              size="md"
               show={smShow}
               onHide={() => setSmShow(false)}
               aria-labelledby="example-modal-sizes-title-sm"
             >
-              <Modal.Header className="border-0" closeButton></Modal.Header>
-              <Modal.Body>
-                <img
-                  src={require("./Sample.png")}
-                  alt="user"
-                  className="img-fluid w-75 mx-auto d-block border rounded-circle border-4 border-primary"
+              <Modal.Header className="border-0 bg-dark"></Modal.Header>
+              <Modal.Body className="modalBody px-4 text-center bg-dark">
+                <div
+                  className="edit-img mx-auto mb-4 rounded-circle"
+                  style={{ width: "200px", height: "200px" }}
+                >
+                  <img
+                    src={editingImg}
+                    alt="user"
+                    className="h-100 w-100 border rounded-circle border-4 border-primary"
+                  />
+                </div>
+                <input
+                  type="file"
+                  name="image"
+                  id="user-img"
+                  onChange={openFile}
+                  className="form-control mb-3"
                 />
-                <input type="file" name="" id="" />
+                <button className="btn btn-success me-2" onClick={confirmImg}>
+                  Done
+                </button>
+                <button className="btn btn-danger" onClick={removeImg}>
+                  Remove
+                </button>
               </Modal.Body>
             </Modal>
           </div>
         </div>
-        <div className="col-md-9">
+        <div className="col-lg-9">
           <div className="info-content py-3">
             <div className="user d-flex justify-content-between align-items-start">
               <div className="user">
-                <h2 className="name">Chandler Bing</h2>
-                <div className="username text-muted mb-3">@chandlerbing</div>
+                <h2 className="name">{userData?.displayName}</h2>
+                <div className="username text-muted mb-3">
+                  @{userData?.email.split("@")[0]}
+                </div>
               </div>
               <div>
-                {currentUser ? (
+                {userData ? (
                   <button className="edit-profile btn btn-outline-secondary">
                     Edit Profile
                   </button>
@@ -76,9 +127,6 @@ const ProfileInfo = () => {
                 )}
               </div>
             </div>
-            <div className="user-job  mb-4">
-              <h4 className="text-primary">UI/UX designer</h4>
-            </div>
             <div className="rating text-secondary">
               <ImStarFull />
               <ImStarFull />
@@ -86,7 +134,7 @@ const ProfileInfo = () => {
               <ImStarFull />
               <ImStarHalf />
             </div>
-            {currentUser && (
+            {userData && (
               <button className="btn btn-primary mt-4">
                 Start New Challenge
               </button>
