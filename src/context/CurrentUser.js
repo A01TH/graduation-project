@@ -19,8 +19,8 @@ const CurrentUserProvider = ({ children }) => {
         uid: userData.uid,
         name: userData.displayName || userInfo.name,
         email: userData.email || userInfo.email,
-        photoUrl: userData.photoURL || userImgUrl,
         // phoneNum: userData.phoneNumber || userInfo.phoneNumber || null,
+        photoUrl: userData.photoURL,
       });
       setUserInfo([]);
     }
