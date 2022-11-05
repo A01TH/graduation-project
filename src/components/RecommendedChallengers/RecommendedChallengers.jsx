@@ -5,13 +5,16 @@ import { Link } from "react-router-dom";
 const RecommendedChallengers = () => {
   return (
     <div>
-      <div className="border-bottom mb-2">
+      <div className="border-bottom mb-2 text-white">
+        <h5>Recommended challengers</h5>
         <ChallengerShortcut />
         <ChallengerShortcut />
         <ChallengerShortcut />
       </div>
       <div className="p-2">
-        <Link to="/">Explore all challengers</Link>
+        <Link to="/" className="text-white">
+          Explore all challengers
+        </Link>
       </div>
     </div>
   );
