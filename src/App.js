@@ -63,7 +63,6 @@ function App() {
           <Route path="/category" element={<Category />} />
           <Route path="/TopChallengers" element={<TopChallengers />} />
           <Route path="/about" element={<About />} />
-          <Route path="/post" element={<Post></Post>}></Route>
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
