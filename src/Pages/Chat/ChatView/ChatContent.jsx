@@ -24,8 +24,6 @@ const ChatContent = () => {
       setSortedMessages(messages.sort((a, b) => a.createdAt - b.createdAt));
     }
   }, [messages]);
-  console.log("sec", secondUser);
-  console.log("first", userData);
 
   // function scrollToBottom() {
   //   const lastMessage = document.querySelector(".chat-area-main").lastChild;

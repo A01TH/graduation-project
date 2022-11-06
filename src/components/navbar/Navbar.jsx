@@ -32,9 +32,9 @@ const Header = () => {
   const handleMobileNav = () => {
     setMobNav((prev) => !prev);
   };
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
+  // useEffect(() => {
+  //   console.log(currentUser);
+  // }, [currentUser]);
 
   return (
     <section className="nav">
