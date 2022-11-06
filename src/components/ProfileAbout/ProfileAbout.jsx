@@ -145,7 +145,7 @@ const ProfileAbout = ({ user, users, self }) => {
                 <img
                   src={friend.photoUrl}
                   alt="contact"
-                  className="img-fluid me-2"
+                  className="img-fluid me-2 rounded-circle"
                 />
                 <Link
                   to={`/${friend.username}`}
@@ -180,7 +180,7 @@ const ProfileAbout = ({ user, users, self }) => {
                   <img
                     src={friend.photoUrl}
                     alt="contact"
-                    className="img-fluid me-2 w-25"
+                    className="img-fluid me-2 w-25 rounded-circle"
                   />
                   <Link
                     to={`/${friend.username}`}
