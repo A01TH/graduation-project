@@ -10,7 +10,7 @@ export const currentContext = createContext();
 const CurrentUserProvider = ({ children }) => {
   const { auth, userCollection } = useContext(FirebaseContext);
   const [userData] = useAuthState(auth);
-  const [userInfo, setUserInfo] = useState();
+  const [userInfo, setUserInfo] = useState([]);
   const query =
     userData?.uid && userCollection.where("uid", "==", userData.uid);
   const [currentUser, userLoading] = useCollectionData(query);
@@ -22,8 +22,11 @@ const CurrentUserProvider = ({ children }) => {
         uid: userData.uid,
         name: userData.displayName || userInfo.name,
         email: userData.email || userInfo.email,
-        photoUrl:
-          userData.photoURL || userInfo?.gender.value === 1 ? male : female,
+        photoUrl: userData.emailVerified
+          ? userData.photoURL
+          : userInfo.gender.value === 1
+          ? male
+          : female,
         interests: [] || userInfo.interests,
         // gender: userInfo?.gender.value || 10,
         points: 50,
