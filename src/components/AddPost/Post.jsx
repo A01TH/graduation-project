@@ -13,7 +13,11 @@ import { currentContext } from "../../context/CurrentUser";
 const animatedComponents = makeAnimated();
 
 const Post = () => {
-  const { register, handleSubmit, control } = useForm();
+  const { register, handleSubmit, control, reset } = useForm({
+    defaultValues: {
+      category: "",
+    },
+  });
   const { challengeCollection } = useContext(FirebaseContext);
   const { currentUser } = useContext(currentContext);
 
@@ -27,6 +31,7 @@ const Post = () => {
       postLikes: 0,
       postComments: [],
     });
+    reset();
   };
   const options = [
     { value: "frontend", label: "Frontend Development" },
@@ -63,9 +68,8 @@ const Post = () => {
                   render={({ field }) => (
                     <Select
                       {...field}
-                      closeMenuOnSelect={false}
+                      closeMenuOnSelect={true}
                       components={animatedComponents}
-                      isMulti
                       options={options}
                       placeholder="Select your challenge category"
                     />

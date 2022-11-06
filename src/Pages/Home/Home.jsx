@@ -16,6 +16,8 @@ const Home = () => {
   const { currentUser } = useContext(currentContext);
   const [currentUserPosts, setcurrentUserPosts] = useState([]);
 
+  console.log(currentUser);
+
   useEffect(() => {
     const filteredChallenges = challenges?.filter((challenge) => {
       console.log(challenge.creatorID, currentUser[0].uid);
