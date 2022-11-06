@@ -7,9 +7,10 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import "./challenge-card.scss";
 
-function ChallengeCard() {
+function ChallengeCard({ post }) {
   return (
     <div className="bg-color text-white p-2 rounded-3  mx-auto my-3 w-75">
+      <p>{post.title}</p>
       <div className="chall-img mb-2 h-25">
         <img src="https://via.placeholder.com/150" alt="" className="w-100" />
       </div>
