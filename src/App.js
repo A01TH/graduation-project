@@ -52,6 +52,14 @@ function App() {
             }
           />
           <Route
+            path="/profile/:usernameParams"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
+          <Route
             path="/messages"
             element={
               <RequireAuth>

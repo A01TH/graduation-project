@@ -3,12 +3,12 @@ import "./ProfileTimeline.scss";
 const ProfileTimeline = () => {
   return (
     <div className="profile-timeline">
-      <ul class="nav position-static nav-fill fw-bold">
-        <li class="nav-item">
-          <a class="nav-link active">My Challenges</a>
+      <ul className="nav position-static nav-fill fw-bold">
+        <li className="nav-item">
+          <a className="nav-link active">My Challenges</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link">Other Challenges</a>
+        <li className="nav-item">
+          <a className="nav-link">Other Challenges</a>
         </li>
       </ul>
       <div className="user-challenges">
