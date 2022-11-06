@@ -28,13 +28,6 @@ const Register = () => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        // updateProfile(auth.currentUser, {
-        //   displayName: data.name,
-        //   photoURL: male,
-        //   interest: data.interest,
-        // })
-        //   .then(() => {})
-        //   .catch((error) => {});
         console.log(data);
         setUserInfo(data);
         navigate("/home");

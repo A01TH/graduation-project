@@ -16,9 +16,8 @@ const CurrentUserProvider = ({ children }) => {
   const [currentUser, userLoading] = useCollectionData(query);
 
   useEffect(() => {
-    console.log(userInfo);
     if (currentUser?.length === 0) {
-      userCollection.add({
+      userCollection.doc(userData.uid).set({
         uid: userData.uid,
         name: userData.displayName || userInfo.name,
         email: userData.email || userInfo.email,
