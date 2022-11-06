@@ -9,8 +9,8 @@ import "./challenge-card.scss";
 
 function ChallengeCard() {
   return (
-    <div className="bg-color text-white p-2 rounded-3">
-      <div className="chall-img mb-2">
+    <div className="bg-color text-white p-2 rounded-3  mx-auto">
+      <div className="chall-img mb-2 h-25">
         <img src="https://via.placeholder.com/150" alt="" className="w-100" />
       </div>
 

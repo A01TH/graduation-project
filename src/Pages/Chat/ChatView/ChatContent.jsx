@@ -18,7 +18,6 @@ const ChatContent = () => {
       ])
       .limit(25);
   const [messages] = useCollectionData(query);
-  console.log(messages);
   useEffect(() => {
     if (messages) {
       setSortedMessages(messages.sort((a, b) => a.createdAt - b.createdAt));
