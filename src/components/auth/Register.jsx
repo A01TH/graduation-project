@@ -3,15 +3,12 @@ import Form from "react-bootstrap/Form";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import { FaGoogle } from "react-icons/fa";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import "./auth.scss";
 import { FirebaseContext } from "../../context/FirebaseContext";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
-import male from "../../assets/profile/user-img-1.svg";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -38,6 +35,7 @@ const Register = () => {
         // })
         //   .then(() => {})
         //   .catch((error) => {});
+        console.log(data);
         setUserInfo(data);
         navigate("/home");
       })
@@ -154,17 +152,6 @@ const Register = () => {
           )}
         </Form.Group>
 
-        {/* <Form.Group className="mb-3 " controlId="formBasicNumber">
-          <Form.Label>Phone Number</Form.Label>
-          <PhoneInput
-            placeholder="Enter phone number"
-            className="mb-3 phone-input form-control d-flex"
-            {...register("phoneNumber", {
-              required: true,
-            })}
-          />
-        </Form.Group> */}
-
         <div className="d-flex align-items-stretch">
           <Form.Group className="mb-3  me-2 w-50" controlId="formBasicPassword">
             <Form.Label>Gender </Form.Label>
@@ -243,7 +230,7 @@ const Register = () => {
           <Form.Label>Interests </Form.Label>
 
           <Controller
-            name="intersts"
+            name="Interests"
             control={control}
             render={({ field }) => (
               <Select {...field} options={multiOptions} isMulti />
