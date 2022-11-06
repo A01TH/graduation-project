@@ -107,6 +107,7 @@ const Header = () => {
                         <span>Settings</span>
                         <FaRegSun />
                       </Dropdown.Item>
+
                       <Dropdown.Item
                         href="#/action-3"
                         className="d-flex align-items-center justify-content-around"
@@ -114,6 +115,7 @@ const Header = () => {
                         <span>{currentUser[0]?.points}</span>
                         <BsCoin />
                       </Dropdown.Item>
+                      
                       <Dropdown.Item
                         onClick={handleSignOut}
                         className="d-flex align-items-center justify-content-around"
