@@ -1,6 +1,10 @@
-const ChatMessage = ({ owner, msgData, photoUrl,date }) => {
+const ChatMessage = ({ owner, msgData, photoUrl, date }) => {
   return (
-    <div className={`chat-msg chat-message d-flex gap-2 align-items-center p-2 ps-3 ${owner && "owner"}`}>
+    <div
+      className={`chat-msg chat-message d-flex gap-2 align-items-center p-2 ps-3 ${
+        owner && "owner"
+      }`}
+    >
       <div className="chat-msg-profile">
         <img className="chat-msg-img rounded-circle" src={photoUrl} alt="" />
         {/* <div className="chat-msg-date">Message sent</div> */}

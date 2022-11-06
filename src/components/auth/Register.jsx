@@ -8,9 +8,10 @@ import "react-phone-number-input/style.css";
 import { useContext, useState } from "react";
 import "./auth.scss";
 import { FirebaseContext } from "../../context/FirebaseContext";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
+import male from "../../assets/profile/user-img-1.svg";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -30,6 +31,13 @@ const Register = () => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const user = userCredential.user;
+        // updateProfile(auth.currentUser, {
+        //   displayName: data.name,
+        //   photoURL: male,
+        //   interest: data.interest,
+        // })
+        //   .then(() => {})
+        //   .catch((error) => {});
         setUserInfo(data);
         navigate("/home");
       })

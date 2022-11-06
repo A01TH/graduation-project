@@ -7,8 +7,9 @@ import ChatMessage from "./ChatMessage";
 const ChatContent = () => {
   const { messageCollection } = useContext(FirebaseContext);
   const [sortedMessages, setSortedMessages] = useState([]);
-  const { userData } = useContext(currentContext);
+  const { userData, currentUser } = useContext(currentContext);
   const { secondUser } = useContext(SecondUserContext);
+
   const query =
     secondUser?.uid &&
     messageCollection
@@ -23,11 +24,13 @@ const ChatContent = () => {
       setSortedMessages(messages.sort((a, b) => a.createdAt - b.createdAt));
     }
   }, [messages]);
+  console.log("sec", secondUser);
+  console.log("first", userData);
 
-  function scrollToBottom() {
-    const lastMessage = document.querySelector(".chat-area-main").lastChild;
-    lastMessage.scrollIntoView(false);
-  }
+  // function scrollToBottom() {
+  //   const lastMessage = document.querySelector(".chat-area-main").lastChild;
+  //   lastMessage.scrollIntoView(false);
+  // }
 
   return (
     <div className="chat-area-main chat-section py-3 px-5">
@@ -39,7 +42,7 @@ const ChatContent = () => {
             msgData={data.msg}
             photoUrl={
               userData.uid === data.createdBy
-                ? userData.photoUrl
+                ? currentUser[0]?.photoUrl
                 : secondUser.photoUrl
             }
           />
