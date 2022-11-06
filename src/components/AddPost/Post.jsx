@@ -13,7 +13,7 @@ const Post = () => {
   const onSubmit = (data) => {
     console.log(data);
     toast.success("Your Post Is Live Now! Hurry To Finish It", {
-      position: "top-right",
+      position: "top-center",
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,

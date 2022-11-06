@@ -9,16 +9,13 @@ const Home = () => {
     <div className=" bg-dark section-padding">
       <div className="container">
         <div className="row align-items-start justify-content-between">
-          <div className="col-8 mb-5">
+          <div className="col-6 mb-5 offset-1">
             <Post />
-          </div>
-          <div className="col-3">
-            <RecommendedChallengers />
-          </div>
-          <div className="col-8">
+            <ChallengeCard />
             <ChallengeCard />
           </div>
           <div className="col-3">
+            <RecommendedChallengers />
             <RecommendedTopChallenges />
           </div>
         </div>
