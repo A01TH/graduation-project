@@ -1,20 +1,15 @@
 import React from "react";
 import ChallengerShortcut from "../ChallengerShortcut/ChallengerShortcut";
 import { Link } from "react-router-dom";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 import { FirebaseContext } from "./../../context/FirebaseContext";
 import { currentContext } from "../../context/CurrentUser";
 
 import { useContext, useEffect, useState } from "react";
 
 const RecommendedChallengers = () => {
-  const { userCollection } = useContext(FirebaseContext);
-  const [users] = useCollectionData(userCollection);
+  const { users } = useContext(FirebaseContext);
   const { currentUser } = useContext(currentContext);
   const [recommendedUsersstate, setRecommendedUsers] = useState([]);
-
-  // console.log(users);
-  // console.log(currentUser);
 
   const interestsVals = [];
 
@@ -24,8 +19,6 @@ const RecommendedChallengers = () => {
         interestsVals.push(interest.value)
       );
     }
-
-    // console.log(interestsVals);
   }, [currentUser]);
 
   useEffect(() => {
@@ -36,19 +29,22 @@ const RecommendedChallengers = () => {
           recommendedUsers.push(usr);
         }
       });
-
       setRecommendedUsers(recommendedUsers);
     });
-
-    console.log("RECOMMENDEDDDDDD", recommendedUsers);
   }, [users]);
 
   return (
     <div>
       <div className="border-bottom mb-2 text-white">
         <h5>Recommended challengers</h5>
-        {recommendedUsersstate.map((usr) => {
-          return <ChallengerShortcut name={usr.name} photoURL={usr.photoURL} />;
+        {recommendedUsersstate.map((usr, index) => {
+          return (
+            <ChallengerShortcut
+              name={usr.name}
+              photoURL={usr.photoUrl}
+              key={index}
+            />
+          );
         })}
       </div>
       <div className="p-2">

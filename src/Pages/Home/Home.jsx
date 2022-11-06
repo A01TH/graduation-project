@@ -17,7 +17,6 @@ const Home = () => {
   const { currentUser } = useContext(currentContext);
   const [currentUserPosts, setcurrentUserPosts] = useState([]);
 
-  console.log(currentUser);
   const update = () => {
     // EDIT DATA
     userCollection
