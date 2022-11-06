@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
+import ContentLoader from "react-content-loader";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { toast, ToastContainer } from "react-toastify";
 import ChallengeCard from "../../components/ChallengeCard/ChallengeCard";
@@ -15,7 +16,7 @@ const Home = () => {
   const { challengeCollection, userCollection } = useContext(FirebaseContext);
   const [challenges] = useCollectionData(challengeCollection);
   const { currentUser } = useContext(currentContext);
-  const [currentUserPosts, setcurrentUserPosts] = useState([]);
+  const [currentUserPosts, setcurrentUserPosts] = useState();
 
   const update = () => {
     // EDIT DATA
@@ -26,7 +27,7 @@ const Home = () => {
           name: "Mostafa Khafaji",
           photoUrl:
             "https://lh3.googleusercontent.com/a/ALm5wu3n5EcjNxxHrNesIcq8ZwxrXXiXaBA0q2xZXJ2J_g=s96-c",
-          points: 5000,
+          points: 100,
         },
         { merge: true }
       )
@@ -46,6 +47,7 @@ const Home = () => {
         console.error("Error writing document: ", error);
       });
   };
+
   useEffect(() => {
     if (currentUser) {
       const filteredChallenges = challenges?.filter((challenge) => {
@@ -61,12 +63,30 @@ const Home = () => {
         <div className="row align-items-start justify-content-between">
           <div className="col-6 mb-5 offset-1">
             <Post />
-            {currentUserPosts?.length > 0 ? (
-              currentUserPosts?.map((post, index) => {
-                return <ChallengeCard post={post} key={index} />;
-              })
+            {challenges ? (
+              <>
+                {challenges?.length > 0 ? (
+                  challenges?.map((post, index) => {
+                    return <ChallengeCard post={post} key={index} />;
+                  })
+                ) : (
+                  <ContentLoader
+                    speed={2}
+                    width={400}
+                    height={460}
+                    viewBox="0 0 400 460"
+                    backgroundColor="#f3f3f3"
+                    foregroundColor="#ecebeb"
+                  >
+                    <circle cx="31" cy="31" r="15" />
+                    <rect x="58" y="18" rx="2" ry="2" width="140" height="10" />
+                    <rect x="58" y="34" rx="2" ry="2" width="140" height="10" />
+                    <rect x="0" y="60" rx="2" ry="2" width="400" height="400" />
+                  </ContentLoader>
+                )}
+              </>
             ) : (
-              <h1>Loading</h1>
+              <h1>No Posts Yet</h1>
             )}
           </div>
           <div className="col-3">
