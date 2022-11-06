@@ -9,13 +9,13 @@ import "./challenge-card.scss";
 
 function ChallengeCard({ post }) {
   return (
-    <div className="bg-c-grey-dark  bg-blur text-white p-2 rounded-3  mx-auto my-3 w-75">
+    <div className="bg-c-grey-dark bg-blur text-white p-3 rounded-3  mx-auto my-3 w-100">
       <p>{post.title}</p>
-      <div className="chall-img mb-2">
+      <div className="chall-img mb-3">
         <img
           src="https://via.placeholder.com/150"
           alt=""
-          className="w-100 h-250px"
+          className="w-100 h-250px rounded-2"
         />
       </div>
 

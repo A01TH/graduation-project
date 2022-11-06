@@ -20,19 +20,19 @@ const ProfileAbout = ({ user, users, self }) => {
   const interestsOptions = [
     {
       value: 1,
-      label: "Reading",
+      label: "Frontend Development",
     },
     {
       value: 2,
-      label: "Training",
+      label: "Backend Development",
     },
     {
       value: 3,
-      label: "Studying",
+      label: "UI/UX",
     },
     {
       value: 4,
-      label: "Cooking",
+      label: "Artifcial Intellegence",
     },
   ];
 

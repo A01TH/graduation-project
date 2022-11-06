@@ -51,8 +51,8 @@ const Post = () => {
   return (
     <>
       <div>
-        <div className="row post">
-          <div className=" py-3  rounded-5 py-4 px-4 post-form">
+        <div className="row post mx-1 bg-c-grey rounded-2 ">
+          <div className=" py-3  rounded-5 py-4 px-3 post-form">
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label className="text-center w-100 text-light">
@@ -70,7 +70,7 @@ const Post = () => {
                   />
                 </FloatingLabel>
               </Form.Group>
-              <Form.Group>
+              <Form.Group className="mb-3">
                 <Controller
                   name="category"
                   control={control}
@@ -86,7 +86,7 @@ const Post = () => {
                   )}
                 />
               </Form.Group>
-              <Form.Group>
+              <Form.Group className="mb-2">
                 <Form.Check
                   className="text-light"
                   type="switch"
