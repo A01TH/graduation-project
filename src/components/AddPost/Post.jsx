@@ -31,7 +31,6 @@ const Post = () => {
       postLikes: 0,
       postComments: [],
     });
-<<<<<<< HEAD
     toast.success("Your Post Is Live Now! Hurry To Finish It", {
       position: "top-center",
       autoClose: 2000,
@@ -42,9 +41,7 @@ const Post = () => {
       progress: undefined,
       theme: "dark",
     });
-=======
     reset();
->>>>>>> origin/logic
   };
   const options = [
     { value: "frontend", label: "Frontend Development" },
