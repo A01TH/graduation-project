@@ -12,11 +12,6 @@ const ChallengerShortcut = ({ name, photoURL }) => {
           <p className="mb-0">{name}</p>
           <small>@{name}</small>
         </div>
-        <div className="col-3">
-          <button className="btn">
-            <FaUserPlus className="fs-2" />
-          </button>
-        </div>
       </div>
       <div>
         <button className="btn">

@@ -51,8 +51,8 @@ const Post = () => {
   return (
     <>
       <div>
-        <div className="row post mx-1 bg-c-grey rounded-2 ">
-          <div className=" py-3  rounded-5 py-4 px-3 post-form">
+        <div className="row post mx-1  ">
+          <div className=" py-3  rounded-5 py-4 px-3 bg-c-grey post-form bg-blur">
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label className="text-center w-100 text-light">

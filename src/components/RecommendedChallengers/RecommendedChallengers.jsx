@@ -39,9 +39,16 @@ const RecommendedChallengers = () => {
         <h5 className="text-center mb-3 border-grey-lite pb-2 mx-3">
           Recommended challengers
         </h5>
-        <ChallengerShortcut />
-        <ChallengerShortcut />
-        <ChallengerShortcut />
+        {recommendedUsersstate.map((usr, index) => {
+          if (usr.uid !== currentUser[0].uid)
+            return (
+              <ChallengerShortcut
+                name={usr.name}
+                photoURL={usr.photoUrl}
+                key={index}
+              />
+            );
+        })}
       </div>
       <div className="p-2">
         <Link

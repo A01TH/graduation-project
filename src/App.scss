@@ -27,12 +27,14 @@
 }
 .border-grey-lite {
   border-bottom: 1px solid #4d4d4d;
-  
 }
 
 .h-250px {
   height: 250px;
 }
 .bg-blur {
-  backdrop-filter: blur(2px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
