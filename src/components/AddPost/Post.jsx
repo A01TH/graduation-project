@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FloatingLabel, Form } from "react-bootstrap";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
@@ -6,21 +6,26 @@ import makeAnimated from "react-select/animated";
 import "./Post.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import { useCollection } from "react-firebase-hooks/firestore";
+import { FirebaseContext } from "../../context/FirebaseContext";
+import { useContext } from "react";
+import { currentContext } from "../../context/CurrentUser";
 const animatedComponents = makeAnimated();
 
 const Post = () => {
   const { register, handleSubmit, control } = useForm();
+  const { challengeCollection } = useContext(FirebaseContext);
+  const { currentUser } = useContext(currentContext);
+
   const onSubmit = (data) => {
-    console.log(data);
-    toast.success("Your Post Is Live Now! Hurry To Finish It", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
+    challengeCollection.add({
+      creatorID: currentUser[0].uid,
+      title: data.title,
+      category: data.category,
+      status: data.postStatus,
+      participants: [],
+      postLikes: 0,
+      postComments: [],
     });
   };
   const options = [
@@ -46,7 +51,7 @@ const Post = () => {
                     as="textarea"
                     placeholder="Leave a comment here"
                     style={{ height: "100px" }}
-                    {...register("post", { required: true })}
+                    {...register("title", { required: true })}
                   />
                 </FloatingLabel>
               </Form.Group>
@@ -89,7 +94,7 @@ const Post = () => {
             </Form>
           </div>
         </div>
-        <ToastContainer
+        {/* <ToastContainer
           position="top-right"
           autoClose={2000}
           hideProgressBar={false}
@@ -100,10 +105,21 @@ const Post = () => {
           draggable
           pauseOnHover={false}
           theme="dark"
-        />
+        /> */}
       </div>
     </>
   );
 };
 
 export default Post;
+
+// toast.success("Your Post Is Live Now! Hurry To Finish It", {
+//   position: "top-center",
+//   autoClose: 2000,
+//   hideProgressBar: false,
+//   closeOnClick: true,
+//   pauseOnHover: false,
+//   draggable: true,
+//   progress: undefined,
+//   theme: "dark",
+// });

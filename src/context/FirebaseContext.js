@@ -19,11 +19,18 @@ const FirebaseProvider = ({ children }) => {
   const firestore = firebase.firestore();
   const userCollection = firestore.collection("users");
   const messageCollection = firestore.collection("messages");
+  const challengeCollection = firestore.collection("challenges");
   const [users] = useCollectionData(userCollection);
 
   return (
     <FirebaseContext.Provider
-      value={{ firebase, auth, userCollection, messageCollection }}
+      value={{
+        firebase,
+        auth,
+        userCollection,
+        messageCollection,
+        challengeCollection,
+      }}
     >
       {children}
     </FirebaseContext.Provider>
