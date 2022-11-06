@@ -17,11 +17,12 @@ const Home = () => {
   const [currentUserPosts, setcurrentUserPosts] = useState([]);
 
   useEffect(() => {
-    const filteredChallenges = challenges?.filter((challenge) => {
-      console.log(challenge.creatorID, currentUser[0].uid);
-      return challenge?.creatorID === currentUser[0]?.uid;
-    });
-    setcurrentUserPosts(filteredChallenges);
+    if (currentUser) {
+      const filteredChallenges = challenges?.filter((challenge) => {
+        return challenge?.creatorID === currentUser[0]?.uid;
+      });
+      setcurrentUserPosts(filteredChallenges);
+    }
   }, [challenges]);
   return (
     <div className=" bg-dark section-padding">
@@ -30,8 +31,8 @@ const Home = () => {
           <div className="col-6 mb-5 offset-1">
             <Post />
             {currentUserPosts?.length > 0 ? (
-              currentUserPosts?.map((post) => {
-                return <ChallengeCard post={post} />;
+              currentUserPosts?.map((post, index) => {
+                return <ChallengeCard post={post} key={index} />;
               })
             ) : (
               <h1>Loading</h1>

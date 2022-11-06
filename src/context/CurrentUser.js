@@ -16,7 +16,7 @@ const CurrentUserProvider = ({ children }) => {
   const [currentUser, userLoading] = useCollectionData(query);
 
   useEffect(() => {
-    console.log(userData);
+    console.log(userInfo);
     if (currentUser?.length === 0) {
       userCollection.add({
         uid: userData.uid,
@@ -27,8 +27,7 @@ const CurrentUserProvider = ({ children }) => {
           : userInfo.gender.value === 1
           ? male
           : female,
-        interests: [] || userInfo.interests,
-        // gender: userInfo?.gender.value || 10,
+        interests: userData.emailVerified ? [] : userInfo.Interests,
         points: 50,
         // birthDate: "" || userInfo.birthDate,
         ownedChallenges: [],

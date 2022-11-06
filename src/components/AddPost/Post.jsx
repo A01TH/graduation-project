@@ -27,6 +27,16 @@ const Post = () => {
       postLikes: 0,
       postComments: [],
     });
+    toast.success("Your Post Is Live Now! Hurry To Finish It", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
   const options = [
     { value: "frontend", label: "Frontend Development" },
@@ -94,7 +104,7 @@ const Post = () => {
             </Form>
           </div>
         </div>
-        {/* <ToastContainer
+        <ToastContainer
           position="top-right"
           autoClose={2000}
           hideProgressBar={false}
@@ -105,21 +115,10 @@ const Post = () => {
           draggable
           pauseOnHover={false}
           theme="dark"
-        /> */}
+        />
       </div>
     </>
   );
 };
 
 export default Post;
-
-// toast.success("Your Post Is Live Now! Hurry To Finish It", {
-//   position: "top-center",
-//   autoClose: 2000,
-//   hideProgressBar: false,
-//   closeOnClick: true,
-//   pauseOnHover: false,
-//   draggable: true,
-//   progress: undefined,
-//   theme: "dark",
-// });
