@@ -21,15 +21,21 @@ const ChatFooter = () => {
         createdAt: new Date(),
         relation: `${userData.uid}/${secondUser.uid}`,
       });
+
+      const lastMessage = document.querySelector(".chat-area-main").lastChild;
+      lastMessage.scrollIntoView(false);
     }
 
     setMsgContent("");
   };
   return (
     <div className="chat-area-footer chat-input">
-      <form className=" d-flex p-2 gap-4 bg-transparent justify-content-center" onSubmit={handleSendMsg}>
+      <form
+        className=" d-flex p-2 gap-4 bg-transparent justify-content-center"
+        onSubmit={handleSendMsg}
+      >
         <input
-           className="w-50 outline-none text-white"
+          className="w-50 outline-none text-white"
           type="text"
           value={msgContent}
           onChange={(e) => setMsgContent(e.target.value)}
