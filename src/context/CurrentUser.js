@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import male from "../assets/profile/male.svg";
 import female from "../assets/profile/female.svg";
+import { toast } from "react-toastify";
 
 export const currentContext = createContext();
 
@@ -37,9 +38,41 @@ const CurrentUserProvider = ({ children }) => {
     setUserInfo([]);
   }, [currentUser]);
 
+  const updateCurrentUser = (key, value) => {
+    userCollection
+      .doc(currentUser[0].uid)
+      .set(
+        {
+          [key]: value,
+        },
+        { merge: true }
+      )
+      .then(() => {
+        toast(`Your ${key.charAt().toUpperCase()} Has Removed Successfully`, {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
+  };
+
   return (
     <currentContext.Provider
-      value={{ userData, setUserInfo, currentUser, userLoading }}
+      value={{
+        userData,
+        setUserInfo,
+        currentUser,
+        userLoading,
+        updateCurrentUser,
+      }}
     >
       {children}
     </currentContext.Provider>

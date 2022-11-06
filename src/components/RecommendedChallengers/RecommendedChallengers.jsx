@@ -34,21 +34,28 @@ const RecommendedChallengers = () => {
   }, [users]);
 
   return (
-    <div>
-      <div className="border-bottom mb-2 text-white">
-        <h5>Recommended challengers</h5>
+    <div className="bg-c-grey-dark rounded-2  py-3 pb-2 mb-5">
+      <div className="mb-2 text-white ">
+        <h5 className="text-center mb-3 border-grey-lite pb-2 mx-3">
+          Recommended challengers
+        </h5>
         {recommendedUsersstate.map((usr, index) => {
-          return (
-            <ChallengerShortcut
-              name={usr.name}
-              photoURL={usr.photoUrl}
-              key={index}
-            />
-          );
+          if (usr.uid !== currentUser[0].uid)
+            return (
+              <ChallengerShortcut
+                name={usr.name}
+                photoURL={usr.photoUrl}
+                key={index}
+              />
+            );
         })}
       </div>
       <div className="p-2">
-        <Link to="/" className="text-white">
+        <Link
+          to="/"
+          className="text-white text-decoration-none bg-c-grey-lite text-center mx-5 py-2 mt-2 rounded-2 d-block 
+           bg-c-grey-lite-hover"
+        >
           Explore all challengers
         </Link>
       </div>

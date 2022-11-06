@@ -61,7 +61,7 @@ const Home = () => {
       <div className="container">
         <button onClick={update}>update</button>
         <div className="row align-items-start justify-content-between">
-          <div className="col-6 mb-5 offset-1">
+          <div className="col-md-6 col-sm-12 mb-5 offset-1">
             <Post />
             {challenges ? (
               <>
@@ -89,7 +89,7 @@ const Home = () => {
               <h1>No Posts Yet</h1>
             )}
           </div>
-          <div className="col-3">
+          <div className="d-none d-md-block col-3">
             <RecommendedChallengers />
             <RecommendedTopChallenges />
           </div>

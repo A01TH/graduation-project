@@ -12,8 +12,41 @@ import "./ProfileInfo.scss";
 import userImgUrl from "./Sample.png";
 import { useParams } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
+import { FirebaseContext } from "../../context/FirebaseContext";
+
+// const update = () => {
+// EDIT DATA
+//   userCollection
+//     .doc(currentUser[0].uid)
+//     .set(
+//       {
+//         name: "Mostafa Khafaji",
+//         photoUrl:
+//           "https://lh3.googleusercontent.com/a/ALm5wu3n5EcjNxxHrNesIcq8ZwxrXXiXaBA0q2xZXJ2J_g=s96-c",
+//         points: 5000,
+//       },
+//       { merge: true }
+//     )
+//     .then(() => {
+//       toast("Your Name Has Updated Successfully", {
+//         position: "top-center",
+//         autoClose: 2000,
+//         hideProgressBar: false,
+//         closeOnClick: true,
+//         pauseOnHover: true,
+//         draggable: true,
+//         progress: undefined,
+//         theme: "dark",
+//       });
+//     })
+//     .catch((error) => {
+//       console.error("Error writing document: ", error);
+//     });
+// };
 
 const ProfileInfo = ({ user, self }) => {
+  const { updateCurrentUser } = useContext(currentContext);
+
   const [smShow, setSmShow] = useState(false);
   const [userImg, setUserImg] = useState(user.photoUrl);
   const [editingImg, setEditingImg] = useState(userImg);
@@ -31,11 +64,13 @@ const ProfileInfo = ({ user, self }) => {
   };
 
   const removeImg = function () {
+    updateCurrentUser("photoUrl", userImgUrl);
     setUserImg(userImgUrl);
     setSmShow(false);
   };
 
   const confirmImg = () => {
+    updateCurrentUser("photoUrl", editingImg);
     setUserImg(editingImg);
     setSmShow(false);
   };

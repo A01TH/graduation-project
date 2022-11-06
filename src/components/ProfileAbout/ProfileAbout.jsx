@@ -8,14 +8,13 @@ import { Modal } from "react-bootstrap";
 import { useEffect } from "react";
 
 const ProfileAbout = ({ user, users, self }) => {
+  const { updateCurrentUser } = useContext(currentContext);
   const [interests, setIneterests] = useState(user.interests);
   const [editInterests, setEditInterests] = useState(false);
   const [smShow, setSmShow] = useState(false);
   const friendsList = users.filter((friend) => {
     return friend.uid !== user.uid;
   });
-  console.log(user);
-  console.log(friendsList);
 
   const interestsOptions = [
     {
@@ -71,6 +70,7 @@ const ProfileAbout = ({ user, users, self }) => {
   }
 
   function confirmEditInterests() {
+    updateCurrentUser("interests", interests);
     setEditInterests(false);
   }
 
