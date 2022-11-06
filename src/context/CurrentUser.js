@@ -26,12 +26,9 @@ const CurrentUserProvider = ({ children }) => {
           : userInfo.gender.value === 1
           ? male
           : female,
-        interests: [] || userInfo.interests,
         username: (userData.email || userInfo.email).split("@")[0],
-        // gender: userInfo?.gender.value || 10,
         interests: userData.emailVerified ? [] : userInfo.Interests,
         points: 50,
-        // birthDate: "" || userInfo.birthDate,
         ownedChallenges: [],
         contributedChallenges: [],
         friends: [],
