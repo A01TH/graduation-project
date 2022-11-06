@@ -5,7 +5,7 @@ import { FaStar } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 const RecommendedTopChallenges = () => {
   return (
-    <div className="text-white">
+    <div className="text-white my-3">
       <h5>Top</h5>
       <ChallengerShortcut />
       <div>
