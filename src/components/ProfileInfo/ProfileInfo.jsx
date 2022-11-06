@@ -7,23 +7,17 @@ import {
   AiOutlineUserAdd,
   AiFillCamera,
 } from "react-icons/ai";
-import { Modal } from "react-bootstrap";
+import { Modal, Placeholder } from "react-bootstrap";
 import "./ProfileInfo.scss";
 import userImgUrl from "./Sample.png";
 import { useParams } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
 
-const ProfileInfo = () => {
-  const { userId } = useParams();
-  const { userData, currentUser } = useContext(currentContext);
-  const [user, setUser] = useState(userData);
-
+const ProfileInfo = ({ user, self }) => {
   const [smShow, setSmShow] = useState(false);
-  const [userImg, setUserImg] = useState(null);
+  const [userImg, setUserImg] = useState(user.photoUrl);
   const [editingImg, setEditingImg] = useState(userImg);
-  useEffect(() => {
-    userData?.photoUrl ? setUserImg(userData.photoUrl) : setUserImg(userImgUrl);
-  }, [userData?.photoUrl]);
+  console.log(user.photoUrl);
 
   const openFile = function (event) {
     const input = event.target;
@@ -56,59 +50,63 @@ const ProfileInfo = () => {
               alt="user"
               className="h-100 w-100 border rounded-circle border-4 border-primary"
             />
-
-            <button
-              className="btn btn-primary p-2 py-1 cam-btn text-white rounded-circle me-3 position-absolute"
-              onClick={() => setSmShow(true)}
-            >
-              <AiFillCamera />
-            </button>
-            <Modal
-              size="md"
-              show={smShow}
-              onHide={() => setSmShow(false)}
-              aria-labelledby="example-modal-sizes-title-sm"
-            >
-              <Modal.Header className="border-0 bg-dark"></Modal.Header>
-              <Modal.Body className="modalBody px-4 text-center bg-dark">
-                <div
-                  className="edit-img mx-auto mb-4 rounded-circle"
-                  style={{ width: "200px", height: "200px" }}
+            {self && (
+              <>
+                <button
+                  className="btn btn-primary p-2 py-1 cam-btn text-white rounded-circle me-3 position-absolute"
+                  onClick={() => setSmShow(true)}
                 >
-                  <img
-                    src={editingImg}
-                    alt="user"
-                    className="h-100 w-100 border rounded-circle border-4 border-primary"
-                  />
-                </div>
-                <input
-                  type="file"
-                  name="image"
-                  id="user-img"
-                  onChange={openFile}
-                  className="form-control mb-3"
-                />
-                <button className="btn btn-success me-2" onClick={confirmImg}>
-                  Done
+                  <AiFillCamera />
                 </button>
-                <button className="btn btn-danger" onClick={removeImg}>
-                  Remove
-                </button>
-              </Modal.Body>
-            </Modal>
+                <Modal
+                  size="md"
+                  show={smShow}
+                  onHide={() => setSmShow(false)}
+                  aria-labelledby="example-modal-sizes-title-sm"
+                >
+                  <Modal.Header className="border-0 bg-dark"></Modal.Header>
+                  <Modal.Body className="modalBody px-4 text-center bg-dark">
+                    <div
+                      className="edit-img mx-auto mb-4 rounded-circle"
+                      style={{ width: "200px", height: "200px" }}
+                    >
+                      <img
+                        src={editingImg}
+                        alt="user"
+                        className="h-100 w-100 border rounded-circle border-4 border-primary"
+                      />
+                    </div>
+                    <input
+                      type="file"
+                      name="image"
+                      id="user-img"
+                      onChange={openFile}
+                      className="form-control mb-3"
+                    />
+                    <button
+                      className="btn btn-success me-2"
+                      onClick={confirmImg}
+                    >
+                      Done
+                    </button>
+                    <button className="btn btn-danger" onClick={removeImg}>
+                      Remove
+                    </button>
+                  </Modal.Body>
+                </Modal>
+              </>
+            )}
           </div>
         </div>
         <div className="col-lg-9">
           <div className="info-content py-3">
             <div className="user d-flex justify-content-between align-items-start">
               <div className="user">
-                <h2 className="name">{currentUser[0].name}</h2>
-                <div className="username text-muted mb-3">
-                  @{userData?.email.split("@")[0]}
-                </div>
+                <h2 className="name">{user.name}</h2>
+                <div className="username text-muted mb-3">@{user.username}</div>
               </div>
               <div>
-                {userData ? (
+                {self ? (
                   <button className="edit-profile btn btn-outline-secondary">
                     Edit Profile
                   </button>
@@ -134,7 +132,7 @@ const ProfileInfo = () => {
               <ImStarFull />
               <ImStarHalf />
             </div>
-            {userData && (
+            {self && (
               <button className="btn btn-primary mt-4">
                 Start New Challenge
               </button>

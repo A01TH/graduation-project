@@ -5,13 +5,17 @@ import Select from "react-select";
 import { Link } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
 import { Modal } from "react-bootstrap";
+import { useEffect } from "react";
 
-const ProfileAbout = ({ user }) => {
-  const { userData } = useContext(currentContext);
-  const [interests, setIneterests] = useState([]);
+const ProfileAbout = ({ user, users, self }) => {
+  const [interests, setIneterests] = useState(user.interests);
   const [editInterests, setEditInterests] = useState(false);
-  const [currentUser, setCurrentUser] = useState(user);
   const [smShow, setSmShow] = useState(false);
+  const friendsList = users.filter((friend) => {
+    return friend.uid !== user.uid;
+  });
+  console.log(user);
+  console.log(friendsList);
 
   const interestsOptions = [
     {
@@ -93,7 +97,7 @@ const ProfileAbout = ({ user }) => {
           )}
         </div>
 
-        {userData &&
+        {self &&
           (!editInterests ? (
             <button
               className="btn btn-primary rounded-2  d-block"
@@ -135,24 +139,23 @@ const ProfileAbout = ({ user }) => {
           Contacts
         </div>
         <div className="contacts-list">
-          <div className="contact m-2">
-            <img src={userImg} alt="contact" className="img-fluid me-2" />
-            <Link to="" className="text-white fw-bold text-decoration-none">
-              Monica Geller
-            </Link>
-          </div>
-          <div className="contact m-2">
-            <img src={userImg} alt="contact" className="img-fluid me-2" />
-            <Link to="" className="text-white fw-bold text-decoration-none">
-              Rachel Green
-            </Link>
-          </div>
-          <div className="contact m-2">
-            <img src={userImg} alt="contact" className="img-fluid me-2" />
-            <Link to="" className="text-white fw-bold text-decoration-none">
-              Joey Tribbiani
-            </Link>
-          </div>
+          {friendsList
+            .map((friend) => (
+              <div className="contact m-2">
+                <img
+                  src={friend.photoUrl}
+                  alt="contact"
+                  className="img-fluid me-2 rounded-circle"
+                />
+                <Link
+                  to={`/${friend.username}`}
+                  className="text-white fw-bold text-decoration-none"
+                >
+                  {friend.name}
+                </Link>
+              </div>
+            ))
+            .slice(0, 3)}
         </div>
         <button className="btn btn-primary" onClick={() => setSmShow(true)}>
           See all contacts
@@ -172,106 +175,21 @@ const ProfileAbout = ({ user }) => {
           </Modal.Header>
           <Modal.Body className="px-4 text-center bg-dark">
             <div className="contacts-list row">
-              <div className="contact mb-3 d-flex align-items-center col-lg-6">
-                <img
-                  src={userImg}
-                  alt="contact"
-                  className="img-fluid me-2 w-25"
-                />
-                <Link to="" className="fw-bold text-decoration-none">
-                  Monica Geller
-                </Link>
-              </div>
-              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
-                <img
-                  src={userImg}
-                  alt="contact"
-                  className="img-fluid me-2 w-25"
-                />
-                <Link to="" className="fw-bold text-decoration-none">
-                  Monica Geller
-                </Link>
-              </div>
-              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
-                <img
-                  src={userImg}
-                  alt="contact"
-                  className="img-fluid me-2 w-25"
-                />
-                <Link to="" className="fw-bold text-decoration-none">
-                  Monica Geller
-                </Link>
-              </div>
-              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
-                <img
-                  src={userImg}
-                  alt="contact"
-                  className="img-fluid me-2 w-25"
-                />
-                <Link to="" className="fw-bold text-decoration-none">
-                  Monica Geller
-                </Link>
-              </div>
-              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
-                <img
-                  src={userImg}
-                  alt="contact"
-                  className="img-fluid me-2 w-25"
-                />
-                <Link to="" className="fw-bold text-decoration-none">
-                  Monica Geller
-                </Link>
-              </div>
-              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
-                <img
-                  src={userImg}
-                  alt="contact"
-                  className="img-fluid me-2 w-25"
-                />
-                <Link to="" className="fw-bold text-decoration-none">
-                  Monica Geller
-                </Link>
-              </div>
-              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
-                <img
-                  src={userImg}
-                  alt="contact"
-                  className="img-fluid me-2 w-25"
-                />
-                <Link to="" className="fw-bold text-decoration-none">
-                  Monica Geller
-                </Link>
-              </div>
-              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
-                <img
-                  src={userImg}
-                  alt="contact"
-                  className="img-fluid me-2 w-25"
-                />
-                <Link to="" className="fw-bold text-decoration-none">
-                  Monica Geller
-                </Link>
-              </div>
-              <div className="contact mb-3 d-flex  align-items-center  col-lg-6">
-                <img
-                  src={userImg}
-                  alt="contact"
-                  className="img-fluid me-2 w-25"
-                />
-                <Link to="" className="fw-bold text-decoration-none">
-                  Rachel Green
-                </Link>
-              </div>
-              <div className="contact mb-3 d-flex align-items-center  col-lg-6">
-                <img
-                  src={userImg}
-                  alt="contact"
-                  className="img-fluid me-2 w-25"
-                />
-                <Link to="" className="fw-bold text-decoration-none">
-                  Joey Tribbiani
-                </Link>
-              </div>
+              {friendsList.map((friend) => (
+                <div className="contact mb-3 d-flex align-items-center col-lg-6">
+                  <img
+                    src={friend.photoUrl}
+                    alt="contact"
+                    className="img-fluid me-2 w-25 rounded-circle"
+                  />
+                  <Link
+                    to={`/${friend.username}`}
+                    className="fw-bold text-decoration-none"
+                  >
+                    {friend.name}
+                  </Link>
+                </div>
+              ))}
             </div>
           </Modal.Body>
         </Modal>

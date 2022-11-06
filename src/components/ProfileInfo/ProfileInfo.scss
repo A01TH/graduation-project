@@ -13,6 +13,9 @@
   .edit-img {
     height: 200px !important;
     width: 200px !important;
+    img {
+      object-fit: cover
+    }
   }
 
   .cam-btn {
