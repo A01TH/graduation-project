@@ -48,7 +48,7 @@ const CurrentUserProvider = ({ children }) => {
         { merge: true }
       )
       .then(() => {
-        toast(`Your ${key.charAt().toUpperCase()} Has Removed Successfully`, {
+        toast(`Your ${key} Has Updated Successfully`, {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
