@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
 import { Modal } from "react-bootstrap";
 import { useEffect } from "react";
+import Toast from "../../UI/Toast/Toast";
 
 const ProfileAbout = ({ user, users, self }) => {
   const { updateCurrentUser } = useContext(currentContext);
@@ -70,7 +71,11 @@ const ProfileAbout = ({ user, users, self }) => {
   }
 
   function confirmEditInterests() {
-    updateCurrentUser("interests", interests);
+    updateCurrentUser(
+      "interests",
+      interests,
+      "Your Interests has been updated successfully"
+    );
     setEditInterests(false);
   }
 
@@ -194,6 +199,7 @@ const ProfileAbout = ({ user, users, self }) => {
           </Modal.Body>
         </Modal>
       </div>
+      <Toast />
     </div>
   );
 };

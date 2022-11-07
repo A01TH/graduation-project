@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import UserAction from "./UserAction";
+import Toast from "../../UI/Toast/Toast";
 
 // const update = () => {
 // EDIT DATA
@@ -58,13 +59,13 @@ const ProfileInfo = ({ user, self }) => {
   };
 
   const removeImg = function () {
-    updateCurrentUser("photoUrl", userImgUrl);
+    updateCurrentUser("photoUrl", userImgUrl, "Your Photo has been removed");
     setUserImg(userImgUrl);
     setSmShow(false);
   };
 
   const confirmImg = () => {
-    updateCurrentUser("photoUrl", editingImg);
+    updateCurrentUser("photoUrl", editingImg, "Your Photo has been updated");
     setUserImg(editingImg);
     setSmShow(false);
   };
@@ -159,6 +160,7 @@ const ProfileInfo = ({ user, self }) => {
           </div>
         </div>
       </div>
+      <Toast />
     </div>
   );
 };
