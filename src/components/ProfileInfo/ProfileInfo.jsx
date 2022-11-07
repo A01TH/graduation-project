@@ -67,6 +67,7 @@ const ProfileInfo = ({ user, self }) => {
   const confirmImg = () => {
     updateCurrentUser("photoUrl", editingImg, "Your Photo has been updated");
     setUserImg(editingImg);
+
     setSmShow(false);
   };
 

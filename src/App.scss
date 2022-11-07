@@ -33,7 +33,11 @@
   height: 250px;
 }
 .bg-blur {
-  background: rgba(128, 128, 128, 0.238);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
@@ -45,3 +49,7 @@
   object-fit: cover;
   aspect-ratio: 1;
 }
+
+// .custom-border {
+//   border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
+// }

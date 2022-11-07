@@ -1,20 +1,24 @@
 import React from "react";
 import { useState } from "react";
+import { Suspense } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import ContentLoader from "react-content-loader";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { toast, ToastContainer } from "react-toastify";
-import ChallengeCard from "../../components/ChallengeCard/ChallengeCard";
+// import ChallengeCard from "../../components/ChallengeCard/ChallengeCard";
+
 import { currentContext } from "../../context/CurrentUser";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import Toast from "../../UI/Toast/Toast";
 import Post from "./../../components/AddPost/Post";
 import RecommendedChallengers from "./../../components/RecommendedChallengers/RecommendedChallengers";
 import RecommendedTopChallenges from "./../../components/RecommendedTopChallenges/RecommendedTopChallenges";
-
+const ChallengeCard = React.lazy(() =>
+  import("../../components/ChallengeCard/ChallengeCard")
+);
 const Home = () => {
-  const { challengeCollection, userCollection } = useContext(FirebaseContext);
+  const { challengeCollection } = useContext(FirebaseContext);
   const [challenges] = useCollectionData(challengeCollection);
   const { currentUser } = useContext(currentContext);
   const [currentUserPosts, setcurrentUserPosts] = useState(challenges);
@@ -58,7 +62,7 @@ const Home = () => {
     }
   }, [challenges]);
   return (
-    <div className=" bg-dark section-padding">
+    <div className="section-padding bg-body">
       <div className="container">
         {/* <button onClick={update}>update</button> */}
         <div className="row align-items-start justify-content-between">
@@ -92,7 +96,15 @@ const Home = () => {
             {currentUserPosts ? (
               <>
                 {currentUserPosts?.map((post, index) => {
-                  return <ChallengeCard post={post} key={index} />;
+                  return (
+                    <Suspense fallback={<h1>Loadin....</h1>}>
+                      <ChallengeCard
+                        post={post}
+                        key={index}
+                        currentUser={currentUser[0]}
+                      />
+                    </Suspense>
+                  );
                 })}
               </>
             ) : (
