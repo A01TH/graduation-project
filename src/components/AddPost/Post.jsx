@@ -36,9 +36,6 @@ const Post = () => {
       postComments: [],
       startDate: new Date(),
       endDate: endDate,
-      postOwnerName: currentUser[0]?.name,
-      postOwnerUs: currentUser[0]?.username,
-      postOwnerImg: currentUser[0]?.photoUrl,
     });
     toast.success("Your Post Is Live Now! Hurry To Finish It", {
       position: "top-center",
