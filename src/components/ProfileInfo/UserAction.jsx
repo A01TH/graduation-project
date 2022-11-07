@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useContext } from "react";
+
 import {
   AiOutlineMessage,
   AiOutlineStop,
   AiOutlineUserAdd,
 } from "react-icons/ai";
+import Toast from "../../UI/Toast/Toast";
 import { currentContext } from "../../context/CurrentUser";
 
 const UserAction = ({ user }) => {
@@ -17,8 +19,11 @@ const UserAction = ({ user }) => {
     console.log("Chat");
   };
   const handleAddFriend = () => {
-    setFriends([...friends, user.uid]);
-    updateCurrentUser("friends", friends);
+    console.log(friends);
+    setFriends([...friends, { friendId: user.uid, status: "pending" }]);
+    console.log(friends);
+    updateCurrentUser("friends", friends, "Friend has been added");
+    console.log(friends);
   };
   return (
     <div>
@@ -26,15 +31,19 @@ const UserAction = ({ user }) => {
         <button className="icon-btn text-secondary me-3 h4">
           <AiOutlineStop onClick={handleReport} />
         </button>
-        {currentUser[0].friends.includes(user.uid) ? (
+        {/* {friends.some((friend) => friend.friendId == user.uid) ? (
           <button className="icon-btn text-secondary me-3 h4">
             <AiOutlineMessage onClick={handleChat} />
           </button>
-        ) : (
-          <button className="icon-btn text-secondary me-3 h4">
-            <AiOutlineUserAdd onClick={handleAddFriend} />
-          </button>
-        )}
+        ) : ( */}
+        <button
+          className="icon-btn text-secondary me-3 h4"
+          onClick={() => handleAddFriend()}
+        >
+          <AiOutlineUserAdd />
+        </button>
+        {/* )} */}
+        <Toast />
       </>
     </div>
   );
