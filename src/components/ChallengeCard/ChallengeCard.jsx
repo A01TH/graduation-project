@@ -22,7 +22,7 @@ function ChallengeCard({ post }) {
 
       <div className="chall-owner d-flex justify-content-between mb-3 align-items-center">
         <div className="chall-owner-info d-flex align-items-center">
-          <img src={post.postOwnerImg} alt="" className="me-2 rounded-circle w-100" />
+          <img src={post.postOwnerImg} alt="" className="me-2 rounded-circle w-100px" />
           <div className="chall-owner-name">
             <p className="mb-0">{post.postOwnerName}</p>
             <small>{post.postOwnerUs}</small>
