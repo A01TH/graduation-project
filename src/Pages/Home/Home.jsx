@@ -10,6 +10,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 import { currentContext } from "../../context/CurrentUser";
 import { FirebaseContext } from "../../context/FirebaseContext";
+import Toast from "../../UI/Toast/Toast";
 import Post from "./../../components/AddPost/Post";
 import RecommendedChallengers from "./../../components/RecommendedChallengers/RecommendedChallengers";
 import RecommendedTopChallenges from "./../../components/RecommendedTopChallenges/RecommendedTopChallenges";
@@ -132,18 +133,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
+      <Toast />
     </div>
   );
 };

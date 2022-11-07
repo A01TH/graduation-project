@@ -1,18 +1,14 @@
 import { ImStarFull, ImStarHalf } from "react-icons/im";
 import { useContext, useEffect, useState } from "react";
-import {
-  AiOutlineCheck,
-  AiOutlineMessage,
-  AiOutlineStop,
-  AiOutlineUserAdd,
-  AiFillCamera,
-} from "react-icons/ai";
+import { AiFillCamera } from "react-icons/ai";
 import { Modal, Placeholder } from "react-bootstrap";
 import "./ProfileInfo.scss";
 import userImgUrl from "./Sample.png";
 import { useParams } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
 import { FirebaseContext } from "../../context/FirebaseContext";
+import UserAction from "./UserAction";
+import Toast from "../../UI/Toast/Toast";
 
 // const update = () => {
 // EDIT DATA
@@ -50,7 +46,6 @@ const ProfileInfo = ({ user, self }) => {
   const [smShow, setSmShow] = useState(false);
   const [userImg, setUserImg] = useState(user.photoUrl);
   const [editingImg, setEditingImg] = useState(userImg);
-  console.log(user.photoUrl);
 
   const openFile = function (event) {
     const input = event.target;
@@ -64,13 +59,13 @@ const ProfileInfo = ({ user, self }) => {
   };
 
   const removeImg = function () {
-    updateCurrentUser("photoUrl", userImgUrl);
+    updateCurrentUser("photoUrl", userImgUrl, "Your Photo has been removed");
     setUserImg(userImgUrl);
     setSmShow(false);
   };
 
   const confirmImg = () => {
-    updateCurrentUser("photoUrl", editingImg);
+    updateCurrentUser("photoUrl", editingImg, "Your Photo has been updated");
     setUserImg(editingImg);
 
     setSmShow(false);
@@ -147,17 +142,7 @@ const ProfileInfo = ({ user, self }) => {
                     Edit Profile
                   </button>
                 ) : (
-                  <>
-                    <button className="icon-btn text-secondary me-3 h4">
-                      <AiOutlineStop />
-                    </button>
-                    <button className="icon-btn text-secondary me-3 h4">
-                      <AiOutlineMessage />
-                    </button>
-                    <button className="icon-btn text-secondary me-3 h4">
-                      <AiOutlineUserAdd />
-                    </button>
-                  </>
+                  <UserAction user={user} />
                 )}
               </div>
             </div>
@@ -176,6 +161,7 @@ const ProfileInfo = ({ user, self }) => {
           </div>
         </div>
       </div>
+      <Toast />
     </div>
   );
 };

@@ -34,7 +34,7 @@ function ChallengeCard({ post }) {
               <img
                 src={postOwner[0].photoUrl}
                 alt=""
-                className="me-2 rounded-circle"
+                className="me-2 rounded-circle w-100px"
               />
 
               <div className="chall-owner-name">
