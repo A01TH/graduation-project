@@ -38,7 +38,7 @@ const CurrentUserProvider = ({ children }) => {
     setUserInfo([]);
   }, [currentUser]);
 
-  const updateCurrentUser = (key, value) => {
+  const updateCurrentUser = (key, value, message) => {
     userCollection
       .doc(currentUser[0].uid)
       .set(
@@ -48,7 +48,7 @@ const CurrentUserProvider = ({ children }) => {
         { merge: true }
       )
       .then(() => {
-        toast(`Your ${key} Has Updated Successfully`, {
+        toast(message, {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
