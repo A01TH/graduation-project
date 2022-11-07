@@ -141,7 +141,7 @@ const ProfileAbout = ({ user, users, self }) => {
         <div className="contacts-list">
           {friendsList
             .map((friend) => (
-              <div className="contact m-2">
+              <div className="contact mb-2">
                 <img
                   src={friend.photoUrl}
                   alt="contact"

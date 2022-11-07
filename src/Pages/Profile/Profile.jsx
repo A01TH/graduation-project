@@ -19,7 +19,6 @@ const Profile = () => {
     : userCollection.where("username", "==", currentUser[0].username);
   const [filterUser, filterUserLoading] = useCollectionData(query);
   const [self, setSelf] = useState(false);
-  console.log(users);
 
   useEffect(() => {
     if (!usernameParams || usernameParams === currentUser[0].username) {
