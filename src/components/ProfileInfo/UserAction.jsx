@@ -8,22 +8,25 @@ import {
 } from "react-icons/ai";
 import Toast from "../../UI/Toast/Toast";
 import { currentContext } from "../../context/CurrentUser";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 const UserAction = ({ user }) => {
   const { currentUser, updateCurrentUser } = useContext(currentContext);
   const [friends, setFriends] = useState(currentUser[0].friends);
+  const didMount = useRef(false);
   const handleReport = () => {
     console.log("Report");
   };
   const handleChat = () => {
     console.log("Chat");
   };
-  const handleAddFriend = () => {
-    console.log(friends);
-    setFriends([...friends, { friendId: user.uid, status: "pending" }]);
-    console.log(friends);
+
+  useEffect(() => {
     updateCurrentUser("friends", friends, "Friend has been added");
-    console.log(friends);
+  }, [friends]);
+  const handleAddFriend = () => {
+    setFriends([...friends, { friendId: user.uid, status: "pending" }]);
   };
   return (
     <div>
