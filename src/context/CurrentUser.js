@@ -33,6 +33,8 @@ const CurrentUserProvider = ({ children }) => {
         ownedChallenges: [],
         contributedChallenges: [],
         friends: [],
+        sentRequests: [],
+        receivedRequests: [],
       });
     }
     setUserInfo([]);

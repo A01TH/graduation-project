@@ -19,11 +19,8 @@ const UserAction = ({ user }) => {
     console.log("Chat");
   };
   const handleAddFriend = () => {
-    console.log(friends);
-    setFriends([...friends, { friendId: user.uid, status: "pending" }]);
-    console.log(friends);
+    setFriends((prev) => [...prev, { friendId: user.uid, status: "pending" }]);
     updateCurrentUser("friends", friends, "Friend has been added");
-    console.log(friends);
   };
   return (
     <div>
@@ -31,18 +28,18 @@ const UserAction = ({ user }) => {
         <button className="icon-btn text-secondary me-3 h4">
           <AiOutlineStop onClick={handleReport} />
         </button>
-        {/* {friends.some((friend) => friend.friendId == user.uid) ? (
+        {friends.some((friend) => friend.friendId == user.uid) ? (
           <button className="icon-btn text-secondary me-3 h4">
             <AiOutlineMessage onClick={handleChat} />
           </button>
-        ) : ( */}
-        <button
-          className="icon-btn text-secondary me-3 h4"
-          onClick={() => handleAddFriend()}
-        >
-          <AiOutlineUserAdd />
-        </button>
-        {/* )} */}
+        ) : (
+          <button
+            className="icon-btn text-secondary me-3 h4"
+            onClick={() => handleAddFriend()}
+          >
+            <AiOutlineUserAdd />
+          </button>
+        )}
         <Toast />
       </>
     </div>
