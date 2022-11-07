@@ -133,3 +133,18 @@ $link-hover-color: #36175e;
 .custom-downdown {
   background-color: red;
 }
+
+.notification {
+  position: relative;
+}
+.notification {
+  font-size: 25px;
+}
+.notification span {
+  position: absolute;
+  color: red;
+  top: -5px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+}

@@ -11,10 +11,20 @@ import "./Navbar.scss";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import { IoIosNotifications } from "react-icons/io";
+import ChallengerShortcut from "../ChallengerShortcut/ChallengerShortcut";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const Header = () => {
   const { userData, currentUser, userLoading } = useContext(currentContext);
-  const { auth } = useContext(FirebaseContext);
+  // const [noti, setNoti] = useState([]);
+  const { auth, users, userCollection } = useContext(FirebaseContext);
+  const query = userCollection.where(
+    "uid",
+    "in",
+    currentUser[0].receivedRequests
+  );
+  const [requestedUsers] = useCollectionData(query);
   const navigate = useNavigate();
   const [logged, setLogged] = useState(false);
   useEffect(() => {
@@ -32,10 +42,9 @@ const Header = () => {
   const handleMobileNav = () => {
     setMobNav((prev) => !prev);
   };
-  // useEffect(() => {
-  //   console.log(currentUser);
-  // }, [currentUser]);
-
+  const test = () => {
+    console.log(requestedUsers);
+  };
   return (
     <section className="nav">
       <div className="container">
@@ -79,6 +88,31 @@ const Header = () => {
                     Messages
                   </NavLink>
                 </li>
+                <li className="notification">
+                  <span onClick={test}>
+                    {currentUser[0].receivedRequests.length}
+                  </span>
+                  {/* <Dropdown>
+                    <Dropdown.Toggle variant="danger" id="notification">
+                      <IoIosNotifications className="position-relative" />
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      {noti?.map((user) => {
+                        return (
+                          <Dropdown.Item href="#/action-3">
+                            <ChallengerShortcut
+                              name={user.name}
+                              photoURL={user.photoUrl}
+                              notification={true}
+                              uid={user.uid}
+                            />
+                          </Dropdown.Item>
+                        );
+                      })}
+                    </Dropdown.Menu>
+                  </Dropdown> */}
+                </li>
                 <li>
                   <Dropdown>
                     <Dropdown.Toggle
@@ -115,7 +149,7 @@ const Header = () => {
                         <span>{currentUser[0]?.points}</span>
                         <BsCoin />
                       </Dropdown.Item>
-                      
+
                       <Dropdown.Item
                         onClick={handleSignOut}
                         className="d-flex align-items-center justify-content-around"

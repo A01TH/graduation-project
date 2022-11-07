@@ -50,7 +50,7 @@ const CurrentUserProvider = ({ children }) => {
         { merge: true }
       )
       .then(() => {
-        console.log(key,value,message);
+        console.log(key, value, message);
         toast(message, {
           position: "top-center",
           autoClose: 2000,
