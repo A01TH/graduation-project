@@ -33,6 +33,8 @@ const CurrentUserProvider = ({ children }) => {
         ownedChallenges: [],
         contributedChallenges: [],
         friends: [],
+        sentRequests: [],
+        receivedRequests: [],
       });
     }
     setUserInfo([]);
@@ -48,6 +50,7 @@ const CurrentUserProvider = ({ children }) => {
         { merge: true }
       )
       .then(() => {
+        console.log(key,value,message);
         toast(message, {
           position: "top-center",
           autoClose: 2000,
