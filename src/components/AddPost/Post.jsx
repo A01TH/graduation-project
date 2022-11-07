@@ -64,7 +64,7 @@ const Post = () => {
     <>
       <div>
         <div className="row post mx-1  ">
-          <div className=" py-3  rounded-5 py-4 px-3 bg-c-grey post-form bg-blur">
+          <div className=" py-3  card py-4 px-3 bg-c-grey post-form bg-light">
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Form.Group className="mb-3" controlId="formInput">
                 <FloatingLabel

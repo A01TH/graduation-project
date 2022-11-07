@@ -62,7 +62,7 @@ const Home = () => {
     }
   }, [challenges]);
   return (
-    <div className=" bg-dark section-padding">
+    <div className="section-padding bg-body">
       <div className="container">
         {/* <button onClick={update}>update</button> */}
         <div className="row align-items-start justify-content-between">

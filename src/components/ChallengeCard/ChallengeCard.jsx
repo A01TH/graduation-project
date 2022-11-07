@@ -19,14 +19,14 @@ function ChallengeCard({ post }) {
   return (
     <>
       {!isLoading && (
-        <div className="bg-c-grey-dark bg-blur text-white p-3 rounded-3  mx-auto my-3 w-100">
-          <p>{post.title}</p>
+        <div className="bg-c-grey-dark bg-c-dark  p-3 card  mx-auto my-3 w-100">
+          <h5 className="text-white ">{post.title}</h5>
           <div className="chall-img mb-3">
-            <img
+            {/* <img
               src={"https://via.placeholder.com/150"}
               alt=""
               className="w-100 h-250px rounded-2"
-            />
+            /> */}
           </div>
 
           <div className="chall-owner d-flex justify-content-between mb-3 align-items-center">
@@ -60,14 +60,14 @@ function ChallengeCard({ post }) {
               </p>
             </div>
             <div className="w-25">
-              <ProgressBar variant="danger" now={80} />
+              <ProgressBar animated now={45} className=" border-dark border" />
             </div>
           </div>
 
           <div className="chall-actions d-flex justify-content-between small align-items-center">
             <div>
               <button
-                className="btn btn-danger me-2"
+                className="btn btn-primary me-2"
                 disabled={post.status === "individual"}
               >
                 Ask to join

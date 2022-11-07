@@ -32,7 +32,7 @@ const Profile = () => {
       <div className="profile-cover">
         <Background />
       </div>
-      <div className="profile-content bg-dark">
+      <div className="profile-content bg-body">
         {filterUserLoading ? (
           <div>Loading..</div>
         ) : (

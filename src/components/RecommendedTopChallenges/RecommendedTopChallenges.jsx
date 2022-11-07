@@ -5,8 +5,10 @@ import { FaStar } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 const RecommendedTopChallenges = () => {
   return (
-    <div className="bg-c-grey-dark rounded-2  py-3 pb-2 text-white">
-      <h5 className="text-center mb-3 border-grey-lite pb-2 mx-3">Top</h5>
+    <div className="bg-light card  py-3 pb-2 text-white">
+      <h5 className="text-center mb-3 border-grey-lite pb-2 mx-3">
+        Top Challenges
+      </h5>
       <ChallengerShortcut />
       <div className="">
         <div className="border-bottom border-black mt-4  ">
