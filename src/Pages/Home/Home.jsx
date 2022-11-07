@@ -47,9 +47,7 @@ const Home = () => {
   //       console.error("Error writing document: ", error);
   //     });
   // };
-  const update = () => {
-    console.log(currentUserPosts);
-  };
+
   useEffect(() => {
     if (currentUser) {
       const filteredChallenges = challenges?.filter((challenge) => {
@@ -61,7 +59,7 @@ const Home = () => {
   return (
     <div className=" bg-dark section-padding">
       <div className="container">
-        <button onClick={update}>update</button>
+        {/* <button onClick={update}>update</button> */}
         <div className="row align-items-start justify-content-between">
           <div className="col-md-6 col-sm-12 mb-5 offset-1">
             <Post />
