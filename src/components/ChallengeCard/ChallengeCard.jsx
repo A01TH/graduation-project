@@ -117,7 +117,7 @@ function ChallengeCard({ post }) {
               </p>
               <p className="mb-0">
                 {post.site === "Youtube" ? (
-                  <i className="me-1 youtube">
+                  <i className="me-2 youtube">
                     <SiYoutube />
                   </i>
                 ) : post.site === "Coursera" ? (
@@ -134,13 +134,6 @@ function ChallengeCard({ post }) {
                   Link for the course
                 </a>
               </p>
-            </div>
-            <div className="w-25">
-              <ProgressBar
-                animated
-                now={45}
-                className="  border border-primary"
-              />
             </div>
           </div>
 

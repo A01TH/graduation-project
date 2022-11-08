@@ -96,7 +96,7 @@ const Post = () => {
               </Form.Group>
               <Form.Group className="mb-3">
                 <div className="row ">
-                  <div className="col-lg-6 col-12 mb-3 mb-lg-0">
+                  <div className="col-lg-6 col-12 mb-3 mb-lg-0 text-black">
                     <Controller
                       name="category"
                       control={control}
@@ -111,7 +111,7 @@ const Post = () => {
                       )}
                     />
                   </div>
-                  <div className="col-lg-2 col-6 ">
+                  <div className="col-lg-2 col-6  text-black">
                     <Controller
                       name="site"
                       control={control}

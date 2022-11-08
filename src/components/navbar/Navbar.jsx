@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo/Logo2.png";
 import { BsCoin, BsFillChatLeftTextFill } from "react-icons/bs";
@@ -10,8 +10,9 @@ import "./Navbar.scss";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { IoIosNotifications } from "react-icons/io";
+import { IoIosNotifications, IoMdNotificationsOutline } from "react-icons/io";
 import ChallengerShortcut from "../ChallengerShortcut/ChallengerShortcut";
+import Notification from "../notification/Notification";
 
 const Header = () => {
   const { userData, currentUser, userLoading } = useContext(currentContext);
@@ -87,23 +88,29 @@ const Header = () => {
                   </NavLink>
                 </li>
 
-                <li className="notification">
-                  <span className="fs-6">
-                    {requestedUsers && currentUser ? requestedUsers.length : 0}
+                <li className="notification position-relative">
+                  <span className="fs-6  position-absolute bill-wrapper">
+                    {requestedUsers && currentUser && requestedUsers.length ? (
+                      <div className="bill"></div>
+                    ) : (
+                      ""
+                    )}
                   </span>
                   <Dropdown>
                     <Dropdown.Toggle variant="tranparent" id="notification">
-                      <IoIosNotifications className="position-relative fs-4" />
+                      <IoMdNotificationsOutline className="position-relative fs-5" />
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu>
+                    <Dropdown.Menu
+                      align="end"
+                      className="dropdown-notification"
+                    >
                       {requestedUsers?.map((user) => {
                         return (
-                          <Dropdown.Item href="#/action-3">
-                            <ChallengerShortcut
+                          <Dropdown.Item className="noti-item">
+                            <Notification
                               name={user.name}
                               photoURL={user.photoUrl}
-                              notification={true}
                               uid={user.uid}
                             />
                           </Dropdown.Item>

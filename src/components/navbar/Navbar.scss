@@ -140,11 +140,54 @@ $nav-font-color: #ffffff;
 .notification {
   font-size: 25px;
 }
-.notification span {
-  position: absolute;
-  color: red;
-  top: -5px;
-  right: -5px;
-  width: 10px;
-  height: 10px;
+
+$c: #ce2b37;
+$s: 10px;
+.bill-wrapper {
+  right: 15px;
+  top: 5px;
+}
+div.bill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $s;
+  height: $s;
+  background-color: $c;
+  border-radius: 50%;
+  position: relative;
+
+  &:before {
+    content: "";
+    width: inherit;
+    height: inherit;
+    border: $s/2 solid $c;
+    border-radius: inherit;
+    position: absolute;
+    z-index: -10;
+    opacity: 0;
+    animation: 2s expand cubic-bezier(0.29, 0, 0, 1) infinite;
+    animation-delay: 1s;
+  }
+}
+
+@keyframes expand {
+  /* Starting at 1 to prevent IOS flicker */
+  1% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 750%;
+    height: 750%;
+    opacity: 0;
+    border-color: #fff;
+    background-color: none;
+    border-width: 2px;
+  }
+}
+
+.dropdown-notification {
+  width: 300px !important;
 }
