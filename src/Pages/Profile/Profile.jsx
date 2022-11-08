@@ -29,9 +29,7 @@ const Profile = () => {
   }, [usernameParams, currentUser[0]]);
   return (
     <div className="profile text-white">
-      <div className="profile-cover">
-        <Background />
-      </div>
+      <div className="profile-cover"></div>
       <div className="profile-content bg-body">
         {filterUserLoading ? (
           <div>Loading..</div>

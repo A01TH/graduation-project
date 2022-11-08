@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { useState } from "react";
+import { Tab, Tabs } from "react-bootstrap";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import ChallengeCard from "../ChallengeCard/ChallengeCard";
@@ -14,7 +15,7 @@ const ProfileTimeline = ({ user }) => {
 
   return (
     <div className="profile-timeline">
-      <ul className="nav position-static nav-fill fw-bold">
+      {/* <ul className="nav position-static nav-fill fw-bold">
         <li className="nav-item">
           <a
             className="nav-link active"
@@ -28,25 +29,32 @@ const ProfileTimeline = ({ user }) => {
             Other Challenges
           </a>
         </li>
-      </ul>
-      <div className="user-challenges">
-        <div className="card challenge-card  w-75 mx-auto bg-dark shadow-2">
-          <div className="card-img w-100">
-            <img
-              src="https://via.placeholder.com/600x200"
-              alt=""
-              className="img-fluid w-100"
-            />
+      </ul> */}
+      <Tabs
+        defaultActiveKey="profile"
+        id="fill-tab-example"
+        className="mb-3 border-0 position-static"
+        fill
+      >
+        <Tab eventKey="home" title="My Challenges">
+          <div className="user-challenges">
+            {showUserChallenges && userChallenges ? (
+              userChallenges.map((challenge, index) => {
+                return <ChallengeCard post={challenge} key={index} />;
+              })
+            ) : (
+              <h1>Loading</h1>
+            )}
           </div>
-          {showUserChallenges && userChallenges ? (
-            userChallenges.map((challenge, index) => {
-              return <ChallengeCard post={challenge} key={index} />;
-            })
-          ) : (
+        </Tab>
+        <Tab eventKey="profile" title="Other Challenges">
+          <div className="user-challenges">
             <h1>Loading</h1>
-          )}
-        </div>
-      </div>
+            <h1>Loading</h1>
+            <h1>Loading</h1>
+          </div>
+        </Tab>
+      </Tabs>
     </div>
   );
 };

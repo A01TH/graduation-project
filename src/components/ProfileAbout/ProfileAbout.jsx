@@ -4,7 +4,7 @@ import userImg from "../../assets/profile/user-img-1.svg";
 import Select from "react-select";
 import { Link } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
-import { Modal } from "react-bootstrap";
+import { Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useEffect } from "react";
 import Toast from "../../UI/Toast/Toast";
 
@@ -34,6 +34,15 @@ const ProfileAbout = ({ user, users, self }) => {
       value: 4,
       label: "Artifcial Intellegence",
     },
+  ];
+
+  const colors = [
+    "primary",
+    "secondary",
+    "success",
+    "info",
+    "warning",
+    "danger",
   ];
 
   const style = {
@@ -85,7 +94,11 @@ const ProfileAbout = ({ user, users, self }) => {
         <div className="info-interests d-flex flex-wrap text-center gap-3 mb-3 w-100">
           {!editInterests ? (
             interests.map((interest) => (
-              <div className="interest bg-secondary rounded-1 px-4">
+              <div
+                className={`badge bg-${
+                  colors[Math.floor(Math.random() * (colors.length - 1))]
+                }`}
+              >
                 {interest.label}
               </div>
             ))
@@ -105,14 +118,14 @@ const ProfileAbout = ({ user, users, self }) => {
         {self &&
           (!editInterests ? (
             <button
-              className="btn btn-primary rounded-2  d-block"
+              className="btn btn-primary btn-sm rounded-2  d-block"
               onClick={handleEditInterests}
             >
               {interests.length ? "Edit" : "Add interests"}
             </button>
           ) : (
             <button
-              className="btn btn-primary rounded-2  d-block"
+              className="btn btn-primary btn-sm rounded-2  d-block"
               onClick={confirmEditInterests}
             >
               Done
@@ -120,85 +133,92 @@ const ProfileAbout = ({ user, users, self }) => {
           ))}
       </div>
 
-      {/* <div className="info-skills mb-2">
-        <div className="skills-label text-center p-3 text-uppercase border rounded-2 fw-bold mb-4">
-          Skills
-        </div>
-        <div className="skill d-flex justify-content-between align-items-center mb-3">
-          <div className="skill-name">Branding</div>
-          <div className="skill-years rounded-2 py-1 px-4">3 years</div>
-        </div>
-        <div className="skill d-flex justify-content-between align-items-center mb-3">
-          <div className="skill-name">UI/UX</div>
-          <div className="skill-years rounded-2 py-1 px-4">3 years</div>
-        </div>
-        <div className="skill d-flex justify-content-between align-items-center mb-4">
-          <div className="skill-name">Visual Effects</div>
-          <div className="skill-years rounded-2 py-1 px-4">3 years</div>
-        </div>
-        <button className="btn btn-primary rounded-2">Edit</button>
-      </div> */}
+      <ul class="list-group stats mb-2">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Owned Challenges
+          <span class="badge bg-primary rounded-pill">14</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Contributed Challenges
+          <span class="badge bg-primary rounded-pill">2</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Finished Challenges
+          <span class="badge bg-primary rounded-pill">1</span>
+        </li>
+      </ul>
 
-      <div className="about-contacts mb-2">
-        <div className="contacts-label text-center p-3 text-uppercase border rounded-2 fw-bold mb-4">
-          Contacts
+      <div class="card bg-body border-primary mb-3">
+        <div class="card-header text-uppercase">Study Buddies</div>
+        <div class="card-body">
+          <div className="contacts-list row">
+            {friendsList
+              .map((friend) => (
+                <OverlayTrigger
+                  placement="bottom"
+                  delay={{ show: 100 }}
+                  overlay={<Tooltip id="my-tooltip-id">{friend.name}</Tooltip>}
+                >
+                  <div className="contact mb-3 col-4">
+                    <Link
+                      to={`/${friend.username}`}
+                      className="text-white fw-bold text-decoration-none"
+                    >
+                      <img
+                        src={friend.photoUrl}
+                        alt="contact"
+                        className="img-fluid rounded-circle"
+                      />
+                    </Link>
+                  </div>
+                </OverlayTrigger>
+              ))
+              .slice(0, 9)}
+          </div>
+          {friendsList.length > 9 && (
+            <button
+              className="btn btn-primary w-100"
+              onClick={() => setSmShow(true)}
+            >
+              See all
+            </button>
+          )}
         </div>
-        <div className="contacts-list">
-          {friendsList
-            .map((friend) => (
-              <div className="contact mb-2">
+      </div>
+
+      <Modal
+        size="md"
+        show={smShow}
+        onHide={() => setSmShow(false)}
+        aria-labelledby="example-modal-sizes-title-sm"
+        className="text-white"
+        scrollable={true}
+      >
+        <Modal.Header className="border-0 bg-dark">
+          <h3 className="text-center fw-bold text-uppercase mx-auto">
+            Contacts
+          </h3>
+        </Modal.Header>
+        <Modal.Body className="px-4 text-center bg-dark">
+          <div className="contacts-list row">
+            {friendsList.map((friend) => (
+              <div className="contact mb-3 d-flex align-items-center col-lg-6">
                 <img
                   src={friend.photoUrl}
                   alt="contact"
-                  className="img-fluid me-2 rounded-circle"
+                  className="img-fluid me-2 w-25 rounded-circle"
                 />
                 <Link
                   to={`/${friend.username}`}
-                  className="text-white fw-bold text-decoration-none"
+                  className="fw-bold text-decoration-none"
                 >
                   {friend.name}
                 </Link>
               </div>
-            ))
-            .slice(0, 3)}
-        </div>
-        <button className="btn btn-primary" onClick={() => setSmShow(true)}>
-          See all contacts
-        </button>
-        <Modal
-          size="md"
-          show={smShow}
-          onHide={() => setSmShow(false)}
-          aria-labelledby="example-modal-sizes-title-sm"
-          className="text-white"
-          scrollable={true}
-        >
-          <Modal.Header className="border-0 bg-dark">
-            <h3 className="text-center fw-bold text-uppercase mx-auto">
-              Contacts
-            </h3>
-          </Modal.Header>
-          <Modal.Body className="px-4 text-center bg-dark">
-            <div className="contacts-list row">
-              {friendsList.map((friend) => (
-                <div className="contact mb-3 d-flex align-items-center col-lg-6">
-                  <img
-                    src={friend.photoUrl}
-                    alt="contact"
-                    className="img-fluid me-2 w-25 rounded-circle"
-                  />
-                  <Link
-                    to={`/${friend.username}`}
-                    className="fw-bold text-decoration-none"
-                  >
-                    {friend.name}
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </Modal.Body>
-        </Modal>
-      </div>
+            ))}
+          </div>
+        </Modal.Body>
+      </Modal>
       <Toast />
     </div>
   );

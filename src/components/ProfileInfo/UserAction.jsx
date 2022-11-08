@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, uselayoutEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useContext } from "react";
 import {
   AiOutlineMessage,
@@ -7,8 +7,6 @@ import {
 } from "react-icons/ai";
 import Toast from "../../UI/Toast/Toast";
 import { currentContext } from "../../context/CurrentUser";
-import { useRef } from "react";
-import { useEffect } from "react";
 
 const UserAction = ({ user }) => {
   const { currentUser, updateCurrentUser } = useContext(currentContext);
