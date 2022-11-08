@@ -5,8 +5,11 @@ import Select from "react-select";
 import { FaGoogle } from "react-icons/fa";
 import { useContext } from "react";
 import "./auth.scss";
+import male from "../../assets/profile/male.svg";
+import female from "../../assets/profile/female.svg";
+
 import { FirebaseContext } from "../../context/FirebaseContext";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
 
@@ -24,17 +27,18 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(data);
-        setUserInfo(data);
-        navigate("/home");
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .then(() =>
+        updateProfile(auth.currentUser, {
+          displayName: data.name,
+          photoURL: data.gender.value === 1 ? male : female,
+          email: data.email,
+        })
+      );
+    setUserInfo(data);
   };
   const handleLoginWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();

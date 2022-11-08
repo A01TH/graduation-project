@@ -10,15 +10,15 @@ import SecondUserProvider from "./context/SecondUserContext";
 // import Navbar from "./components/navbar/Navbar";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <FirebaseProvider>
-      <CurrentUserProvider>
-        <SecondUserProvider>
-          <App />
-        </SecondUserProvider>
-      </CurrentUserProvider>
-    </FirebaseProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <FirebaseProvider>
+    <CurrentUserProvider>
+      <SecondUserProvider>
+        <App />
+      </SecondUserProvider>
+    </CurrentUserProvider>
+  </FirebaseProvider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

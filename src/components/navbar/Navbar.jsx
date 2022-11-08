@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo/Logo2.png";
-import user from "../../assets/navbar/profile.svg";
 import { BsCoin, BsFillChatLeftTextFill } from "react-icons/bs";
 import { FaHome, FaRegSun, FaUserAlt } from "react-icons/fa";
 import { BiCategoryAlt } from "react-icons/bi";
@@ -11,10 +10,13 @@ import "./Navbar.scss";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import { IoIosNotifications } from "react-icons/io";
+import ChallengerShortcut from "../ChallengerShortcut/ChallengerShortcut";
 
 const Header = () => {
   const { userData, currentUser, userLoading } = useContext(currentContext);
-  const { auth } = useContext(FirebaseContext);
+  const { auth, users } = useContext(FirebaseContext);
+  const [requestedUsers, setRequestedUsers] = useState([]);
   const navigate = useNavigate();
   const [logged, setLogged] = useState(false);
   useEffect(() => {
@@ -32,12 +34,17 @@ const Header = () => {
   const handleMobileNav = () => {
     setMobNav((prev) => !prev);
   };
-  // useEffect(() => {
-  //   console.log(currentUser);
-  // }, [currentUser]);
+  useEffect(() => {
+    if (currentUser?.length !== 0 && userData) {
+      const recived = users?.filter((user) => {
+        return currentUser[0].receivedRequests.includes(user.uid);
+      });
+      setRequestedUsers(recived);
+    }
+  }, [currentUser]);
 
   return (
-    <section className="nav">
+    <section className="nav bg-tranparent">
       <div className="container">
         <header className="d-flex align-items-center justify-content-between w-100 h-100">
           <div className="brand">
@@ -79,6 +86,32 @@ const Header = () => {
                     Messages
                   </NavLink>
                 </li>
+
+                <li className="notification">
+                  <span className="fs-6">
+                    {requestedUsers && currentUser ? requestedUsers.length : 0}
+                  </span>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="tranparent" id="notification">
+                      <IoIosNotifications className="position-relative fs-4" />
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      {requestedUsers?.map((user) => {
+                        return (
+                          <Dropdown.Item href="#/action-3">
+                            <ChallengerShortcut
+                              name={user.name}
+                              photoURL={user.photoUrl}
+                              notification={true}
+                              uid={user.uid}
+                            />
+                          </Dropdown.Item>
+                        );
+                      })}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </li>
                 <li>
                   <Dropdown>
                     <Dropdown.Toggle
@@ -115,7 +148,7 @@ const Header = () => {
                         <span>{currentUser[0]?.points}</span>
                         <BsCoin />
                       </Dropdown.Item>
-                      
+
                       <Dropdown.Item
                         onClick={handleSignOut}
                         className="d-flex align-items-center justify-content-around"
@@ -130,7 +163,7 @@ const Header = () => {
             ) : (
               <ul className="nav-list list-unstyled  d-flex gap-4  align-items-center justify-content-center">
                 <li className="link">
-                  <NavLink to="/about">Why Chall.go</NavLink>
+                  <NavLink to="/about">Why Challe.go</NavLink>
                 </li>
                 <li>
                   <Button variant="outline-primary" className="text-light">
