@@ -40,7 +40,7 @@ function App() {
             path="/categories"
             element={
               <RequireAuth>
-                <Categories />
+                <Category />
               </RequireAuth>
             }
           />

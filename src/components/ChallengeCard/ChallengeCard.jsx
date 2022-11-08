@@ -23,6 +23,7 @@ function ChallengeCard({ post }) {
   const [postOwner, isLoading] = useCollectionData(query);
   const [isJoined, setIsJoined] = useState(false);
   const [liked, setLiked] = useState(false);
+
   const handleJoinChall = () => {
     challengeCollection
       .doc(post.cid)
