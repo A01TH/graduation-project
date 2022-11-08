@@ -60,10 +60,14 @@ function Category() {
           </ButtonGroup>
         </div>
 
-        <div className="row">
-          <div>
+        <div>
+          <div className="row ay-7aga align-items-lg-stretch">
             {renderArr.map((ch, i) => {
-              return <ChallengeCard post={ch} />;
+              return (
+                <div className="col-4">
+                  <ChallengeCard post={ch} key={ch.cid} className="h-100" />
+                </div>
+              );
             })}
           </div>
         </div>
