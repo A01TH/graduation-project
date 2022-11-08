@@ -79,7 +79,11 @@ const ProfileInfo = ({ user, self }) => {
             className="profile-img border rounded-circle border-4 border-primary"
             style={{ width: "200px", height: "200px" }}
           >
-            <img src={userImg} alt="user" className="h-100 w-100 " />
+            <img
+              src={userImg}
+              alt="user"
+              className="h-100 w-100 rounded-circle "
+            />
             {self && (
               <>
                 <button

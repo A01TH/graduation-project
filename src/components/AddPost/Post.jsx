@@ -32,7 +32,7 @@ const Post = () => {
       desc: data.description,
       category: data.category,
       status: data.postStatus,
-      participants: [],
+      participants: [currentUser[0].uid],
       postLikes: 0,
       postComments: [],
       startDate: new Date(),
