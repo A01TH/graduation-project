@@ -9,13 +9,13 @@ import { toast } from "react-toastify";
 export const currentContext = createContext();
 
 const CurrentUserProvider = ({ children }) => {
-  const { auth, userCollection } = useContext(FirebaseContext);
+  const { auth, userCollection, users } = useContext(FirebaseContext);
   const [userData] = useAuthState(auth);
   const [userInfo, setUserInfo] = useState([]);
   const query =
     userData?.uid && userCollection.where("uid", "==", userData.uid);
   const [currentUser, userLoading] = useCollectionData(query);
-
+  const [friends, setFriends] = useState([]);
   useEffect(() => {
     if (currentUser?.length === 0) {
       userCollection.doc(userData.uid).set({
@@ -66,7 +66,34 @@ const CurrentUserProvider = ({ children }) => {
         console.error("Error writing document: ", error);
       });
   };
+  useEffect(() => {
+    if (currentUser && userData) {
+      const filteredUserFriends = [];
+      currentUser[0]?.friends.forEach((friend) => {
+        console.log(friend);
+        users.filter((user) => {
+          if (user.uid === friend) {
+            filteredUserFriends.push(user);
+          }
+        });
+      });
+      setFriends(filteredUserFriends);
+      console.log(filteredUserFriends);
+    }
+  }, [currentUser]);
 
+  // useEffect(() => {
+  //   if (currentUser && userData) {
+  //     const filteredUserFriends = [];
+  //     users.filter((user) => {
+  //       currentUser[0].friends.forEach((friend) => {
+  //         return friend === user.uid;
+  //       });
+  //       filteredUserFriends.push(user);
+  //     });
+  //     console.log(filteredUserFriends);
+  //   }
+  // }, [currentUser]);
   return (
     <currentContext.Provider
       value={{
@@ -75,6 +102,7 @@ const CurrentUserProvider = ({ children }) => {
         currentUser,
         userLoading,
         updateCurrentUser,
+        friends,
       }}
     >
       {children}
