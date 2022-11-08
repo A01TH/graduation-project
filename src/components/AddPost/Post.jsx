@@ -13,6 +13,7 @@ import { SiCoursera, SiUdemy, SiYoutube } from "react-icons/si";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AiOutlineUserAdd, AiOutlineUsergroupAdd } from "react-icons/ai";
+import uuid from "react-uuid";
 
 const Post = () => {
   const [endDate, setEndDate] = useState(new Date());
@@ -25,18 +26,18 @@ const Post = () => {
   const { currentUser } = useContext(currentContext);
 
   const onSubmit = (data) => {
-    console.log(data);
-    challengeCollection.add({
+    const uniqueID = uuid();
+    challengeCollection.doc(uniqueID).set({
       creatorID: currentUser[0].uid,
       title: data.title,
       desc: data.description,
       category: data.category,
-      status: data.postStatus,
       participants: [currentUser[0].uid],
       postLikes: 0,
       postComments: [],
       startDate: new Date(),
       endDate: endDate,
+      cid: uniqueID,
     });
     toast.success("Your Post Is Live Now! Hurry To Finish It", {
       position: "top-center",
@@ -133,33 +134,10 @@ const Post = () => {
                   </div>
                 </div>
               </Form.Group>
-              <Form.Group>
-                {["radio"].map((type) => (
-                  <div key={`inline-${type}`} className="mb-3 text-light ">
-                    <Form.Check
-                      inline
-                      label={<AiOutlineUserAdd />}
-                      name="individual"
-                      type={type}
-                      id={`inline-${type}-1`}
-                      value="individual"
-                      {...register("postStatus")}
-                    />
-                    <Form.Check
-                      inline
-                      label={<AiOutlineUsergroupAdd />}
-                      name="shared"
-                      type={type}
-                      value="shared"
-                      id={`inline-${type}-2`}
-                      {...register("postStatus")}
-                    />
-                  </div>
-                ))}
-              </Form.Group>
+
               <Form.Group className="mb-2 border-bottom border-primary"></Form.Group>
               <Form.Group>
-                <p className="text-center text-light">
+                <p className="text-center text-white">
                   Complete your challenge to earn points 👌🥳
                 </p>
               </Form.Group>

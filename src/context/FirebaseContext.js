@@ -30,6 +30,7 @@ const FirebaseProvider = ({ children }) => {
         userCollection,
         messageCollection,
         challengeCollection,
+        firestore,
         users,
       }}
     >

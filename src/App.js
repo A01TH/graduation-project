@@ -61,7 +61,7 @@ function App() {
             }
           />
           <Route
-            path="/challenge"
+            path="/challenge/:cid"
             element={
               <RequireAuth>
                 <ChallengePage />
