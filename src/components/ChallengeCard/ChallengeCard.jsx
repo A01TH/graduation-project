@@ -92,7 +92,13 @@ function ChallengeCard({ post }) {
                 <span>{`${dateFormat(
                   post.endDate.toDate(),
                   "dddd, mmmm , yyyy"
-                )} to `}</span>
+                )} to`}</span>{" "}
+                <span>
+                  {`${dateFormat(
+                    post.startDate.toDate(),
+                    "dddd, mmmm , yyyy"
+                  )} to`}
+                </span>
               </p>
               <p className="chall-challengers-count">
                 <FaUserFriends />
