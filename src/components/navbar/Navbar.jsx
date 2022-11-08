@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo/Logo2.png";
-import user from "../../assets/navbar/profile.svg";
 import { BsCoin, BsFillChatLeftTextFill } from "react-icons/bs";
 import { FaHome, FaRegSun, FaUserAlt } from "react-icons/fa";
 import { BiCategoryAlt } from "react-icons/bi";
@@ -13,18 +12,11 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { IoIosNotifications } from "react-icons/io";
 import ChallengerShortcut from "../ChallengerShortcut/ChallengerShortcut";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const Header = () => {
   const { userData, currentUser, userLoading } = useContext(currentContext);
-  // const [noti, setNoti] = useState([]);
-  const { auth, users, userCollection } = useContext(FirebaseContext);
-  const query = userCollection.where(
-    "uid",
-    "in",
-    currentUser[0].receivedRequests
-  );
-  const [requestedUsers] = useCollectionData(query);
+  const { auth, users } = useContext(FirebaseContext);
+  const [requestedUsers, setRequestedUsers] = useState([]);
   const navigate = useNavigate();
   const [logged, setLogged] = useState(false);
   useEffect(() => {
@@ -42,9 +34,15 @@ const Header = () => {
   const handleMobileNav = () => {
     setMobNav((prev) => !prev);
   };
-  const test = () => {
-    console.log(requestedUsers);
-  };
+  useEffect(() => {
+    if (currentUser?.length !== 0 && userData) {
+      const recived = users?.filter((user) => {
+        return currentUser[0].receivedRequests.includes(user.uid);
+      });
+      setRequestedUsers(recived);
+    }
+  }, [currentUser]);
+
   return (
     <section className="nav">
       <div className="container">
@@ -88,17 +86,18 @@ const Header = () => {
                     Messages
                   </NavLink>
                 </li>
+
                 <li className="notification">
-                  <span onClick={test}>
-                    {currentUser[0].receivedRequests.length}
+                  <span className="fs-6">
+                    {requestedUsers && currentUser ? requestedUsers.length : 0}
                   </span>
-                  {/* <Dropdown>
-                    <Dropdown.Toggle variant="danger" id="notification">
-                      <IoIosNotifications className="position-relative" />
+                  <Dropdown>
+                    <Dropdown.Toggle variant="tranparent" id="notification">
+                      <IoIosNotifications className="position-relative fs-4" />
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      {noti?.map((user) => {
+                      {requestedUsers?.map((user) => {
                         return (
                           <Dropdown.Item href="#/action-3">
                             <ChallengerShortcut
@@ -111,7 +110,7 @@ const Header = () => {
                         );
                       })}
                     </Dropdown.Menu>
-                  </Dropdown> */}
+                  </Dropdown>
                 </li>
                 <li>
                   <Dropdown>

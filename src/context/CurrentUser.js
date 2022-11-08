@@ -21,14 +21,14 @@ const CurrentUserProvider = ({ children }) => {
       userCollection.doc(userData.uid).set({
         uid: userData.uid,
         name: userData.displayName || userInfo.name,
-        email: userData.email || userInfo.email,
-        photoUrl: userData.emailVerified
-          ? userData.photoURL
-          : userInfo.gender.value === 1
-          ? male
-          : female,
+        email: userData.email,
+        photoUrl: userData.photoURL,
         username: (userData.email || userInfo.email).split("@")[0],
-        interests: userData.emailVerified ? [] : userInfo.Interests,
+        interests: userData.emailVerified
+          ? []
+          : userInfo.Interests
+          ? userInfo.Interests
+          : [],
         points: 50,
         ownedChallenges: [],
         contributedChallenges: [],
