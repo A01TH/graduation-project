@@ -8,7 +8,6 @@ $nav-font-color: #ffffff;
   height: $nav-height;
   background: $nav-background;
   padding-top: 10px;
-  backdrop-filter: blur(3px);
   left: 0;
   right: 0;
   a {
@@ -69,6 +68,7 @@ $nav-font-color: #ffffff;
       flex-direction: column;
       background: $nav-background;
       backdrop-filter: blur(10px);
+      z-index: 999;
     }
   }
   #nav-toggle {
@@ -121,6 +121,7 @@ $nav-font-color: #ffffff;
 @media screen and (min-width: $breakpoint) {
   .nav-list {
     display: block !important;
+    z-index: 999;
   }
 }
 

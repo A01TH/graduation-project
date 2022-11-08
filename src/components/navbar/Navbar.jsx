@@ -126,7 +126,7 @@ const Header = () => {
                       />
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu className="bg-dark">
+                    <Dropdown.Menu className="bg-body">
                       <Dropdown.Item className="d-flex align-items-center justify-content-around">
                         <Link role="link" to="/profile">
                           <span>Profile</span>
