@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, uselayoutEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useContext } from "react";
 import {
   AiOutlineMessage,
@@ -7,10 +7,14 @@ import {
 } from "react-icons/ai";
 import Toast from "../../UI/Toast/Toast";
 import { currentContext } from "../../context/CurrentUser";
+import { FirebaseContext } from "../../context/FirebaseContext";
 
 const UserAction = ({ user }) => {
   const { currentUser, updateCurrentUser } = useContext(currentContext);
-  const [friends, setFriends] = useState(currentUser[0].friends);
+  const { userCollection } = useContext(FirebaseContext);
+  const [sentReq, setSentReq] = useState(currentUser[0].sentRequests);
+  const [recReq, setrecReq] = useState(user.receivedRequests);
+
   const [clicked, setClicked] = useState(false);
   const handleReport = () => {
     console.log("Report");
@@ -19,16 +23,28 @@ const UserAction = ({ user }) => {
     console.log("Chat");
   };
   useEffect(() => {
-    
     if (clicked) {
-      updateCurrentUser("friends", friends, "Friend has been added");
+      updateCurrentUser("sentRequests", sentReq, "Friend has been added");
+
+      userCollection
+        .doc(user.uid)
+        .set(
+          {
+            receivedRequests: recReq,
+          },
+          { merge: true }
+        )
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+
       setClicked(false);
     }
-
-  }, [friends]);
+  }, [sentReq]);
 
   const handleAddFriend = () => {
-    setFriends([...friends, { friendId: user.uid, status: "pending" }]);
+    setSentReq([...sentReq, user.uid]);
+    setrecReq([...recReq, currentUser[0].uid]);
     setClicked(true);
   };
   return (
@@ -37,7 +53,7 @@ const UserAction = ({ user }) => {
         <button className="icon-btn text-secondary me-3 h4">
           <AiOutlineStop onClick={handleReport} />
         </button>
-        {friends.some((friend) => friend.friendId == user.uid) ? (
+        {sentReq.some((friend) => friend == user.uid) ? (
           <button className="icon-btn text-secondary me-3 h4">
             <AiOutlineMessage onClick={handleChat} />
           </button>

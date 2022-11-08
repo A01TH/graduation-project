@@ -21,12 +21,12 @@ const ChatFooter = () => {
         createdAt: new Date(),
         relation: `${userData.uid}/${secondUser.uid}`,
       });
+      setMsgContent("");
 
       const lastMessage = document.querySelector(".chat-area-main").lastChild;
       lastMessage.scrollIntoView(false);
     }
 
-    setMsgContent("");
   };
   return (
     <div className="chat-area-footer chat-input">

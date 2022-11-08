@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import ContentLoader from "react-content-loader";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 // import ChallengeCard from "../../components/ChallengeCard/ChallengeCard";
 
@@ -62,12 +63,13 @@ const Home = () => {
     }
   }, [challenges]);
   return (
-    <div className="section-padding bg-body">
+    <div className="section-padding bg-body home">
       <div className="container">
         {/* <button onClick={update}>update</button> */}
         <div className="row align-items-start justify-content-between">
           <div className="col-md-6 col-sm-12 mb-5 offset-1">
             <Post />
+            <Link to="/challenge">Go to challenge</Link>
             {/* {currentUserPosts ? (
               <>
                 {currentUserPosts?.length > 0 ? (

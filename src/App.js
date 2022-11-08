@@ -12,6 +12,7 @@ import Profile from "./Pages/Profile/Profile";
 import Category from "./Pages/Category/Category";
 import TopChallengers from "./Pages/TopChallengers/TopChallengers";
 import ChatView from "./Pages/Chat/ChatView";
+import ChallengePage from "./Pages/ChallengePage/ChallengePage";
 
 function App() {
   return (
@@ -56,6 +57,14 @@ function App() {
             element={
               <RequireAuth>
                 <Profile />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/challenge"
+            element={
+              <RequireAuth>
+                <ChallengePage />
               </RequireAuth>
             }
           />

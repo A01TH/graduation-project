@@ -20,7 +20,6 @@ const Login = () => {
     auth
       .signInWithPopup(provider)
       .then(() => navigate("/home"))
-
       .catch((err) => err);
   };
 
@@ -33,10 +32,7 @@ const Login = () => {
   const onSubmit = (data) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
-
-        // ...
       })
       .catch((error) => {
         return error;
