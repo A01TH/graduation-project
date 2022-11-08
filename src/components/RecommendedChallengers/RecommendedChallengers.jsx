@@ -9,7 +9,6 @@ import { useContext, useEffect, useState } from "react";
 const RecommendedChallengers = () => {
   const { users } = useContext(FirebaseContext);
   const { currentUser } = useContext(currentContext);
-  const [recommendedUsersstate, setRecommendedUsers] = useState([]);
   let currentUserInterests = [];
   let currentUserFriends = [];
   let strangeUsers = [];
@@ -51,20 +50,25 @@ const RecommendedChallengers = () => {
         <h5 className="text-center mb-3 border-grey-lite pb-2 mx-3">
           Recommended challengers
         </h5>
-        {mayKnowUsers.map((usr, index) => {
+        {mayKnowUsers.slice(0, 4).map((usr, index) => {
           if (usr.uid !== currentUser[0].uid)
             return (
-              <ChallengerShortcut
-                name={usr.name}
-                photoURL={usr.photoUrl}
-                key={index}
-              />
+              <Link
+                className=" text-decoration-none text-white"
+                to={`/${usr.username}`}
+              >
+                <ChallengerShortcut
+                  name={usr.name}
+                  photoURL={usr.photoUrl}
+                  key={index}
+                />
+              </Link>
             );
         })}
       </div>
       <div className="p-2">
         <Link
-          to="/"
+          to="/mayknow"
           className=" text-decoration-none bg-primary text-light text-center mx-5 py-2 mt-2  card d-block 
            bg-c-grey-lite-hover"
         >

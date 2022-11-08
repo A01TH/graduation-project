@@ -1,6 +1,4 @@
 import React from "react";
-import { useState } from "react";
-import { FaUserPlus } from "react-icons/fa";
 import { BsFillCheckCircleFill, BsXCircleFill } from "react-icons/bs";
 import { useContext } from "react";
 import { FirebaseContext } from "../../context/FirebaseContext";
