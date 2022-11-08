@@ -14,6 +14,8 @@ import { currentContext } from "../../context/CurrentUser";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import dateFormat, { masks } from "dateformat";
+
 function ChallengeCard({ post }) {
   const { userCollection, challengeCollection } = useContext(FirebaseContext);
   const { currentUser } = useContext(currentContext);
@@ -60,18 +62,13 @@ function ChallengeCard({ post }) {
     setLiked((prev) => !prev);
     console.log(liked);
   };
+  const now = new Date();
+
   return (
     <>
       {!isLoading && (
         <div className="bg-c-grey-dark bg-c-dark  p-3 card  mx-auto my-3 w-100">
           <h5 className="text-white ">{post.title}</h5>
-          <div className="chall-img mb-3">
-            {/* <img
-              src={"https://via.placeholder.com/150"}
-              alt=""
-              className="w-100 h-250px rounded-2"
-            /> */}
-          </div>
 
           <div className="chall-owner d-flex justify-content-between mb-3 align-items-center">
             <div className="chall-owner-info d-flex align-items-center">
@@ -91,7 +88,11 @@ function ChallengeCard({ post }) {
           <div className="chall-info d-flex justify-content-between align-items-center mb-3">
             <div className="small">
               <p className="chall-date mb-0">
-                <FaRegCalendarAlt /> <span>12 NOV 2017 - 18 NOV 2017</span>
+                <FaRegCalendarAlt />
+                <span>{`${dateFormat(
+                  post.endDate.toDate(),
+                  "dddd, mmmm , yyyy"
+                )} to `}</span>
               </p>
               <p className="chall-challengers-count">
                 <FaUserFriends />
