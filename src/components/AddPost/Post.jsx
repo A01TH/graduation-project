@@ -12,7 +12,6 @@ import { currentContext } from "../../context/CurrentUser";
 import { SiCoursera, SiUdemy, SiYoutube } from "react-icons/si";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { AiOutlineUserAdd, AiOutlineUsergroupAdd } from "react-icons/ai";
 import uuid from "react-uuid";
 
 const Post = () => {
@@ -37,6 +36,7 @@ const Post = () => {
       postComments: [],
       startDate: new Date(),
       endDate: endDate,
+      site: data.site.value,
       cid: uniqueID,
     });
     toast.success("Your Post Is Live Now! Hurry To Finish It", {

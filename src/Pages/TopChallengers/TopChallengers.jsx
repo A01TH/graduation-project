@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useIsRTL } from "react-bootstrap/esm/ThemeProvider";
 import Table from "react-bootstrap/Table";
 import "./top-challenger.scss";
 

@@ -1,6 +1,4 @@
-import { FaHeart } from "react-icons/fa";
-import { FcLike } from "react-icons/fc";
-import { FaUserFriends } from "react-icons/fa";
+import { FaUserFriends, FaYoutube } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import ProgressBar from "react-bootstrap/ProgressBar";
@@ -14,7 +12,9 @@ import { currentContext } from "../../context/CurrentUser";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import dateFormat, { masks } from "dateformat";
+import dateFormat from "dateformat";
+import Badge from "react-bootstrap/Badge";
+import { SiCoursera, SiUdemy, SiYoutube } from "react-icons/si";
 
 function ChallengeCard({ post }) {
   const { userCollection, challengeCollection } = useContext(FirebaseContext);
@@ -54,59 +54,92 @@ function ChallengeCard({ post }) {
     }
   }, [post]);
 
-  // const handleLikes = () => {
-  //   console.log(postOwner);
-  // };
-
   const click = () => {
     setLiked((prev) => !prev);
     console.log(liked);
   };
-  const now = new Date();
 
   return (
     <>
       {!isLoading && (
         <div className="bg-c-grey-dark bg-c-dark  p-3 card  mx-auto my-3 w-100">
-          <h5 className="text-white ">{post.title}</h5>
+          <h5 className="text-primary fw-bold">{post.title}</h5>
 
-          <div className="chall-owner d-flex justify-content-between mb-3 align-items-center">
-            <div className="chall-owner-info d-flex align-items-center">
-              <img
-                src={postOwner[0].photoUrl}
-                alt=""
-                className="me-2 rounded-circle w-100px"
-              />
+          <div className="chall-owner d-flex justify-content-between mb-3 align-items-center   ">
+            <Link
+              className="tex text-decoration-none "
+              to={`/${postOwner[0].username}`}
+            >
+              <div className="chall-owner-info d-flex align-items-center">
+                <img
+                  src={postOwner[0].photoUrl}
+                  alt=""
+                  className="me-2 rounded-circle w-100px"
+                />
 
-              <div className="chall-owner-name">
-                <p className="mb-0">{postOwner[0].name}</p>
-                <small>{postOwner[0].username}</small>
+                <div className="chall-owner-name">
+                  <p className="mb-0">{postOwner[0].name}</p>
+                  <small className="text-muted ">
+                    @{postOwner[0].username}
+                  </small>
+                </div>
               </div>
+            </Link>
+            <div className="">
+              <Badge bg="primary">{post.category.label}</Badge>
             </div>
           </div>
-
+          <div className="px-3 my-2 border-bottom border-primary pb-2">
+            {post.desc}
+          </div>
           <div className="chall-info d-flex justify-content-between align-items-center mb-3">
             <div className="small">
               <p className="chall-date mb-0">
-                <FaRegCalendarAlt />
-                <span>{`${dateFormat(
-                  post.endDate.toDate(),
+                <FaRegCalendarAlt className="me-1" />
+                <Badge bg="secondary">{`${dateFormat(
+                  post.startDate.toDate(),
                   "dddd, mmmm , yyyy"
-                )} to`}</span>{" "}
+                )} `}</Badge>
                 <span>
-                  {`${dateFormat(
-                    post.startDate.toDate(),
-                    "dddd, mmmm , yyyy"
-                  )} to`}
+                  <span> To </span>
+                  <Badge bg="success">
+                    {`${dateFormat(
+                      post.endDate.toDate(),
+                      "dddd, mmmm , yyyy"
+                    )} `}
+                  </Badge>
                 </span>
               </p>
-              <p className="chall-challengers-count">
-                <FaUserFriends />
+              <p className="mb-0">
+                <FaUserFriends className="me-1" />
                 <span>{post.participants.length} Challenger</span>
+              </p>
+              <p className="mb-0">
+                {post.site === "Youtube" ? (
+                  <i className="me-1 youtube">
+                    <SiYoutube />
+                  </i>
+                ) : post.site === "Coursera" ? (
+                  <i className="me-1 coursera">
+                    <SiCoursera />
+                  </i>
+                ) : (
+                  <i className="me-1 udemy">
+                    <SiUdemy />
+                  </i>
+                )}
+
+                <a href="" className=" text-decoration-none">
+                  Link for the course
+                </a>
               </p>
             </div>
             <div className="w-25">
-              <ProgressBar animated now={45} className=" border-dark border" />
+              <ProgressBar
+                animated
+                now={45}
+                className="  border border-primary"
+              />
             </div>
           </div>
 
@@ -128,11 +161,9 @@ function ChallengeCard({ post }) {
               )}
             </div>
 
-            <div className="chall-reactions d-flex">
-              <span className="me-3 text-danger ">
-                <LikeBtn click={click} like={liked} />
-                <span>{post.postLikes}</span>
-              </span>
+            <div className="chall-reactions d-flex justify-content-center align-items-center gap-0">
+              <LikeBtn click={click} like={liked} />
+              <span>{post.postLikes}</span>
             </div>
           </div>
         </div>

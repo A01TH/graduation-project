@@ -73,6 +73,7 @@ $nav-font-color: #ffffff;
   }
   #nav-toggle {
     display: block !important;
+    z-index: 1000;
   }
 }
 

@@ -63,9 +63,8 @@ const Home = () => {
     }
   }, [challenges]);
   return (
-    <div className="section-padding bg-body home">
+    <div className="mt-5 bg-body home">
       <div className="container">
-        {/* <button onClick={update}>update</button> */}
         <div className="row align-items-start justify-content-between">
           <div className="col-md-6 col-sm-12 mb-5 offset-1">
             <Post />

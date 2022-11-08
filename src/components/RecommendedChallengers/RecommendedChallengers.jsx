@@ -5,6 +5,7 @@ import { FirebaseContext } from "./../../context/FirebaseContext";
 import { currentContext } from "../../context/CurrentUser";
 
 import { useContext, useEffect, useState } from "react";
+import { Button, Modal } from "react-bootstrap";
 
 const RecommendedChallengers = () => {
   const { users } = useContext(FirebaseContext);
@@ -14,6 +15,9 @@ const RecommendedChallengers = () => {
   let strangeUsers = [];
   let mayKnowUsersIDs = [];
   let mayKnowUsers = [];
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   if (users && currentUser && currentUser.length > 0) {
     currentUser[0].interests.forEach((interest) => {
@@ -67,13 +71,41 @@ const RecommendedChallengers = () => {
         })}
       </div>
       <div className="p-2">
-        <Link
-          to="/mayknow"
+        <button
+          onClick={handleShow}
+          to="/people you man"
           className=" text-decoration-none bg-primary text-light text-center mx-5 py-2 mt-2  card d-block 
            bg-c-grey-lite-hover"
         >
           Explore all challengers
-        </Link>
+        </button>
+
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Recommended Challengers</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {mayKnowUsers.map((user, index) => {
+              return (
+                <Link
+                  className=" text-decoration-none text-white"
+                  to={`/${user.username}`}
+                >
+                  <ChallengerShortcut
+                    name={user.name}
+                    photoURL={user.photoUrl}
+                    key={index}
+                  />
+                </Link>
+              );
+            })}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </div>
   );
