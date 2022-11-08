@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, uselayoutEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useContext } from "react";
 import {
   AiOutlineMessage,
@@ -19,22 +19,15 @@ const UserAction = ({ user }) => {
     console.log("Chat");
   };
   useEffect(() => {
-    
     if (clicked) {
       updateCurrentUser("friends", friends, "Friend has been added");
       setClicked(false);
     }
-
   }, [friends]);
 
   const handleAddFriend = () => {
-<<<<<<< HEAD
-    setFriends((prev) => [...prev, { friendId: user.uid, status: "pending" }]);
-    updateCurrentUser("friends", friends, "Friend has been added");
-=======
     setFriends([...friends, { friendId: user.uid, status: "pending" }]);
     setClicked(true);
->>>>>>> 3ed96062b039a6bac3e8ea104ddb219d3d3e23da
   };
   return (
     <div>
