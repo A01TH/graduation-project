@@ -3,9 +3,9 @@ import ChallengerShortcut from "../ChallengerShortcut/ChallengerShortcut";
 import { Link } from "react-router-dom";
 import { FirebaseContext } from "./../../context/FirebaseContext";
 import { currentContext } from "../../context/CurrentUser";
-
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import { motion } from "framer-motion";
 
 const RecommendedChallengers = () => {
   const { users } = useContext(FirebaseContext);
@@ -45,7 +45,12 @@ const RecommendedChallengers = () => {
   }
 
   return (
-    <div className="  py-3 pb-2 mb-5  bg-body border-primary card text-center">
+    <motion.div
+      className="  py-3 pb-2 mb-5  bg-body border-primary card text-center"
+      initial={{ x: 100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="mb-2 text-white ">
         <h5 className="text-center mb-3 border-primary border-bottom pb-2 mx-2">
           Recommended Challengers
@@ -106,7 +111,7 @@ const RecommendedChallengers = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </motion.div>
   );
 };
 

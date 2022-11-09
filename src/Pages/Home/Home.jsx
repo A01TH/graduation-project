@@ -34,13 +34,18 @@ const Home = () => {
 
             {currentUserPosts ? (
               <>
-                {currentUserPosts?.map((post, index) => {
-                  return (
-                    <Suspense fallback={<h1>Loadin....</h1>} key={post.cid}>
-                      <ChallengeCard post={post} currentUser={currentUser[0]} />
-                    </Suspense>
-                  );
-                })}
+                {currentUserPosts
+                  ?.sort((a, b) => b.startDate.toDate() - a.startDate.toDate())
+                  .map((post, index) => {
+                    return (
+                      <Suspense fallback={<h1>Loadin....</h1>} key={post.cid}>
+                        <ChallengeCard
+                          post={post}
+                          currentUser={currentUser[0]}
+                        />
+                      </Suspense>
+                    );
+                  })}
               </>
             ) : (
               <ContentLoader viewBox="0 0 476 124">
