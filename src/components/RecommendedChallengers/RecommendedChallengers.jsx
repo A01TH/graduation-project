@@ -30,8 +30,6 @@ const RecommendedChallengers = () => {
         !currentUserFriends.includes(user.uid) &&
         user.uid !== currentUser[0].uid
     );
-    console.log(strangeUsers);
-    console.log(currentUserInterests);
     strangeUsers.forEach((user) => {
       user.interests.forEach((interest) => {
         currentUserInterests.includes(interest.value) &&
@@ -44,8 +42,6 @@ const RecommendedChallengers = () => {
     users.forEach((user) => {
       mayKnowUsersIDs.includes(user.uid) && mayKnowUsers.push(user);
     });
-
-    console.log(mayKnowUsers);
   }
 
   return (

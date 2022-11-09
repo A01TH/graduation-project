@@ -73,12 +73,8 @@ const Home = () => {
               <>
                 {currentUserPosts?.map((post, index) => {
                   return (
-                    <Suspense fallback={<h1>Loadin....</h1>}>
-                      <ChallengeCard
-                        post={post}
-                        key={index}
-                        currentUser={currentUser[0]}
-                      />
+                    <Suspense fallback={<h1>Loadin....</h1>} key={post.cid}>
+                      <ChallengeCard post={post} currentUser={currentUser[0]} />
                     </Suspense>
                   );
                 })}
@@ -100,7 +96,7 @@ const Home = () => {
             )}
 
             {currentUserPosts?.length === 0 ? (
-              <h1 className="text-light">No Posts</h1>
+              <h1 className="text-light">No Posts Yet !</h1>
             ) : null}
           </div>
           <div className="d-none d-md-block col-3">

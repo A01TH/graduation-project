@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo/Logo2.png";
 import { BsCoin, BsFillChatLeftTextFill } from "react-icons/bs";
@@ -10,8 +10,7 @@ import "./Navbar.scss";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { IoIosNotifications, IoMdNotificationsOutline } from "react-icons/io";
-import ChallengerShortcut from "../ChallengerShortcut/ChallengerShortcut";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import Notification from "../notification/Notification";
 
 const Header = () => {
@@ -20,6 +19,7 @@ const Header = () => {
   const [requestedUsers, setRequestedUsers] = useState([]);
   const navigate = useNavigate();
   const [logged, setLogged] = useState(false);
+  const [opened, Setopened] = useState(false);
   useEffect(() => {
     if (userData) {
       setLogged(true);
@@ -41,6 +41,7 @@ const Header = () => {
         return currentUser[0].receivedRequests.includes(user.uid);
       });
       setRequestedUsers(recived);
+      Setopened(false);
     }
   }, [currentUser]);
 
@@ -105,17 +106,26 @@ const Header = () => {
                       align="end"
                       className="dropdown-notification"
                     >
-                      {requestedUsers?.map((user) => {
-                        return (
-                          <Dropdown.Item className="noti-item">
-                            <Notification
-                              name={user.name}
-                              photoURL={user.photoUrl}
-                              uid={user.uid}
-                            />
-                          </Dropdown.Item>
-                        );
-                      })}
+                      {requestedUsers.length > 0 ? (
+                        <>
+                          {requestedUsers?.map((user) => {
+                            return (
+                              <Dropdown.Item
+                                className="noti-item"
+                                key={user.uid}
+                              >
+                                <Notification
+                                  name={user.name}
+                                  photoURL={user.photoUrl}
+                                  uid={user.uid}
+                                />
+                              </Dropdown.Item>
+                            );
+                          })}
+                        </>
+                      ) : (
+                        <h6 className="text-center">No Notifications</h6>
+                      )}
                     </Dropdown.Menu>
                   </Dropdown>
                 </li>

@@ -1,7 +1,6 @@
-import { FaUserFriends, FaYoutube } from "react-icons/fa";
+import { FaUserFriends } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { FaRegCalendarAlt } from "react-icons/fa";
-import ProgressBar from "react-bootstrap/ProgressBar";
 import "./challenge-card.scss";
 import { useContext } from "react";
 import { FirebaseContext } from "../../context/FirebaseContext";

@@ -50,17 +50,20 @@ const Notification = ({ name, photoURL, uid = null }) => {
   };
   return (
     <div className="row notification align-items-center justify-content-center">
-      <div className="col-4 ">
+      <div className="col-2 ">
         <img src={photoURL} className="rounded-circle" alt="" />
       </div>
-      <div className="col-4 mb-0">
-        <span>{name}</span>
+      <div className="col-4 ">
+        <span className="fs-6">{name}</span>
       </div>
-      <div className="col-4">
-        <button onClick={handleAcceptFriend}>
+      <div className="col-6 d-flex justify-content-end  gap-2">
+        <button
+          className="btn btn-outline-success "
+          onClick={handleAcceptFriend}
+        >
           <BsFillCheckCircleFill />
         </button>
-        <button onClick={handleRejectFriend}>
+        <button className="btn btn-outline-danger" onClick={handleRejectFriend}>
           <BsXCircleFill />
         </button>
       </div>
