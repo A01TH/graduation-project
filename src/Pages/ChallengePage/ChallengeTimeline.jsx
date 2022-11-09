@@ -25,7 +25,7 @@ const ChallengeTimeline = () => {
   const progressRef = useRef();
   const commentRef = useRef();
   const [userProgress, setUserProgress] = useState(0);
-  const [height, width] = useWindowSize();
+  const size = useWindowSize();
 
   useEffect(() => {
     const getParticipants = async () => {
@@ -51,6 +51,8 @@ const ChallengeTimeline = () => {
       console.log(userProgress);
     }
   }, [challenge]);
+
+  useEffect(() => {});
 
   const [progressInput, setProgressInput] = useState(false);
   const [participantsList, setParticipatsList] = useState([]);
@@ -179,11 +181,19 @@ const ChallengeTimeline = () => {
             ></div>
           </div>
         </div>
-        <hr />
-        {!progressInput ? (
+        {userProgress == 100 ? (
+          <div className="text-center">
+            <div>
+              Congratulations, you finished this challenge. &#128170; 🥳
+            </div>
+            <Link to="/home" type="button" class="btn btn-link">
+              Go discover more challenges
+            </Link>
+          </div>
+        ) : !progressInput ? (
           <div>
             <button
-              className="btn btn-primary"
+              className="btn btn-primary mx-auto"
               onClick={() => setProgressInput(true)}
             >
               Update progress
@@ -193,16 +203,15 @@ const ChallengeTimeline = () => {
           <Form onSubmit={commentHandler}>
             <div className="form-group mb-3">
               I've done
-              <Form.Select
+              <input
+                type="number"
                 ref={progressRef}
-                className="d-inline mx-3"
+                className="d-inline mx-3 form-control"
                 style={{ width: "100px" }}
-              >
-                <option value={25}>25</option>
-                <option value={50}>50</option>
-                <option value={75}>75</option>
-                <option value={100}>100</option>
-              </Form.Select>
+                min={userProgress}
+                max="100"
+                required
+              />
               % of this chalenge.
             </div>
             <div className="form-group">
@@ -227,17 +236,18 @@ const ChallengeTimeline = () => {
             >
               Cancel
             </button>
-            <button type="button" class="btn btn-link">
-              I've finished the challenge
-            </button>
           </Form>
         )}
       </div>
       <Toast />
       {userProgress == 100 && (
         <>
-          <Confetti width={width} height={height} />
-          <div>dsdfsdfsdfs</div>
+          <Confetti
+            width={size.width}
+            height={size.height}
+            tweenDuration={1}
+            confettiSource={{ x: -10, y: 0, w: 700, h: 0 }}
+          />
         </>
       )}
     </div>

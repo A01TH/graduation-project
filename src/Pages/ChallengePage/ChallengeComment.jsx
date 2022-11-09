@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ContentLoader from "react-content-loader";
+import { Link } from "react-router-dom";
 
 const ChallengeComment = ({ comment, participants }) => {
   const challenger = participants.find(
@@ -25,14 +26,20 @@ const ChallengeComment = ({ comment, participants }) => {
     <>
       <div className="row">
         <div className="col-1">
-          <img
-            src={challenger.photoUrl}
-            alt={challenger.name}
-            className="img-fluid"
-          />
+          <Link to={`/${challenger.username}`}>
+            <img
+              src={challenger.photoUrl}
+              alt={challenger.name}
+              className="img-fluid rounded-circle"
+            />
+          </Link>
         </div>
         <div className="col-10">
-          <div>
+          <div
+            className={`${
+              comment.progress == 100 ? "fw-bold text-success" : ""
+            }`}
+          >
             {challenger.name} has finished {comment.progress}% of the challenge
           </div>
           <div className="comment text-muted">{comment.comment}</div>
