@@ -9,67 +9,67 @@ import { FirebaseContext } from "../../context/FirebaseContext";
 
 const Notification = ({ name, photoURL, uid }) => {
   const { currentUser } = useContext(currentContext);
-  const { userCollection, firestore } = useContext(FirebaseContext);
+  const { userCollection } = useContext(FirebaseContext);
   const query = userCollection.where("uid", "==", uid);
   const [secondUser] = useCollectionData(query);
   // console.log(secondUser);
   // console.log(currentUser[0].sentRequests);
   // console.log("uid", uid);
   const handleAcceptFriend = () => {
-    // userCollection
-    //   .doc(currentUser[0].uid)
-    //   .set(
-    //     {
-    //       friends: [...currentUser[0].friends, uid],
-    //       sentRequests: [
-    //         ...currentUser[0].sentRequests.filter((id) => id != uid),
-    //       ],
-    //     },
-    //     { merge: true }
-    //   )
-    //   .catch((error) => {
-    //     console.error("Error writing document: ", error);
-    //   });
     userCollection
       .doc(currentUser[0].uid)
-      .update({
-        friends: firebase.firestore.FieldValue.arrayUnion(uid),
-        sentRequests: firebase.firestore.FieldValue.arrayRemove(uid),
-      })
+      .set(
+        {
+          friends: [...currentUser[0].friends, uid],
+          sentRequests: [
+            ...currentUser[0].sentRequests.filter((id) => id !== uid),
+          ],
+        },
+        { merge: true }
+      )
       .catch((error) => {
         console.error("Error writing document: ", error);
       });
-
     // userCollection
-    //   .doc(uid)
-    //   .set(
-    //     {
-    //       friends: [...secondUser[0].friends, currentUser[0].uid],
-    //       receivedRequests: secondUser[0].receivedRequests.filter(
-    //         (id) => id !== currentUser[0].uid
-    //       ),
-    //     },
-    //     { merge: true }
-    //   )
+    //   .doc(currentUser[0].uid)
+    //   .update({
+    //     friends: firebase.firestore.FieldValue.arrayUnion(uid),
+    //     sentRequests: firebase.firestore.FieldValue.arrayRemove(uid),
+    //   })
     //   .catch((error) => {
     //     console.error("Error writing document: ", error);
     //   });
 
     userCollection
       .doc(uid)
-      .update({
-        friends: firebase.firestore.FieldValue.arrayUnion(currentUser[0].uid),
-        receivedRequests: firebase.firestore.FieldValue.arrayRemove(
-          currentUser[0].uid
-        ),
-        //  friends: [...secondUser[0].friends, currentUser[0].uid],
-        //  receivedRequests: secondUser[0].receivedRequests.filter(
-        //    (id) => id !== currentUser[0].uid
-        //  ),
-      })
+      .set(
+        {
+          friends: [...secondUser[0].friends, currentUser[0].uid],
+          receivedRequests: secondUser[0].receivedRequests.filter(
+            (id) => id !== currentUser[0].uid
+          ),
+        },
+        { merge: true }
+      )
       .catch((error) => {
         console.error("Error writing document: ", error);
       });
+
+    // userCollection
+    //   .doc(uid)
+    //   .update({
+    //     friends: firebase.firestore.FieldValue.arrayUnion(currentUser[0].uid),
+    //     receivedRequests: firebase.firestore.FieldValue.arrayRemove(
+    //       currentUser[0].uid
+    //     ),
+    //     //  friends: [...secondUser[0].friends, currentUser[0].uid],
+    //     //  receivedRequests: secondUser[0].receivedRequests.filter(
+    //     //    (id) => id !== currentUser[0].uid
+    //     //  ),
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error writing document: ", error);
+    //   });
   };
   useEffect(() => {
     console.log(secondUser);
