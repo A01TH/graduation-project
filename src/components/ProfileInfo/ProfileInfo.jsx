@@ -1,4 +1,3 @@
-import { ImStarFull, ImStarHalf } from "react-icons/im";
 import { useContext, useState } from "react";
 import { AiFillCamera } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
