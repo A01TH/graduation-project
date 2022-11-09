@@ -21,9 +21,9 @@ const Notification = ({ name, photoURL, uid }) => {
       .set(
         {
           friends: [...currentUser[0].friends, uid],
-          sentRequests: [
-            ...currentUser[0].sentRequests.filter((id) => id !== uid),
-          ],
+          sentRequests: currentUser[0].sentRequests.filter(
+            (id) => id !== secondUser.uid
+          ),
         },
         { merge: true }
       )
