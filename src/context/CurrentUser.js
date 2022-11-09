@@ -70,7 +70,6 @@ const CurrentUserProvider = ({ children }) => {
     if (currentUser && userData) {
       const filteredUserFriends = [];
       currentUser[0]?.friends.forEach((friend) => {
-        console.log(friend);
         users.filter((user) => {
           if (user.uid === friend) {
             filteredUserFriends.push(user);
@@ -78,22 +77,9 @@ const CurrentUserProvider = ({ children }) => {
         });
       });
       setFriends(filteredUserFriends);
-      console.log(filteredUserFriends);
     }
   }, [currentUser]);
 
-  // useEffect(() => {
-  //   if (currentUser && userData) {
-  //     const filteredUserFriends = [];
-  //     users.filter((user) => {
-  //       currentUser[0].friends.forEach((friend) => {
-  //         return friend === user.uid;
-  //       });
-  //       filteredUserFriends.push(user);
-  //     });
-  //     console.log(filteredUserFriends);
-  //   }
-  // }, [currentUser]);
   return (
     <currentContext.Provider
       value={{

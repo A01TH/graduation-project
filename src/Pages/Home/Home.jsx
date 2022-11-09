@@ -56,55 +56,25 @@ const Home = () => {
 
   useEffect(() => {
     if (currentUser) {
-      const filteredChallenges = challenges?.filter((challenge) => {
-        return challenge?.creatorID === currentUser[0]?.uid;
-      });
-      setcurrentUserPosts(filteredChallenges);
+      // const filteredChallenges = challenges?.filter((challenge) => {
+      //   return challenge?.creatorID === currentUser[0]?.uid;
+      // });
+      setcurrentUserPosts(challenges);
     }
   }, [challenges]);
   return (
-    <div className="section-padding bg-body home">
+    <div className="mt-5 bg-body home">
       <div className="container">
-        {/* <button onClick={update}>update</button> */}
         <div className="row align-items-start justify-content-between">
           <div className="col-md-6 col-sm-12 mb-5 offset-1">
             <Post />
-            <Link to="/challenge">Go to challenge</Link>
-            {/* {currentUserPosts ? (
-              <>
-                {currentUserPosts?.length > 0 ? (
-                  currentUserPosts?.map((post, index) => {
-                    return <ChallengeCard post={post} key={index} />;
-                  })
-                ) : (
-                  <ContentLoader
-                    speed={2}
-                    width={400}
-                    height={460}
-                    viewBox="0 0 400 460"
-                    backgroundColor="#f3f3f3"
-                    foregroundColor="#ecebeb"
-                  >
-                    <circle cx="31" cy="31" r="15" />
-                    <rect x="58" y="18" rx="2" ry="2" width="140" height="10" />
-                    <rect x="58" y="34" rx="2" ry="2" width="140" height="10" />
-                    <rect x="0" y="60" rx="2" ry="2" width="400" height="400" />
-                  </ContentLoader>
-                )}
-              </>
-            ) : (
-              <h1>No Posts Yet</h1>
-            )} */}
+
             {currentUserPosts ? (
               <>
                 {currentUserPosts?.map((post, index) => {
                   return (
-                    <Suspense fallback={<h1>Loadin....</h1>}>
-                      <ChallengeCard
-                        post={post}
-                        key={index}
-                        currentUser={currentUser[0]}
-                      />
+                    <Suspense fallback={<h1>Loadin....</h1>} key={post.cid}>
+                      <ChallengeCard post={post} currentUser={currentUser[0]} />
                     </Suspense>
                   );
                 })}
@@ -126,7 +96,7 @@ const Home = () => {
             )}
 
             {currentUserPosts?.length === 0 ? (
-              <h1 className="text-light">No Posts</h1>
+              <h1 className="text-light">No Posts Yet !</h1>
             ) : null}
           </div>
           <div className="d-none d-md-block col-3">

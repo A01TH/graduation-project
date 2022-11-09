@@ -10,8 +10,8 @@ import "./Navbar.scss";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { IoIosNotifications } from "react-icons/io";
-import ChallengerShortcut from "../ChallengerShortcut/ChallengerShortcut";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import Notification from "../notification/Notification";
 
 const Header = () => {
   const { userData, currentUser, userLoading } = useContext(currentContext);
@@ -19,6 +19,7 @@ const Header = () => {
   const [requestedUsers, setRequestedUsers] = useState([]);
   const navigate = useNavigate();
   const [logged, setLogged] = useState(false);
+  const [opened, Setopened] = useState(false);
   useEffect(() => {
     if (userData) {
       setLogged(true);
@@ -40,6 +41,7 @@ const Header = () => {
         return currentUser[0].receivedRequests.includes(user.uid);
       });
       setRequestedUsers(recived);
+      Setopened(false);
     }
   }, [currentUser]);
 
@@ -87,28 +89,43 @@ const Header = () => {
                   </NavLink>
                 </li>
 
-                <li className="notification">
-                  <span className="fs-6">
-                    {requestedUsers && currentUser ? requestedUsers.length : 0}
+                <li className="notification position-relative">
+                  <span className="fs-6  position-absolute bill-wrapper">
+                    {requestedUsers && currentUser && requestedUsers.length ? (
+                      <div className="bill"></div>
+                    ) : (
+                      ""
+                    )}
                   </span>
                   <Dropdown>
                     <Dropdown.Toggle variant="tranparent" id="notification">
-                      <IoIosNotifications className="position-relative fs-4" />
+                      <IoMdNotificationsOutline className="position-relative fs-5" />
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu>
-                      {requestedUsers?.map((user) => {
-                        return (
-                          <Dropdown.Item href="#/action-3">
-                            <ChallengerShortcut
-                              name={user.name}
-                              photoURL={user.photoUrl}
-                              notification={true}
-                              uid={user.uid}
-                            />
-                          </Dropdown.Item>
-                        );
-                      })}
+                    <Dropdown.Menu
+                      align="end"
+                      className="dropdown-notification"
+                    >
+                      {requestedUsers.length > 0 ? (
+                        <>
+                          {requestedUsers?.map((user) => {
+                            return (
+                              <Dropdown.Item
+                                className="noti-item"
+                                key={user.uid}
+                              >
+                                <Notification
+                                  name={user.name}
+                                  photoURL={user.photoUrl}
+                                  uid={user.uid}
+                                />
+                              </Dropdown.Item>
+                            );
+                          })}
+                        </>
+                      ) : (
+                        <h6 className="text-center">No Notifications</h6>
+                      )}
                     </Dropdown.Menu>
                   </Dropdown>
                 </li>
