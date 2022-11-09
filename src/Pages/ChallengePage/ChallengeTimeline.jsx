@@ -12,6 +12,8 @@ import ChallengeComment from "./ChallengeComment";
 import { currentContext } from "../../context/CurrentUser";
 import { toast } from "react-toastify";
 import Toast from "../../UI/Toast/Toast";
+import Confetti from "react-confetti";
+import useWindowSize from "../../hooks/windowSizeHook";
 
 const ChallengeTimeline = () => {
   const { cid } = useParams();
@@ -23,6 +25,7 @@ const ChallengeTimeline = () => {
   const progressRef = useRef();
   const commentRef = useRef();
   const [userProgress, setUserProgress] = useState(0);
+  const [height, width] = useWindowSize();
 
   useEffect(() => {
     const getParticipants = async () => {
@@ -37,11 +40,15 @@ const ChallengeTimeline = () => {
     };
     if (!challengeLoading) {
       getParticipants();
-      setUserProgress(
-        challenge.postComments.findLast(
-          (comment) => comment.uid === currentUser[0].uid
-        ).progress
-      );
+      if (challenge[0].postComments.length > 0) {
+        setUserProgress(
+          challenge[0].postComments.findLast(
+            (comment) => comment.uid === currentUser[0].uid
+          ).progress
+        );
+      }
+
+      console.log(userProgress);
     }
   }, [challenge]);
 
@@ -60,7 +67,6 @@ const ChallengeTimeline = () => {
         }),
       })
       .then(() => {
-        console.log("done");
         toast("Progress has been updated", {
           position: "top-center",
           autoClose: 2000,
@@ -174,7 +180,6 @@ const ChallengeTimeline = () => {
           </div>
         </div>
         <hr />
-
         {!progressInput ? (
           <div>
             <button
@@ -209,7 +214,7 @@ const ChallengeTimeline = () => {
                   id="floatingInput"
                   placeholder="Your progress comment.."
                 />
-                <label for="floatingInput">Your progress comment..</label>
+                <label htmlFor="floatingInput">Your progress comment..</label>
               </div>
             </div>
             <button type="submit" className="btn btn-success me-2">
@@ -229,6 +234,12 @@ const ChallengeTimeline = () => {
         )}
       </div>
       <Toast />
+      {userProgress == 100 && (
+        <>
+          <Confetti width={width} height={height} />
+          <div>dsdfsdfsdfs</div>
+        </>
+      )}
     </div>
   );
 };
