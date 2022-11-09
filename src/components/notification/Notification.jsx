@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import { useContext } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { BsFillCheckCircleFill, BsXCircleFill } from "react-icons/bs";
@@ -8,7 +7,7 @@ import { FirebaseContext } from "../../context/FirebaseContext";
 
 const Notification = ({ name, photoURL, uid = null }) => {
   const { currentUser } = useContext(currentContext);
-  const { userCollection, users } = useContext(FirebaseContext);
+  const { userCollection } = useContext(FirebaseContext);
   const query = userCollection.where("uid", "==", uid);
   const [secondUser] = useCollectionData(query);
   const handleAcceptFriend = () => {
@@ -41,13 +40,8 @@ const Notification = ({ name, photoURL, uid = null }) => {
         console.error("Error writing document: ", error);
       });
   };
-  useEffect(() => {
-    console.log(users);
-  }, []);
 
-  const handleRejectFriend = () => {
-    console.log(secondUser);
-  };
+  const handleRejectFriend = () => {};
   return (
     <div className="row notification align-items-center justify-content-center">
       <div className="col-2 ">

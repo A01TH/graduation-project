@@ -9,7 +9,6 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 function Category() {
   const { challengeCollection } = useContext(FirebaseContext);
   const [challenges] = useCollectionData(challengeCollection);
-  console.log(challenges);
   const [renderArr, setRenderArr] = useState([]);
 
   const handleClick = (e) => {

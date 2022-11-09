@@ -1,11 +1,7 @@
-import { useState } from "react";
 import ContentLoader from "react-content-loader";
 import { Link } from "react-router-dom";
 
-const ChallengeComment = ({ comment, participants }) => {
-  const challenger = participants.find(
-    (participant) => (participant.uid = comment.uid)
-  );
+const ChallengeComment = ({ comment, challenger }) => {
   if (!challenger) {
     return (
       <div>
@@ -22,6 +18,7 @@ const ChallengeComment = ({ comment, participants }) => {
       </div>
     );
   }
+
   return (
     <>
       <div className="row">

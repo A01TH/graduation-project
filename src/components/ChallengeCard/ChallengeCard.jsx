@@ -56,13 +56,12 @@ function ChallengeCard({ post }) {
 
   const click = () => {
     setLiked((prev) => !prev);
-    console.log(liked);
   };
 
   return (
     <div>
       {!isLoading && (
-        <div className="bg-c-grey-dark bg-c-dark  p-3 card  mx-auto my-3 w-100">
+        <div className="p-3 card  mx-auto my-3 w-100 bg-body border-primary">
           <h5 className="text-primary fw-bold">{post.title}</h5>
 
           <div className="chall-owner d-flex justify-content-between mb-3 align-items-center   ">

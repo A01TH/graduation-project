@@ -2,7 +2,7 @@ import { getDocs } from "firebase/firestore";
 import React, { useContext, useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
-import { Form, FormSelect, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import ContentLoader from "react-content-loader";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import firebase from "firebase/compat/app";
@@ -44,21 +44,18 @@ const ChallengeTimeline = () => {
         setUserProgress(
           challenge[0].postComments.findLast(
             (comment) => comment.uid === currentUser[0].uid
-          ).progress
+          )?.progress
         );
       }
-
-      console.log(userProgress);
     }
   }, [challenge]);
-
-  useEffect(() => {});
 
   const [progressInput, setProgressInput] = useState(false);
   const [participantsList, setParticipatsList] = useState([]);
 
   const commentHandler = (e) => {
     e.preventDefault();
+
     challengeCollection
       .doc(cid)
       .update({
@@ -166,7 +163,9 @@ const ChallengeTimeline = () => {
             return (
               <ChallengeComment
                 comment={comment}
-                participants={participantsList}
+                challenger={participantsList.find(
+                  (participant) => participant.uid === comment.uid
+                )}
               />
             );
           })}

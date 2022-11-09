@@ -5,7 +5,6 @@ import Select from "react-select";
 import "./Post.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import { useCollection } from "react-firebase-hooks/firestore";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import { useContext } from "react";
 import { currentContext } from "../../context/CurrentUser";
@@ -65,8 +64,8 @@ const Post = () => {
   return (
     <>
       <div>
-        <div className="row post mx-1  ">
-          <div className=" py-3  card py-4 px-3 bg-c-grey post-form bg-light">
+        <div className="row post mx-1   ">
+          <div className=" py-3  card py-4 px-3 bg-c-grey post-form bg-body border-primary">
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Form.Group className="mb-3" controlId="formInput">
                 <FloatingLabel

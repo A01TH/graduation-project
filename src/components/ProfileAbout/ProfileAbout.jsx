@@ -133,21 +133,6 @@ const ProfileAbout = ({ user, users, self }) => {
           ))}
       </div>
 
-      {/* <ul class="list-group stats mb-2">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Owned Challenges
-          <span class="badge bg-primary rounded-pill">14</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Contributed Challenges
-          <span class="badge bg-primary rounded-pill">2</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Finished Challenges
-          <span class="badge bg-primary rounded-pill">1</span>
-        </li>
-      </ul> */}
-
       <div class="card bg-body border-primary mb-3">
         <div class="card-header text-uppercase">Study Buddies</div>
         <div class="card-body">

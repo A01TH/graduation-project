@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useParams } from "react-router-dom";
-import Background from "../../components/background/Background";
 import ProfileAbout from "../../components/ProfileAbout/ProfileAbout";
 import ProfileInfo from "../../components/ProfileInfo/ProfileInfo";
 import ProfileTimeline from "../../components/ProfileTimeline/ProfileTimeline";

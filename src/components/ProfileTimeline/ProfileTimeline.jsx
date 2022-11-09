@@ -8,7 +8,6 @@ import ChallengeCard from "../ChallengeCard/ChallengeCard";
 import "./ProfileTimeline.scss";
 
 const ProfileTimeline = ({ user, self }) => {
-  const [showUserChallenges, setShowUserChallenges] = useState(true);
   const { challengeCollection } = useContext(FirebaseContext);
   const [userChallenges, challengesLoading] = useCollectionData(
     challengeCollection.where("creatorID", "==", user.uid)
@@ -30,21 +29,6 @@ const ProfileTimeline = ({ user, self }) => {
 
   return (
     <div className="profile-timeline">
-      {/* <ul className="nav position-static nav-fill fw-bold">
-        <li className="nav-item">
-          <a
-            className="nav-link active"
-            onClick={() => setShowUserChallenges(true)}
-          >
-            My Challenges
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" onClick={() => setShowUserChallenges(false)}>
-            Other Challenges
-          </a>
-        </li>
-      </ul> */}
       <Tabs
         defaultActiveKey="home"
         id="fill-tab-example"
@@ -94,29 +78,35 @@ const ProfileTimeline = ({ user, self }) => {
               </ContentLoader>
             ) : (
               <>
-                {allChallenges.filter(
-                  (challenge) =>
-                    challenge.participants.includes(user.uid) &&
-                    challenge.creatorID !== user.uid
-                ).length > 0 ? (
-                  allChallenges
-                    .filter(
-                      (challenge) =>
-                        challenge.participants.includes(user.uid) &&
-                        challenge.creatorID !== user.uid
-                    )
-                    .map((challenge, index) => {
-                      return <ChallengeCard post={challenge} key={index} />;
-                    })
-                ) : (
-                  <div className="text-center fw-bold">
-                    {self
-                      ? "You didn't participated in any challenge yet."
-                      : `${
-                          user.name.split(" ")[0]
-                        } hasn't participated in any challenge yet.`}
-                  </div>
-                )}
+                <div className="row">
+                  {allChallenges.filter(
+                    (challenge) =>
+                      challenge.participants.includes(user.uid) &&
+                      challenge.creatorID !== user.uid
+                  ).length > 0 ? (
+                    allChallenges
+                      .filter(
+                        (challenge) =>
+                          challenge.participants.includes(user.uid) &&
+                          challenge.creatorID !== user.uid
+                      )
+                      .map((challenge, index) => {
+                        return (
+                          <div className="col-6">
+                            <ChallengeCard post={challenge} key={index} />
+                          </div>
+                        );
+                      })
+                  ) : (
+                    <div className="text-center fw-bold">
+                      {self
+                        ? "You didn't participated in any challenge yet."
+                        : `${
+                            user.name.split(" ")[0]
+                          } hasn't participated in any challenge yet.`}
+                    </div>
+                  )}
+                </div>
               </>
             )}
           </div>

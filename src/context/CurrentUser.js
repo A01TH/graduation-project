@@ -2,8 +2,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { FirebaseContext } from "./FirebaseContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import male from "../assets/profile/male.svg";
-import female from "../assets/profile/female.svg";
 import { toast } from "react-toastify";
 
 export const currentContext = createContext();
@@ -50,7 +48,6 @@ const CurrentUserProvider = ({ children }) => {
         { merge: true }
       )
       .then(() => {
-        console.log(key, value, message);
         toast(message, {
           position: "top-center",
           autoClose: 2000,
