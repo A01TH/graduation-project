@@ -139,15 +139,7 @@ const ProfileInfo = ({ user, self }) => {
                 <h2 className="name">{user.name}</h2>
                 <div className="username text-muted mb-3">@{user.username}</div>
               </div>
-              <div>
-                {self ? (
-                  <button className="edit-profile btn btn-outline-secondary">
-                    Edit Profile
-                  </button>
-                ) : (
-                  <UserAction user={user} />
-                )}
-              </div>
+              <div>{self || <UserAction user={user} />}</div>
             </div>
             <div className="rating text-secondary">
               <ImStarFull />

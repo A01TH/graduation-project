@@ -10,7 +10,8 @@ import { currentContext } from "../../context/CurrentUser";
 import { FirebaseContext } from "../../context/FirebaseContext";
 
 const UserAction = ({ user }) => {
-  const { currentUser, updateCurrentUser } = useContext(currentContext);
+  const { currentUser, updateCurrentUser, friends } =
+    useContext(currentContext);
   const { userCollection } = useContext(FirebaseContext);
   const [sentReq, setSentReq] = useState(currentUser[0].sentRequests);
   const [recReq, setrecReq] = useState(user.receivedRequests);
@@ -53,10 +54,16 @@ const UserAction = ({ user }) => {
         <button className="icon-btn text-secondary me-3 h4">
           <AiOutlineStop onClick={handleReport} />
         </button>
-        {sentReq.some((friend) => friend == user.uid) ? (
-          <button className="icon-btn text-secondary me-3 h4">
-            <AiOutlineMessage onClick={handleChat} />
-          </button>
+        {friends.includes(user.uid) ? (
+          user.receivedRequests.includes(
+            currentUser[0].uid ? (
+              <div>sent</div>
+            ) : (
+              <button className="icon-btn text-secondary me-3 h4">
+                <AiOutlineMessage onClick={handleChat} />
+              </button>
+            )
+          )
         ) : (
           <button
             className="icon-btn text-secondary me-3 h4"
