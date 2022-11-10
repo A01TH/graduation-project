@@ -64,7 +64,7 @@ const Home = () => {
           </div>
           <div className="d-none d-md-block col-3">
             <RecommendedChallengers />
-            <RecommendedTopChallenges />
+            <RecommendedTopChallenges challenges={challenges} />
           </div>
         </div>
       </div>
