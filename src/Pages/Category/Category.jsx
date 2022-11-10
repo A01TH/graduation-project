@@ -9,6 +9,9 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 function Category() {
   const { challengeCollection } = useContext(FirebaseContext);
   const [challenges] = useCollectionData(challengeCollection);
+
+  const [title, setTitle] = useState("Choose a category to display");
+  console.log(challenges);
   const [renderArr, setRenderArr] = useState([]);
 
   const handleClick = (e) => {
@@ -23,47 +26,75 @@ function Category() {
   };
 
   return (
-    <div className="section-padding bg-body text-white">
+    <div className="section-padding categroy bg-body text-white">
       <div className="container">
-        <h1 className="text-center mb-5">Choose a category to display</h1>
-        <div className="row mb-5">
-          <ButtonGroup aria-label="Basic example">
-            <Button
-              name="all"
-              variant="secondary rounded-5 me-2 bg-color border-0"
-              onClick={(e) => handleClick(e)}
-            >
-              All
-            </Button>
-            <Button
-              name="frontend"
-              variant="secondary rounded-5 me-2 bg-color border-0"
-              onClick={(e) => handleClick(e)}
-            >
-              Frontend
-            </Button>
-            <Button
-              name="backend"
-              variant="secondary rounded-5 me-2 bg-color border-0"
-              onClick={(e) => handleClick(e)}
-            >
-              Backend
-            </Button>
-            <Button
-              name="ui/ux"
-              variant="secondary rounded-5 bg-color border-0"
-              onClick={(e) => handleClick(e)}
-            >
-              UI/UX
-            </Button>
-          </ButtonGroup>
+        <div
+          className="wv-100 p-4 rounded-4"
+          style={
+            title === "Frontend"
+              ? { "background-color": "blue" }
+              : title === "Backend"
+              ? { "background-color": "white" }
+              : title === "UI/UX"
+              ? { "background-color": "yellow" }
+              : { "background-color": "orange" }
+          }
+        >
+          <h1 className="text-center  bg mb-5">{title}</h1>
+          <div className="row categroy mb-5 ">
+            <ButtonGroup aria-label="Basic example row ">
+              <Button
+                className="rounded-1 btn-1 btn col-sm-6 col-md-3 py-3"
+                name="all"
+                variant="secondary me-2 bg-color border-0"
+                onClick={(e) => {
+                  handleClick(e);
+                  setTitle("All");
+                }}
+              >
+                All
+              </Button>
+              <Button
+                name="frontend"
+                className="rounded-1 col-sm-6 col-md-3 btn-1 btn "
+                variant="secondary me-2 bg-color border-0 "
+                onClick={(e) => {
+                  handleClick(e);
+                  setTitle("Frontend");
+                }}
+              >
+                Frontend
+              </Button>
+              <Button
+                name="backend"
+                className="rounded-1 col-3"
+                variant="secondary   me-2 bg-color "
+                onClick={(e) => {
+                  handleClick(e);
+                  setTitle("Backend");
+                }}
+              >
+                Backend
+              </Button>
+              <Button
+                name="ui/ux"
+                className="rounded-1 col-3"
+                variant="secondary bg-color"
+                onClick={(e) => {
+                  handleClick(e);
+                  setTitle("UI/UX");
+                }}
+              >
+                UI/UX
+              </Button>
+            </ButtonGroup>
+          </div>
         </div>
-
         <div>
           <div className="row ay-7aga align-items-lg-stretch">
             {renderArr.map((ch, i) => {
               return (
-                <div className="col-4">
+                <div className="col-md-6 col-sm-12 col-lg-4">
                   <ChallengeCard post={ch} key={ch.cid} className="h-100" />
                 </div>
               );

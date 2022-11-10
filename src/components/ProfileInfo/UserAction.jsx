@@ -48,7 +48,7 @@ const UserAction = ({ user }) => {
       });
   };
   const toastClosed = () => {
-    navigate("/");
+    navigate(`/${currentUser[0].username}`);
   };
   useEffect(() => {
     if (clicked) {
