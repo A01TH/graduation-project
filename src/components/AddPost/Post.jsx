@@ -69,11 +69,8 @@ const Post = () => {
   };
   return (
     <>
-      <div className="text-center">
-        <button
-          onClick={openChallengeForm}
-          className="btn btn-primary mb-3 w-75 "
-        >
+      <div>
+        <button onClick={openChallengeForm} className="btn btn-primary mb-3  ">
           Start New Challenge
         </button>
         {openForm && (
