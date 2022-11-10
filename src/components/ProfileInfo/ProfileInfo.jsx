@@ -65,8 +65,10 @@ const ProfileInfo = ({ user, self }) => {
                   onHide={() => setSmShow(false)}
                   aria-labelledby="example-modal-sizes-title-sm"
                 >
-                  <Modal.Header className="border-0 bg-dark"></Modal.Header>
-                  <Modal.Body className="modalBody px-4 text-center bg-dark">
+                  <Modal.Header className="border-1 bg-light border-primary">
+                    Update Profile Image
+                  </Modal.Header>
+                  <Modal.Body className="modalBody px-4 text-center bg-light">
                     <div
                       className="edit-img mx-auto mb-4 rounded-circle"
                       style={{ width: "200px", height: "200px" }}

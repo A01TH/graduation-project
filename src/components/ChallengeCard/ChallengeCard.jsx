@@ -15,15 +15,21 @@ import dateFormat from "dateformat";
 import Badge from "react-bootstrap/Badge";
 import { SiCoursera, SiUdemy, SiYoutube } from "react-icons/si";
 import { motion } from "framer-motion";
+import { Button, Modal } from "react-bootstrap";
+import ChallengerShortcut from "../ChallengerShortcut/ChallengerShortcut";
 
 function ChallengeCard({ post }) {
-  const { userCollection, challengeCollection } = useContext(FirebaseContext);
+  const { userCollection, challengeCollection, users } =
+    useContext(FirebaseContext);
+
   const { currentUser } = useContext(currentContext);
   const query = userCollection.where("uid", "==", post.creatorID);
   const [postOwner, isLoading] = useCollectionData(query);
   const [isJoined, setIsJoined] = useState(false);
   const [liked, setLiked] = useState(false);
-
+  const [likedUsers, setLikedUsers] = useState([]);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
   const handleJoinChall = () => {
     challengeCollection
       .doc(post.cid)
@@ -56,7 +62,6 @@ function ChallengeCard({ post }) {
   }, [post]);
 
   const click = () => {
-    // setLiked((prev) => !prev);
     challengeCollection
       .doc(post.cid)
       .update({
@@ -71,6 +76,17 @@ function ChallengeCard({ post }) {
       setLiked(true);
     }
   }, [post]);
+  const openLikes = () => {
+    setShow(true);
+  };
+
+  useEffect(() => {
+    setLikedUsers(
+      post.postLikes.map((post) => {
+        return users.find((user) => user.uid === post);
+      })
+    );
+  }, [post.postLikes]);
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
@@ -132,22 +148,44 @@ function ChallengeCard({ post }) {
               </p>
               <p className="mb-0">
                 {post.site === "Youtube" ? (
-                  <i className="me-2 youtube">
-                    <SiYoutube />
-                  </i>
+                  <>
+                    <i className="me-2 youtube">
+                      <SiYoutube />
+                    </i>
+                    <a
+                      href="https://www.youtube.com/"
+                      className=" text-decoration-none text-danger"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Link for the course
+                    </a>
+                  </>
                 ) : post.site === "Coursera" ? (
-                  <i className="me-1 coursera">
-                    <SiCoursera />
-                  </i>
+                  <>
+                    <i className="me-1 coursera">
+                      <SiCoursera />
+                    </i>
+                    <a
+                      href="https://www.coursera.org/"
+                      className=" text-decoration-none"
+                    >
+                      Link for the course
+                    </a>
+                  </>
                 ) : (
-                  <i className="me-1 udemy">
-                    <SiUdemy />
-                  </i>
+                  <>
+                    <i className="me-1 udemy">
+                      <SiUdemy />
+                    </i>
+                    <a
+                      href="https://www.udemy.com/"
+                      className=" text-decoration-none text-info"
+                    >
+                      Link for the course
+                    </a>
+                  </>
                 )}
-
-                <a href="" className=" text-decoration-none">
-                  Link for the course
-                </a>
               </p>
             </div>
           </div>
@@ -172,9 +210,50 @@ function ChallengeCard({ post }) {
 
             <div className="chall-reactions d-flex justify-content-center align-items-center gap-0">
               <LikeBtn click={click} like={liked} />
-              <span className="text-white fw-bold like-counter">
+              <span
+                className="text-white fw-bold like-counter"
+                onClick={openLikes}
+              >
                 {post.postLikes.length}
               </span>
+
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header
+                  closeButton
+                  className="bg-body border-primary border-bottom"
+                >
+                  <Modal.Title className="fs-5">
+                    People Who Like this
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="bg-body border-primary border-bottom">
+                  {likedUsers.length > 0 ? (
+                    <>
+                      {likedUsers.map((user, index) => {
+                        return (
+                          <Link
+                            className=" text-decoration-none text-white"
+                            to={`/${user.username}`}
+                          >
+                            <ChallengerShortcut
+                              name={user.name}
+                              photoURL={user.photoUrl}
+                              key={index}
+                            />
+                          </Link>
+                        );
+                      })}
+                    </>
+                  ) : (
+                    <h4>No likes yet!</h4>
+                  )}
+                </Modal.Body>
+                <Modal.Footer className="bg-body">
+                  <Button variant="danger" onClick={handleClose}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
           </div>
         </div>
