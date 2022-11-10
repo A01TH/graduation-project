@@ -29,7 +29,7 @@ const Home = () => {
     <div className="mt-5 bg-body home">
       <div className=" container-fluid">
         <div className="row align-items-start justify-content-between">
-          <div className="col-md-2 ">
+          <div className="col-md-2  d-sm-none d-lg-none">
             <div
               className="profile-img border rounded-circle border-4 border-primary"
               style={{ width: "200px", height: "200px" }}

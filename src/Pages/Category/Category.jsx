@@ -5,7 +5,7 @@ import ChallengeCard from "../../components/ChallengeCard/ChallengeCard";
 import { FirebaseContext } from "./../../context/FirebaseContext";
 import { useContext, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-
+import {motion} from "framer-motion";
 function Category() {
   const { challengeCollection } = useContext(FirebaseContext);
   const [challenges] = useCollectionData(challengeCollection);
@@ -94,9 +94,11 @@ function Category() {
           <div className="row ay-7aga align-items-lg-stretch">
             {renderArr.map((ch, i) => {
               return (
+                <motion.div>
                 <div className="col-md-6 col-sm-12 col-lg-4">
                   <ChallengeCard post={ch} key={ch.cid} className="h-100" />
                 </div>
+                </motion.div>
               );
             })}
           </div>
