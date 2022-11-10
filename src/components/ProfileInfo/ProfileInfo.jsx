@@ -1,44 +1,11 @@
-import { ImStarFull, ImStarHalf } from "react-icons/im";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AiFillCamera } from "react-icons/ai";
-import { Modal, Placeholder } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import "./ProfileInfo.scss";
 import userImgUrl from "./Sample.png";
-import { useParams } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
-import { FirebaseContext } from "../../context/FirebaseContext";
 import UserAction from "./UserAction";
 import Toast from "../../UI/Toast/Toast";
-
-// const update = () => {
-// EDIT DATA
-//   userCollection
-//     .doc(currentUser[0].uid)
-//     .set(
-//       {
-//         name: "Mostafa Khafaji",
-//         photoUrl:
-//           "https://lh3.googleusercontent.com/a/ALm5wu3n5EcjNxxHrNesIcq8ZwxrXXiXaBA0q2xZXJ2J_g=s96-c",
-//         points: 5000,
-//       },
-//       { merge: true }
-//     )
-//     .then(() => {
-//       toast("Your Name Has Updated Successfully", {
-//         position: "top-center",
-//         autoClose: 2000,
-//         hideProgressBar: false,
-//         closeOnClick: true,
-//         pauseOnHover: true,
-//         draggable: true,
-//         progress: undefined,
-//         theme: "dark",
-//       });
-//     })
-//     .catch((error) => {
-//       console.error("Error writing document: ", error);
-//     });
-// };
 
 const ProfileInfo = ({ user, self }) => {
   const { updateCurrentUser } = useContext(currentContext);
@@ -139,28 +106,8 @@ const ProfileInfo = ({ user, self }) => {
                 <h2 className="name">{user.name}</h2>
                 <div className="username text-muted mb-3">@{user.username}</div>
               </div>
-              <div>
-                {self ? (
-                  <button className="edit-profile btn btn-outline-secondary">
-                    Edit Profile
-                  </button>
-                ) : (
-                  <UserAction user={user} />
-                )}
-              </div>
+              <div>{self || <UserAction user={user} />}</div>
             </div>
-            <div className="rating text-secondary">
-              <ImStarFull />
-              <ImStarFull />
-              <ImStarFull />
-              <ImStarFull />
-              <ImStarHalf />
-            </div>
-            {self && (
-              <button className="btn btn-primary mt-4">
-                Start New Challenge
-              </button>
-            )}
           </div>
         </div>
       </div>

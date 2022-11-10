@@ -4,7 +4,6 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import GetStarted from "./Pages/GetStarted/GetStarted";
 import NotFound from "./Pages/NotFound/NotFound";
 import Home from "./Pages/Home/Home";
-import Categories from "./Pages/Categories/Categories";
 import About from "./Pages/About/About";
 import { RequireAuth } from "./components/ProtectedRoutes/RequireAuth";
 import { LoggedUser } from "./components/ProtectedRoutes/LoggedUser";

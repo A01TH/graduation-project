@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo/Logo2.png";
 import { BsCoin, BsFillChatLeftTextFill } from "react-icons/bs";
 import { FaHome, FaRegSun, FaUserAlt } from "react-icons/fa";
-import { BiCategoryAlt } from "react-icons/bi";
+import { BiCategoryAlt, BiLogOut } from "react-icons/bi";
 import { currentContext } from "../../context/CurrentUser";
 import "./Navbar.scss";
 import { FirebaseContext } from "../../context/FirebaseContext";
@@ -158,20 +158,20 @@ const Header = () => {
                         <FaRegSun />
                       </Dropdown.Item>
 
-                      <Dropdown.Item
+                      {/* <Dropdown.Item
                         href="#/action-3"
                         className="d-flex align-items-center justify-content-around"
                       >
                         <span>{currentUser[0]?.points}</span>
                         <BsCoin />
-                      </Dropdown.Item>
+                      </Dropdown.Item> */}
 
                       <Dropdown.Item
                         onClick={handleSignOut}
                         className="d-flex align-items-center justify-content-around"
                       >
                         <span>Logout</span>
-                        <BsCoin />
+                        <BiLogOut />
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>

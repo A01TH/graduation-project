@@ -5,14 +5,8 @@ import { currentContext } from "../../../context/CurrentUser";
 import { SecondUserContext } from "../../../context/SecondUserContext";
 import { IoSend } from "react-icons/io5";
 import { MdOutlineEmojiEmotions } from "react-icons/md";
-//-----------
-// import Picker from "@emoji-mart/react";
 
-// import { Picker } from "emoji-mart";
-// import "emoji-mart/css/emoji-mart.css";
-
-import data from '@emoji-mart/data'
-import Picker from '@emoji-mart/react'
+import Picker from "@emoji-mart/react";
 
 const ChatFooter = () => {
   const { messageCollection } = useContext(FirebaseContext);
@@ -38,8 +32,6 @@ const ChatFooter = () => {
     }
   };
   let addEmoji = (e) => {
-    console.log("h");
-
     let sym = e.unified.split("-");
     let codesArray = [];
     sym.forEach((el) => codesArray.push("0x" + el));
@@ -48,7 +40,6 @@ const ChatFooter = () => {
   };
   return (
     <div className="chat-area-footer chat-input">
-         {/* <Picker data={data} onEmojiSelect={console.log} /> */}
       <form
         className=" d-flex p-2 gap-4 bg-transparent justify-content-center "
         onSubmit={handleSendMsg}
@@ -63,8 +54,9 @@ const ChatFooter = () => {
             className="emoji-btn "
             onClick={() => setShowEmojis(!showEmojis)}
           >
-            
-            <MdOutlineEmojiEmotions style={showEmojis &&{ "color":"#a48e41"}}/>
+            <MdOutlineEmojiEmotions
+              style={showEmojis && { color: "#a48e41" }}
+            />
           </button>
           <input
             className=" outline-none text-white flex-grow-1 bg-transparent"
@@ -73,14 +65,13 @@ const ChatFooter = () => {
             onChange={(e) => setMsgContent(e.target.value)}
             placeholder="Type something here..."
           />
-                  <button
-          className="btn d-flex justify-content-center align-items-center p-2 msg-send"
-          type="submit"
-        >
-          <IoSend />
-        </button>
+          <button
+            className="btn d-flex justify-content-center align-items-center p-2 msg-send"
+            type="submit"
+          >
+            <IoSend />
+          </button>
         </div>
-
       </form>
     </div>
   );

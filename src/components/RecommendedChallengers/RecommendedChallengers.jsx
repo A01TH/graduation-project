@@ -3,9 +3,9 @@ import ChallengerShortcut from "../ChallengerShortcut/ChallengerShortcut";
 import { Link } from "react-router-dom";
 import { FirebaseContext } from "./../../context/FirebaseContext";
 import { currentContext } from "../../context/CurrentUser";
-
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import { motion } from "framer-motion";
 
 const RecommendedChallengers = () => {
   const { users } = useContext(FirebaseContext);
@@ -45,10 +45,15 @@ const RecommendedChallengers = () => {
   }
 
   return (
-    <div className="bg-c-grey-dark card bg-light  py-3 pb-2 mb-5">
+    <motion.div
+      className="  py-3 pb-2 mb-5  bg-body border-primary card text-center"
+      initial={{ x: 100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="mb-2 text-white ">
-        <h5 className="text-center mb-3 border-grey-lite pb-2 mx-3">
-          Recommended challengers
+        <h5 className="text-center mb-3 border-primary border-bottom pb-2 mx-2">
+          Recommended Challengers
         </h5>
         {mayKnowUsers.slice(0, 4).map((usr, index) => {
           if (usr.uid !== currentUser[0].uid)
@@ -61,49 +66,52 @@ const RecommendedChallengers = () => {
                   name={usr.name}
                   photoURL={usr.photoUrl}
                   key={index}
+                  username={usr.username}
                 />
               </Link>
             );
         })}
       </div>
-      <div className="p-2">
+      <div className="d-flex justify-content-center">
         <button
           onClick={handleShow}
-          to="/people you man"
           className=" text-decoration-none bg-primary text-light text-center mx-5 py-2 mt-2  card d-block 
            bg-c-grey-lite-hover"
         >
           Explore all challengers
         </button>
-
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Recommended Challengers</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {mayKnowUsers.map((user, index) => {
-              return (
-                <Link
-                  className=" text-decoration-none text-white"
-                  to={`/${user.username}`}
-                >
-                  <ChallengerShortcut
-                    name={user.name}
-                    photoURL={user.photoUrl}
-                    key={index}
-                  />
-                </Link>
-              );
-            })}
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
       </div>
-    </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header
+          closeButton
+          className="bg-body border-primary border-bottom"
+        >
+          <Modal.Title>Recommended Challengers</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="bg-body border-primary border-bottom">
+          {mayKnowUsers.map((user, index) => {
+            return (
+              <Link
+                className=" text-decoration-none text-white"
+                to={`/${user.username}`}
+              >
+                <ChallengerShortcut
+                  name={user.name}
+                  photoURL={user.photoUrl}
+                  key={index}
+                />
+              </Link>
+            );
+          })}
+        </Modal.Body>
+        <Modal.Footer className="bg-body">
+          <Button variant="danger" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </motion.div>
   );
 };
 
