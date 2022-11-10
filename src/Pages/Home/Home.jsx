@@ -11,9 +11,13 @@ import Toast from "../../UI/Toast/Toast";
 import Post from "./../../components/AddPost/Post";
 import RecommendedChallengers from "./../../components/RecommendedChallengers/RecommendedChallengers";
 import RecommendedTopChallenges from "./../../components/RecommendedTopChallenges/RecommendedTopChallenges";
+import TopChallengers from "./../TopChallengers/TopChallengers";
+import { Link } from "react-router-dom";
+
 const ChallengeCard = React.lazy(() =>
   import("../../components/ChallengeCard/ChallengeCard")
 );
+
 const Home = () => {
   const { challengeCollection } = useContext(FirebaseContext);
   const [challenges, isLoading] = useCollectionData(challengeCollection);
@@ -103,11 +107,24 @@ const Home = () => {
           </div>
           <div className="d-none d-md-block col-3  ">
             <RecommendedChallengers />
-            <div className="top">
+            <div className="mb-5">
               <RecommendedTopChallenges
                 challenges={challenges}
                 isLoading={isLoading}
               />
+            </div>
+            <div className="rounded-2 overflow-hidden bg-light px-2">
+              <h5 className="text-center mb-1 border-bottom border-light  p-3 mx-3">
+                Top Challengers
+              </h5>
+              <TopChallengers home={true} className="w-100 mb-3" />
+              <Link
+                to="/top-challengers"
+                className="text-decoration-none text-primary "
+              >
+                {" "}
+                <p className="text-center"> Explore all top challengers</p>
+              </Link>
             </div>
           </div>
         </div>
