@@ -31,8 +31,6 @@ const Notification = ({ name, photoURL, uid = null }) => {
         {
           friends: [...secondUser[0].friends, currentUser[0].uid],
           sentRequests: secondUser[0].sentRequests.filter(
-<<<<<<< HEAD
-=======
             (id) => id !== currentUser[0].uid
           ),
         },
@@ -62,7 +60,6 @@ const Notification = ({ name, photoURL, uid = null }) => {
       .set(
         {
           sentRequests: secondUser[0].sentRequests.filter(
->>>>>>> d977b53ce559ef65700ae2de27ca2b2578570d1d
             (id) => id !== currentUser[0].uid
           ),
         },
@@ -72,11 +69,6 @@ const Notification = ({ name, photoURL, uid = null }) => {
         console.error("Error writing document: ", error);
       });
   };
-<<<<<<< HEAD
-
-  const handleRejectFriend = () => {};
-=======
->>>>>>> d977b53ce559ef65700ae2de27ca2b2578570d1d
   return (
     <div className="row notification align-items-center justify-content-center">
       <div className="col-2 ">
