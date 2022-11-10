@@ -185,12 +185,12 @@ const ProfileAbout = ({ user, users, self }) => {
         className="text-white"
         scrollable={true}
       >
-        <Modal.Header className="border-0 bg-dark">
+        <Modal.Header className="bg-body">
           <h3 className="text-center fw-bold text-uppercase mx-auto">
             Contacts
           </h3>
         </Modal.Header>
-        <Modal.Body className="px-4 text-center bg-dark">
+        <Modal.Body className="px-4 text-center bg-body">
           <div className="contacts-list row">
             {friendsList.map((friend) => (
               <div className="contact mb-3 d-flex align-items-center col-lg-6">
