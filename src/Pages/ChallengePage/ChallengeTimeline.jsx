@@ -50,6 +50,25 @@ const ChallengeTimeline = () => {
     }
   }, [challenge]);
 
+  useEffect(() => {
+    if (userProgress == 100) {
+      userCollection
+        .doc(currentUser[0].uid)
+        .update(
+          {
+            finishedChallenges: firebase.firestore.FieldValue.arrayUnion(cid),
+          },
+          { merge: true }
+        )
+        .then(() => {
+          console.log("challenge added");
+        })
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    }
+  }, [userProgress]);
+
   const [progressInput, setProgressInput] = useState(false);
   const [participantsList, setParticipatsList] = useState([]);
 

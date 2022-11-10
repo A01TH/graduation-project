@@ -23,7 +23,7 @@ function Category() {
   };
 
   return (
-    <div className="section-padding bg-dark text-white">
+    <div className="section-padding bg-body text-white">
       <div className="container">
         <h1 className="text-center mb-5">Choose a category to display</h1>
         <div className="row mb-5">
