@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import ContentLoader from "react-content-loader";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useParams } from "react-router-dom";
 import ProfileAbout from "../../components/ProfileAbout/ProfileAbout";
@@ -31,7 +32,26 @@ const Profile = () => {
       <div className="profile-cover"></div>
       <div className="profile-content bg-body">
         {filterUserLoading ? (
-          <div>Loading..</div>
+          <div className="container">
+            <ContentLoader
+              speed={3}
+              width={1440}
+              height={500}
+              viewBox="0 0 1440 500"
+              backgroundColor="#f3f3f3"
+              foregroundColor="#ecebeb"
+            >
+              <circle cx="80" cy="111" r="54" />
+              <rect x="182" y="86" rx="0" ry="0" width="148" height="21" />
+              <rect x="185" y="112" rx="0" ry="0" width="87" height="13" />
+              <rect x="39" y="203" rx="0" ry="0" width="70" height="12" />
+              <rect x="40" y="221" rx="0" ry="0" width="72" height="11" />
+              <rect x="29" y="266" rx="0" ry="0" width="129" height="125" />
+              <rect x="184" y="167" rx="0" ry="0" width="296" height="19" />
+              <rect x="197" y="238" rx="0" ry="0" width="129" height="85" />
+              <rect x="339" y="238" rx="0" ry="0" width="129" height="85" />
+            </ContentLoader>
+          </div>
         ) : (
           <div className="container">
             <ProfileInfo user={filterUser[0]} self={self} />
