@@ -56,7 +56,7 @@ function ChallengeCard({ post }) {
   };
 
   useEffect(() => {
-    if (post.participants.includes(currentUser[0].uid)) {
+    if (post.participants?.includes(currentUser[0].uid)) {
       setIsJoined(true);
     }
   }, [post]);

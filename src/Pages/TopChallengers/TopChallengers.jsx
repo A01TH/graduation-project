@@ -83,7 +83,13 @@ function TopChallengers({ home = false }) {
                               </td>
                               {
                                 <td className="text-dark align-middle">
-                                  {usr.badges}
+                                  {usr.userBadge && (
+                                    <img
+                                      className="custom-badge"
+                                      src={usr.userBadge}
+                                      alt="rank"
+                                    />
+                                  )}
                                 </td>
                               }
                               <td className="text-warning align-middle">
@@ -119,7 +125,16 @@ function TopChallengers({ home = false }) {
                                       />
                                     </div>
 
-                                    <div className="fs-6">{usr.name}</div>
+                                    <div className="fs-6">
+                                      {usr.name}{" "}
+                                      {usr.userBadge && (
+                                        <img
+                                          className="custom-badge"
+                                          src={usr.userBadge}
+                                          alt="rank"
+                                        />
+                                      )}{" "}
+                                    </div>
                                   </div>
                                 </Link>
                               </td>

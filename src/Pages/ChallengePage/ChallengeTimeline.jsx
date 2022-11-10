@@ -14,6 +14,10 @@ import { toast } from "react-toastify";
 import Toast from "../../UI/Toast/Toast";
 import Confetti from "react-confetti";
 import useWindowSize from "../../hooks/windowSizeHook";
+import topRatedPlus from "../../assets/badges/topRatedPlus.svg";
+import topRated from "../../assets/badges/topRated.svg";
+import risingTalent from "../../assets/badges/risingTalent.svg";
+import expert from "../../assets/badges/expert.svg";
 
 const ChallengeTimeline = () => {
   const { cid } = useParams();
@@ -99,6 +103,64 @@ const ChallengeTimeline = () => {
       .catch((error) => {
         console.error("Error writing document: ", error);
       });
+    if (
+      currentUser[0].finishedChallenges.length >= 2 &&
+      currentUser[0].finishedChallenges.length < 4
+    ) {
+      userCollection
+        .doc(currentUser[0].uid)
+        .set(
+          {
+            userBadge: risingTalent,
+          },
+          { merge: true }
+        )
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    } else if (
+      currentUser[0].finishedChallenges.length >= 4 &&
+      currentUser[0].finishedChallenges.length < 6
+    ) {
+      userCollection
+        .doc(currentUser[0].uid)
+        .set(
+          {
+            userBadge: topRated,
+          },
+          { merge: true }
+        )
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    } else if (
+      currentUser[0].finishedChallenges.length >= 6 &&
+      currentUser[0].finishedChallenges.length < 8
+    ) {
+      userCollection
+        .doc(currentUser[0].uid)
+        .set(
+          {
+            userBadge: topRatedPlus,
+          },
+          { merge: true }
+        )
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    } else if (currentUser[0].finishedChallenges.length >= 8) {
+      userCollection
+        .doc(currentUser[0].uid)
+        .set(
+          {
+            userBadge: expert,
+          },
+          { merge: true }
+        )
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    }
     setProgressInput(false);
   };
 
