@@ -16,7 +16,7 @@ const ChallengeCard = React.lazy(() =>
 );
 const Home = () => {
   const { challengeCollection } = useContext(FirebaseContext);
-  const [challenges] = useCollectionData(challengeCollection);
+  const [challenges, isLoading] = useCollectionData(challengeCollection);
   const { currentUser } = useContext(currentContext);
   const [currentUserPosts, setcurrentUserPosts] = useState(challenges);
 
@@ -64,7 +64,10 @@ const Home = () => {
           </div>
           <div className="d-none d-md-block col-3">
             <RecommendedChallengers />
-            <RecommendedTopChallenges />
+            <RecommendedTopChallenges
+              challenges={challenges}
+              isLoading={isLoading}
+            />
           </div>
         </div>
       </div>

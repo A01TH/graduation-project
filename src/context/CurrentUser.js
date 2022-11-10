@@ -27,12 +27,10 @@ const CurrentUserProvider = ({ children }) => {
           : userInfo.Interests
           ? userInfo.Interests
           : [],
-        points: 50,
-        ownedChallenges: [],
-        contributedChallenges: [],
         friends: [],
         sentRequests: [],
         receivedRequests: [],
+        finishedChallenges: [],
       });
     }
     setUserInfo([]);
