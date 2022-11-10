@@ -8,7 +8,7 @@ import UserAction from "./UserAction";
 import Toast from "../../UI/Toast/Toast";
 
 const ProfileInfo = ({ user, self }) => {
-  const { updateCurrentUser } = useContext(currentContext);
+  const { currentUser, updateCurrentUser } = useContext(currentContext);
 
   const [smShow, setSmShow] = useState(false);
   const [userImg, setUserImg] = useState(user.photoUrl);
@@ -65,10 +65,7 @@ const ProfileInfo = ({ user, self }) => {
                   onHide={() => setSmShow(false)}
                   aria-labelledby="example-modal-sizes-title-sm"
                 >
-                  <Modal.Header className="border-1 bg-light border-primary">
-                    Update Profile Image
-                  </Modal.Header>
-                  <Modal.Body className="modalBody px-4 text-center bg-light">
+                  <Modal.Body className="modalBody px-4 text-center bg-body">
                     <div
                       className="edit-img mx-auto mb-4 rounded-circle"
                       style={{ width: "200px", height: "200px" }}
@@ -77,6 +74,7 @@ const ProfileInfo = ({ user, self }) => {
                         src={editingImg}
                         alt="user"
                         className="h-100 w-100 border rounded-circle border-4 border-primary"
+                        style={{ width: "200px", height: "200px" }}
                       />
                     </div>
                     <input
@@ -106,7 +104,10 @@ const ProfileInfo = ({ user, self }) => {
             <div className="user d-flex justify-content-between align-items-start">
               <div className="user">
                 <h2 className="name">{user.name}</h2>
-                <div className="username text-muted mb-3">@{user.username}</div>
+                <div className="username text-muted mb-2">@{user.username}</div>
+                {user.friends.includes(currentUser[0].uid) && (
+                  <span className="badge bg-primary">Friend</span>
+                )}
               </div>
               <div>{self || <UserAction user={user} />}</div>
             </div>
