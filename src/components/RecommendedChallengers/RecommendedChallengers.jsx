@@ -46,7 +46,7 @@ const RecommendedChallengers = () => {
 
   return (
     <motion.div
-      className="  py-3 pb-2 mb-5  bg-body border-light card text-center"
+      className="  py-3 pb-2 mb-5   border-light card text-center bg-light"
       initial={{ x: 100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
