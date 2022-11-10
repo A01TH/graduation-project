@@ -26,7 +26,7 @@ function Category() {
   };
 
   return (
-    <div className="section-padding   text-white  ">
+    <div className="section-padding categroy bg-body text-white">
       <div className="container">
         <div
           className="wv-100 p-4 rounded-4"
@@ -44,7 +44,7 @@ function Category() {
           <div className="row categroy mb-5 ">
             <ButtonGroup aria-label="Basic example row ">
               <Button
-                className="rounded-1 btn-1 btn col-3"
+                className="rounded-1 btn-1 btn col-sm-6 col-md-3 py-3"
                 name="all"
                 variant="secondary me-2 bg-color border-0"
                 onClick={(e) => {
@@ -56,8 +56,8 @@ function Category() {
               </Button>
               <Button
                 name="frontend"
-                className="rounded-1 btn-1 btn col-3"
-                variant="secondary me-2 bg-color border-0"
+                className="rounded-1 col-sm-6 col-md-3 btn-1 btn "
+                variant="secondary me-2 bg-color border-0 "
                 onClick={(e) => {
                   handleClick(e);
                   setTitle("Frontend");

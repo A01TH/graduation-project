@@ -13,7 +13,7 @@
 }
 
 .is_animating {
-  animation: heart-burst 0.8s steps(28) 1;
+  animation: heart-burst 1s steps(28) 1 forwards;
 }
 
 @keyframes heart-burst {

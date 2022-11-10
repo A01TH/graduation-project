@@ -14,7 +14,7 @@ const ProfileAbout = ({ user, users, self }) => {
   const [editInterests, setEditInterests] = useState(false);
   const [smShow, setSmShow] = useState(false);
   const friendsList = users.filter((friend) => {
-    return friend.uid !== user.uid;
+    return friend.friends.includes(user.uid);
   });
 
   const interestsOptions = [
@@ -133,47 +133,38 @@ const ProfileAbout = ({ user, users, self }) => {
           ))}
       </div>
 
-      <ul class="list-group stats mb-2">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Owned Challenges
-          <span class="badge bg-primary rounded-pill">14</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Contributed Challenges
-          <span class="badge bg-primary rounded-pill">2</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Finished Challenges
-          <span class="badge bg-primary rounded-pill">1</span>
-        </li>
-      </ul>
-
       <div class="card bg-body border-primary mb-3">
         <div class="card-header text-uppercase">Study Buddies</div>
         <div class="card-body">
           <div className="contacts-list row">
-            {friendsList
-              .map((friend) => (
-                <OverlayTrigger
-                  placement="bottom"
-                  delay={{ show: 100 }}
-                  overlay={<Tooltip id="my-tooltip-id">{friend.name}</Tooltip>}
-                >
-                  <div className="contact mb-3 col-4">
-                    <Link
-                      to={`/${friend.username}`}
-                      className="text-white fw-bold text-decoration-none"
-                    >
-                      <img
-                        src={friend.photoUrl}
-                        alt="contact"
-                        className="img-fluid rounded-circle"
-                      />
-                    </Link>
-                  </div>
-                </OverlayTrigger>
-              ))
-              .slice(0, 9)}
+            {friendsList.length === 0 ? (
+              <div>No study buddies yet</div>
+            ) : (
+              friendsList
+                .map((friend) => (
+                  <OverlayTrigger
+                    placement="bottom"
+                    delay={{ show: 100 }}
+                    overlay={
+                      <Tooltip id="my-tooltip-id">{friend.name}</Tooltip>
+                    }
+                  >
+                    <div className="contact mb-3 col-4">
+                      <Link
+                        to={`/${friend.username}`}
+                        className="text-white fw-bold text-decoration-none"
+                      >
+                        <img
+                          src={friend.photoUrl}
+                          alt="contact"
+                          className="img-fluid rounded-circle"
+                        />
+                      </Link>
+                    </div>
+                  </OverlayTrigger>
+                ))
+                .slice(0, 9)
+            )}
           </div>
           {friendsList.length > 9 && (
             <button

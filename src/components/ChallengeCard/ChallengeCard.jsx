@@ -1,7 +1,6 @@
-import { FaUserFriends, FaYoutube } from "react-icons/fa";
+import { FaUserFriends } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { FaRegCalendarAlt } from "react-icons/fa";
-import ProgressBar from "react-bootstrap/ProgressBar";
 import "./challenge-card.scss";
 import { useContext } from "react";
 import { FirebaseContext } from "../../context/FirebaseContext";
@@ -15,6 +14,7 @@ import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
 import Badge from "react-bootstrap/Badge";
 import { SiCoursera, SiUdemy, SiYoutube } from "react-icons/si";
+import { motion } from "framer-motion";
 
 function ChallengeCard({ post }) {
   const { userCollection, challengeCollection } = useContext(FirebaseContext);
@@ -56,17 +56,32 @@ function ChallengeCard({ post }) {
   }, [post]);
 
   const click = () => {
-    setLiked((prev) => !prev);
-    console.log(liked);
+    // setLiked((prev) => !prev);
+    challengeCollection
+      .doc(post.cid)
+      .update({
+        postLikes: firebase.firestore.FieldValue.arrayUnion(currentUser[0].uid),
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
   };
-
+  useEffect(() => {
+    if (post.postLikes.includes(currentUser[0].uid)) {
+      setLiked(true);
+    }
+  }, [post]);
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       {!isLoading && (
-        <div className="bg-c-grey-dark bg-c-dark  p-3 card  mx-auto my-3 w-100">
+        <div className="p-3 card   mx-auto my-3 w-100 bg-body border-primary">
           <h5 className="text-primary fw-bold">{post.title}</h5>
 
-          <div className="chall-owner d-flex justify-content-between mb-3 align-items-center   ">
+          <div className="chall-owner d-flex justify-content-between mb-3 flex-wrap align-items-center   ">
             <Link
               className="tex text-decoration-none "
               to={`/${postOwner[0].username}`}
@@ -117,7 +132,7 @@ function ChallengeCard({ post }) {
               </p>
               <p className="mb-0">
                 {post.site === "Youtube" ? (
-                  <i className="me-1 youtube">
+                  <i className="me-2 youtube">
                     <SiYoutube />
                   </i>
                 ) : post.site === "Coursera" ? (
@@ -134,13 +149,6 @@ function ChallengeCard({ post }) {
                   Link for the course
                 </a>
               </p>
-            </div>
-            <div className="w-25">
-              <ProgressBar
-                animated
-                now={45}
-                className="  border border-primary"
-              />
             </div>
           </div>
 
@@ -164,12 +172,14 @@ function ChallengeCard({ post }) {
 
             <div className="chall-reactions d-flex justify-content-center align-items-center gap-0">
               <LikeBtn click={click} like={liked} />
-              <span>{post.postLikes}</span>
+              <span className="text-white fw-bold like-counter">
+                {post.postLikes.length}
+              </span>
             </div>
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 

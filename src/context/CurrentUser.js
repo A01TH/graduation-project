@@ -2,8 +2,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { FirebaseContext } from "./FirebaseContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import male from "../assets/profile/male.svg";
-import female from "../assets/profile/female.svg";
 import { toast } from "react-toastify";
 
 export const currentContext = createContext();
@@ -50,7 +48,6 @@ const CurrentUserProvider = ({ children }) => {
         { merge: true }
       )
       .then(() => {
-        console.log(key, value, message);
         toast(message, {
           position: "top-center",
           autoClose: 2000,
@@ -70,7 +67,6 @@ const CurrentUserProvider = ({ children }) => {
     if (currentUser && userData) {
       const filteredUserFriends = [];
       currentUser[0]?.friends.forEach((friend) => {
-        console.log(friend);
         users.filter((user) => {
           if (user.uid === friend) {
             filteredUserFriends.push(user);
@@ -78,22 +74,9 @@ const CurrentUserProvider = ({ children }) => {
         });
       });
       setFriends(filteredUserFriends);
-      console.log(filteredUserFriends);
     }
   }, [currentUser]);
 
-  // useEffect(() => {
-  //   if (currentUser && userData) {
-  //     const filteredUserFriends = [];
-  //     users.filter((user) => {
-  //       currentUser[0].friends.forEach((friend) => {
-  //         return friend === user.uid;
-  //       });
-  //       filteredUserFriends.push(user);
-  //     });
-  //     console.log(filteredUserFriends);
-  //   }
-  // }, [currentUser]);
   return (
     <currentContext.Provider
       value={{

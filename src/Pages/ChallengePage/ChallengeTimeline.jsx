@@ -1,21 +1,36 @@
 import { getDocs } from "firebase/firestore";
 import React, { useContext, useState } from "react";
+import { useRef } from "react";
 import { useEffect } from "react";
-import { Form, FormSelect, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import ContentLoader from "react-content-loader";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import firebase from "firebase/compat/app";
 import { Link, useParams } from "react-router-dom";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import ChallengeComment from "./ChallengeComment";
+import { currentContext } from "../../context/CurrentUser";
+import { toast } from "react-toastify";
+import Toast from "../../UI/Toast/Toast";
+import Confetti from "react-confetti";
+import useWindowSize from "../../hooks/windowSizeHook";
 
 const ChallengeTimeline = () => {
+  const { cid } = useParams();
   const { challengeCollection, userCollection } = useContext(FirebaseContext);
-  const [challenge, challengeLoading] = useCollectionData(challengeCollection);
+  const { currentUser } = useContext(currentContext);
+  const [challenge, challengeLoading] = useCollectionData(
+    challengeCollection.where("cid", "==", cid)
+  );
+  const progressRef = useRef();
+  const commentRef = useRef();
+  const [userProgress, setUserProgress] = useState(0);
+  const size = useWindowSize();
 
   useEffect(() => {
     const getParticipants = async () => {
       const participants = await getDocs(
-        userCollection.where("uid", "in", challenge[2].participants)
+        userCollection.where("uid", "in", challenge[0].participants)
       );
       let list = [];
       participants.forEach((doc) => {
@@ -25,11 +40,67 @@ const ChallengeTimeline = () => {
     };
     if (!challengeLoading) {
       getParticipants();
+      if (challenge[0].postComments.length > 0) {
+        setUserProgress(
+          challenge[0].postComments.findLast(
+            (comment) => comment.uid === currentUser[0].uid
+          )?.progress
+        );
+      }
     }
   }, [challenge]);
 
+  useEffect(() => {
+    if (userProgress == 100) {
+      userCollection
+        .doc(currentUser[0].uid)
+        .update(
+          {
+            finishedChallenges: firebase.firestore.FieldValue.arrayUnion(cid),
+          },
+          { merge: true }
+        )
+        .then(() => {
+          console.log("challenge added");
+        })
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    }
+  }, [userProgress]);
+
   const [progressInput, setProgressInput] = useState(false);
   const [participantsList, setParticipatsList] = useState([]);
+
+  const commentHandler = (e) => {
+    e.preventDefault();
+
+    challengeCollection
+      .doc(cid)
+      .update({
+        postComments: firebase.firestore.FieldValue.arrayUnion({
+          uid: currentUser[0].uid,
+          progress: progressRef.current.value,
+          comment: commentRef.current.value,
+        }),
+      })
+      .then(() => {
+        toast("Progress has been updated", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
+    setProgressInput(false);
+  };
 
   if (challengeLoading) {
     return (
@@ -73,117 +144,104 @@ const ChallengeTimeline = () => {
 
   return (
     <div className="card bg-body border border-primary p-3">
-      <div className="card-header">
-        <h3>{challenge[2].title}</h3>
-        <p>{challenge[2].description}</p>
+      <div className="card-header border-primary">
+        <h5>{challenge[0].title}</h5>
+        <p>{challenge[0].desc}</p>
       </div>
       <div className="card-body">
-        <div className="card bg-body border-primary mb-3 row">
+        <div className="card bg-body border-primary mb-3 px-3">
           <legend>Participants</legend>
-          {participantsList.map((participant) => (
-            <OverlayTrigger
-              placement="bottom"
-              delay={{ show: 100 }}
-              overlay={
-                <Tooltip id="my-tooltip-id">{participant.username}</Tooltip>
-              }
-            >
-              <div className="contact mb-3 col-1">
-                <Link
-                  to={`/${participant.username}`}
-                  className="text-white fw-bold text-decoration-none"
-                >
-                  <img
-                    src={participant.photoUrl}
-                    className="img-fluid rounded-circle"
-                  />
-                </Link>
-              </div>
-            </OverlayTrigger>
-          ))}
+          <div className="row p-2 g-2">
+            {participantsList.map((participant) => (
+              <OverlayTrigger
+                placement="bottom"
+                delay={{ show: 100 }}
+                overlay={
+                  <Tooltip id="my-tooltip-id">{participant.username}</Tooltip>
+                }
+              >
+                <div className="contact mb-3 col-1">
+                  <Link
+                    to={`/${participant.username}`}
+                    className="text-white fw-bold text-decoration-none"
+                  >
+                    <img
+                      src={participant.photoUrl}
+                      className="img-fluid rounded-circle"
+                    />
+                  </Link>
+                </div>
+              </OverlayTrigger>
+            ))}
+          </div>
         </div>
 
-        <div className="comments">
-          {challenge[2].postComments.map((comment) => {
-            <ChallengeComment />;
+        <div className="comments card-scroll">
+          <legend>Timeline</legend>
+          {challenge[0].postComments.map((comment) => {
+            return (
+              <ChallengeComment
+                comment={comment}
+                challenger={participantsList.find(
+                  (participant) => participant.uid === comment.uid
+                )}
+              />
+            );
           })}
         </div>
-        <hr />
-        <legend>Your progress:</legend>
-        <div className="row g-2 mb-3">
-          <div class="progress col-3">
-            <div
-              class="progress-bar progress-bar-striped progress-bar-animated"
-              role="progressbar"
-              style={{ width: "100%" }}
-              aria-valuenow="10"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div class="progress col-3">
-            <div
-              class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-              role="progressbar"
-              style={{ width: "100%" }}
-              aria-valuenow="25"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div class="progress col-3">
+        <legend>Your progress</legend>
+        <div className="g-2 mb-3">
+          <div class="progress">
             <div
               class="progress-bar progress-bar-striped progress-bar-animated bg-info"
               role="progressbar"
-              style={{ width: "100%" }}
-              aria-valuenow="50"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div class="progress col-3">
-            <div
-              class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-              role="progressbar"
-              style={{ width: "100%" }}
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
+              style={{ width: `${userProgress}%` }}
             ></div>
           </div>
         </div>
-        <hr />
-
-        {!progressInput ? (
+        {userProgress == 100 ? (
+          <div className="text-center">
+            <div>
+              Congratulations, you finished this challenge. &#128170; 🥳
+            </div>
+            <Link to="/home" type="button" class="btn btn-link">
+              Go discover more challenges
+            </Link>
+          </div>
+        ) : !progressInput ? (
           <div>
             <button
-              className="btn btn-primary"
+              className="btn btn-primary mx-auto"
               onClick={() => setProgressInput(true)}
             >
               Update progress
             </button>
           </div>
         ) : (
-          <Form>
+          <Form onSubmit={commentHandler}>
             <div className="form-group mb-3">
               I've done
-              <Form.Select className="d-inline mx-3" style={{ width: "100px" }}>
-                <option value={25}>25</option>
-                <option value={50}>50</option>
-                <option value={75}>75</option>
-                <option value={100}>100</option>
-              </Form.Select>
-              %
+              <input
+                type="number"
+                ref={progressRef}
+                className="d-inline mx-3 form-control"
+                style={{ width: "100px" }}
+                min={userProgress}
+                max="100"
+                required
+              />
+              % of this chalenge.
             </div>
             <div className="form-group">
               <div className="form-floating mb-3">
                 <input
-                  type="email"
+                  ref={commentRef}
+                  type="text"
                   className="form-control"
                   id="floatingInput"
                   placeholder="Your progress comment.."
                 />
-                <label for="floatingInput">Your progress comment..</label>
+                <label htmlFor="floatingInput">Your progress comment..</label>
               </div>
             </div>
             <button type="submit" className="btn btn-success me-2">
@@ -196,12 +254,20 @@ const ChallengeTimeline = () => {
             >
               Cancel
             </button>
-            <button type="button" class="btn btn-link">
-              I've finished the challenge
-            </button>
           </Form>
         )}
       </div>
+      <Toast />
+      {userProgress == 100 && (
+        <>
+          <Confetti
+            width={size.width}
+            height={size.height}
+            tweenDuration={1}
+            confettiSource={{ x: -10, y: 0, w: 700, h: 0 }}
+          />
+        </>
+      )}
     </div>
   );
 };

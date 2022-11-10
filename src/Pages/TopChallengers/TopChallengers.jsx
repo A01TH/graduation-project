@@ -25,26 +25,7 @@ function TopChallengers() {
               <tr className=" p-2">
                 <th className="p-2">Rank</th>
                 <th className="p-2 ">Challenger</th>
-                {/* <th className="p-2">
-                  {" "}
-                  <span className="bg-success p-2 rounded-4 text-white">
-                    DONE
-                  </span>{" "}
-                </th>
                 <th className="p-2">
-                  {" "}
-                  <span className="bg-primary p-2 rounded-4 text-white">
-                    CURRENT
-                  </span>{" "}
-                </th>
-                <th className="p-2">
-                  {" "}
-                  <span className="bg-danger p-2 rounded-4 text-white">
-                    FAILED
-                  </span>{" "}
-                </th> */}
-                <th className="p-2">
-                  {" "}
                   <span className="bg-dark p-2 rounded-4 text-white">
                     BADGES
                   </span>{" "}
@@ -65,13 +46,10 @@ function TopChallengers() {
                             alt={usr.name}
                             className=" rounded-circle w-100"
                           />
-                        </div>{" "}
+                        </div>
                         <div>{usr.name}</div>
                       </div>
                     </td>
-                    {/* <td className="text-success">{usr.done}</td>
-                    <td className="text-primary">{usr.current}</td>
-                    <td className="text-danger">{usr.failed}</td> */}
                     <td className="text-dark align-middle">{usr.badges}</td>
                     <td className="text-warning align-middle">{usr.points}</td>
                   </tr>
