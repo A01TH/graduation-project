@@ -72,24 +72,21 @@ const Header = () => {
               >
                 <li className="link">
                   <NavLink to="/home">
-                    <FaHome className="me-2" />
-                    Home
+                    <FaHome className="me-2 h6" />
                   </NavLink>
                 </li>
                 <li className="link">
                   <NavLink to="/categories">
-                    <BiCategoryAlt className="me-2" />
-                    Categories
+                    <BiCategoryAlt className="me-2 h6" />
                   </NavLink>
                 </li>
                 <li className="link">
                   <NavLink to="/messages">
-                    <BsFillChatLeftTextFill className="me-2" />
-                    Messages
+                    <BsFillChatLeftTextFill className="me-2 h6" />
                   </NavLink>
                 </li>
 
-                <li className="notification position-relative">
+                <li className="notification position-relative lik">
                   <span className="fs-6  position-absolute bill-wrapper">
                     {requestedUsers && currentUser && requestedUsers.length ? (
                       <div className="bill"></div>
@@ -98,7 +95,11 @@ const Header = () => {
                     )}
                   </span>
                   <Dropdown>
-                    <Dropdown.Toggle variant="tranparent" id="notification">
+                    <Dropdown.Toggle
+                      variant="tranparent"
+                      id="notification"
+                      className="p-0"
+                    >
                       <IoMdNotificationsOutline className="position-relative fs-5" />
                     </Dropdown.Toggle>
 
@@ -124,7 +125,7 @@ const Header = () => {
                           })}
                         </>
                       ) : (
-                        <h6 className="text-center">No Notifications</h6>
+                        <h6 className="text-center p-2">No Notifications</h6>
                       )}
                     </Dropdown.Menu>
                   </Dropdown>

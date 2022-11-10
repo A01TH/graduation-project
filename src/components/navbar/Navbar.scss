@@ -17,7 +17,7 @@ $nav-font-color: #ffffff;
     position: relative;
     overflow: hidden;
     &:hover {
-      color: #bdbdbd;
+      color: #1a8cd8;
     }
   }
   li {
@@ -25,12 +25,15 @@ $nav-font-color: #ffffff;
     img {
       width: 40px;
     }
+    a.active {
+      color: #1a8cd8;
+    }
   }
   ul .link a::before {
     content: "";
     width: 0%;
     height: 4px;
-    background-color: #1a8cd8;
+    color: #1a8cd8;
     left: 50%;
     transform: translateX(-50%);
     bottom: -10px;
@@ -141,7 +144,7 @@ $nav-font-color: #ffffff;
   font-size: 25px;
 }
 
-$c: #ce2b37;
+$c: #1a8cd8;
 $s: 10px;
 .bill-wrapper {
   right: 15px;

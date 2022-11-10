@@ -30,6 +30,13 @@ const Home = () => {
       <div className="container">
         <div className="row align-items-start justify-content-between">
           <div className="col-md-6 col-sm-12 mb-5 offset-1">
+            <h3 className="mb-2">
+              Welcome,{" "}
+              <span className="text-primary">
+                {" "}
+                {currentUser[0].name.split(" ")[0]}
+              </span>
+            </h3>
             <Post />
 
             {currentUserPosts ? (
