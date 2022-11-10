@@ -5,7 +5,7 @@ import ChallengeCard from "../../components/ChallengeCard/ChallengeCard";
 import { FirebaseContext } from "./../../context/FirebaseContext";
 import { useContext, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 function Category() {
   const { challengeCollection } = useContext(FirebaseContext);
   const [challenges] = useCollectionData(challengeCollection);
@@ -29,64 +29,71 @@ function Category() {
     <div className="section-padding categroy bg-body text-white">
       <div className="container">
         <div
-          className="wv-100 p-4 rounded-4"
+          className="wv-100 p-4 rounded-4 mb-2"
           style={
             title === "Frontend"
-              ? { "background-color": "blue" }
+              ? { "background-color": "#3a3a3a" }
               : title === "Backend"
-              ? { "background-color": "white" }
+              ? { "background-color": "#414040" }
               : title === "UI/UX"
-              ? { "background-color": "yellow" }
-              : { "background-color": "orange" }
+              ? { "background-color": "#494848 " }
+              : { "background-color": "#2f2f2f" }
           }
         >
           <h1 className="text-center  bg mb-5">{title}</h1>
           <div className="row categroy mb-5 ">
-            <ButtonGroup aria-label="Basic example row ">
-              <Button
-                className="rounded-1 btn-1 btn col-sm-6 col-md-3 py-3"
-                name="all"
-                variant="secondary me-2 bg-color border-0"
-                onClick={(e) => {
-                  handleClick(e);
-                  setTitle("All");
-                }}
-              >
-                All
-              </Button>
-              <Button
-                name="frontend"
-                className="rounded-1 col-sm-6 col-md-3 btn-1 btn "
-                variant="secondary me-2 bg-color border-0 "
-                onClick={(e) => {
-                  handleClick(e);
-                  setTitle("Frontend");
-                }}
-              >
-                Frontend
-              </Button>
-              <Button
-                name="backend"
-                className="rounded-1 col-3"
-                variant="secondary   me-2 bg-color "
-                onClick={(e) => {
-                  handleClick(e);
-                  setTitle("Backend");
-                }}
-              >
-                Backend
-              </Button>
-              <Button
-                name="ui/ux"
-                className="rounded-1 col-3"
-                variant="secondary bg-color"
-                onClick={(e) => {
-                  handleClick(e);
-                  setTitle("UI/UX");
-                }}
-              >
-                UI/UX
-              </Button>
+            <ButtonGroup aria-label="Basic example row d-flex flex-wrap">
+              <div className="col-6 bg-primary rounded-2 text-center  mx-2">
+                <button
+                  className="rounded-1  btn w-100 py-3 "
+                  name="all"
+                  // variant="secondary me-2 bg-color border-0"
+                  onClick={(e) => {
+                    handleClick(e);
+                    setTitle("All");
+                  }}
+                >
+                  All
+                </button>
+              </div>
+              <div className="col-6 bg-primary rounded-2 text-center  mx-2">
+                <Button
+                  name="frontend"
+                  className="rounded-1  btn w-100 py-3 "
+                  onClick={(e) => {
+                    handleClick(e);
+                    setTitle("Frontend");
+                  }}
+                >
+                  Frontend
+                </Button>
+              </div>
+              <div className="col-6 bg-primary rounded-2 text-center  mx-2">
+                <Button
+                  name="backend"
+                  className="rounded-1 col-3"
+                  variant="secondary   me-2 bg-color "
+                  onClick={(e) => {
+                    handleClick(e);
+                    setTitle("Backend");
+                  }}
+                >
+                  Backend
+                </Button>
+              </div>
+              <div className="col-6 bg-primary rounded-2 text-center  mx-2">
+                <Button
+                  name="ui/ux"
+                  className="rounded-1 col-3"
+                  variant="secondary bg-color"
+                  onClick={(e) => {
+                    handleClick(e);
+                    setTitle("UI/UX");
+                  }}
+                >
+                  UI/UX
+                </Button>
+              </div>
             </ButtonGroup>
           </div>
         </div>
@@ -95,9 +102,9 @@ function Category() {
             {renderArr.map((ch, i) => {
               return (
                 <motion.div>
-                <div className="col-md-6 col-sm-12 col-lg-4">
-                  <ChallengeCard post={ch} key={ch.cid} className="h-100" />
-                </div>
+                  <div className="col-md-6 col-sm-12 col-lg-4">
+                    <ChallengeCard post={ch} key={ch.cid} className="h-100" />
+                  </div>
                 </motion.div>
               );
             })}

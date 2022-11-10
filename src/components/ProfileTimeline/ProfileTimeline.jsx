@@ -42,7 +42,7 @@ const ProfileTimeline = ({ user, self }) => {
           }
           className="text-white"
         >
-          <div className="user-challenges row">
+          <div className="user-challenges row  ">
             {challengesLoading ? (
               <ContentLoader viewBox="0 0 500 475" height={475} width={500}>
                 <circle cx="70.2" cy="73.2" r="41.3" />
@@ -56,7 +56,7 @@ const ProfileTimeline = ({ user, self }) => {
                 {userChallenges.length > 0 ? (
                   userChallenges.map((challenge, index) => {
                     return (
-                      <div className="col-6">
+                      <div className="col-sm-12 col-md-6 mb-3 " >
                         <ChallengeCard post={challenge} key={index} />
                       </div>
                     );

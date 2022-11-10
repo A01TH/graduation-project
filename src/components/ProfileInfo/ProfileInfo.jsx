@@ -41,7 +41,7 @@ const ProfileInfo = ({ user, self }) => {
   return (
     <div className="profile-info">
       <div className="row">
-        <div className="col-lg-3">
+        <div className="col-lg-3 d-flex justify-content-center">
           <div
             className="profile-img border rounded-circle border-4 border-primary"
             style={{ width: "200px", height: "200px" }}

@@ -29,31 +29,35 @@ const Home = () => {
     <div className="mt-5 bg-body home">
       <div className=" container-fluid">
         <div className="row align-items-start justify-content-between">
-          <div className="col-md-2  d-sm-none d-lg-none">
-            <div
-              className="profile-img border rounded-circle border-4 border-primary"
-              style={{ width: "200px", height: "200px" }}
-            >
-              <img
-                src={currentUser[0].photoUrl}
-                alt="user"
-                className="h-100 w-100 rounded-circle "
-              />
-            </div>
-            <div className="info-content py-3">
-              <div className="user d-flex justify-content-between align-items-start">
-                <div className="user">
-                  <h2 className="name fs-4">{currentUser[0].name}</h2>
-                  <div className="username text-muted mb-2">
-                    @{currentUser[0].username}
+          {currentUser ? (
+            <div className="col-md-2  d-none d-lg-block">
+              <div
+                className="profile-img border rounded-circle border-4 border-primary"
+                style={{ width: "200px", height: "200px" }}
+              >
+                <img
+                  src={currentUser[0].photoUrl}
+                  alt="user"
+                  className="h-100 w-100 rounded-circle "
+                />
+              </div>
+              <div className="info-content py-3">
+                <div className="user d-flex justify-content-between align-items-start">
+                  <div className="user">
+                    <h2 className="name fs-4">{currentUser[0].name}</h2>
+                    <div className="username text-muted mb-2">
+                      @{currentUser[0].username}
+                    </div>
                   </div>
                 </div>
               </div>
+              <Toast />
             </div>
-            <Toast />
-          </div>
+          ) : (
+            <h1>Loading</h1>
+          )}
 
-          <div className="col-md-6 col-sm-12  mb-2 ">
+          <div className="col-md-8 col-sm-12 col-lg-6  mb-2 ">
             <Post />
 
             {currentUserPosts ? (
@@ -86,7 +90,7 @@ const Home = () => {
               <h1 className="text-white text-center mt-5">No Posts Yet!</h1>
             ) : null}
           </div>
-          <div className="d-none d-md-block col-3  ">
+          <div className="d-none d-md-block col-3  col-md-4 col-lg-3 ">
             <RecommendedChallengers />
             <div className="top">
               <RecommendedTopChallenges
