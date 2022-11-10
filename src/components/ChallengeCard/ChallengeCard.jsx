@@ -94,7 +94,7 @@ function ChallengeCard({ post }) {
       transition={{ duration: 0.5 }}
     >
       {!isLoading && (
-        <div className="p-3 card   mx-auto my-3 w-100 bg-body border-primary">
+        <div className="p-3    mx-auto  w-100 bg-body  border-light border">
           <h5 className="text-primary fw-bold">{post.title}</h5>
 
           <div className="chall-owner d-flex justify-content-between mb-3 flex-wrap align-items-center   ">

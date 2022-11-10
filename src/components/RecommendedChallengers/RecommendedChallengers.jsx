@@ -46,13 +46,13 @@ const RecommendedChallengers = () => {
 
   return (
     <motion.div
-      className="  py-3 pb-2 mb-5  bg-body border-primary card text-center"
+      className="  py-3 pb-2 mb-5  bg-body border-light card text-center"
       initial={{ x: 100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <div className="mb-2 text-white ">
-        <h5 className="text-center mb-3 border-primary border-bottom pb-2 mx-2">
+        <h5 className="text-center mb-3 border-light border-bottom pb-2 mx-2">
           Recommended Challengers
         </h5>
         {mayKnowUsers.slice(0, 4).map((usr, index) => {
