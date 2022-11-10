@@ -76,7 +76,7 @@ function App() {
             }
           />
           <Route path="/category" element={<Category />} />
-          <Route path="/TopChallengers" element={<TopChallengers />} />
+          <Route path="/top-challengers" element={<TopChallengers />} />
           <Route path="/about" element={<About />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
