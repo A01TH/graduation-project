@@ -3,6 +3,7 @@ import Table from "react-bootstrap/Table";
 import "./top-challenger.scss";
 import { FirebaseContext } from "./../../context/FirebaseContext";
 import ContentLoader from "react-content-loader";
+import { Link } from "react-router-dom";
 
 function TopChallengers({ home = false }) {
   const { users } = useContext(FirebaseContext);
@@ -11,9 +12,7 @@ function TopChallengers({ home = false }) {
   return (
     <div
       className={
-        !home
-          ? "container page-height bg-body top-challenge"
-          : "bg-body top-challenge"
+        !home ? "container page-height bg-body top-challenge" : "bg-body "
       }
     >
       {!home && (
@@ -56,39 +55,81 @@ function TopChallengers({ home = false }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {users
-                    .sort(
-                      (a, b) =>
-                        b.finishedChallenges.length -
-                        a.finishedChallenges.length
-                    )
-                    .map((usr) => {
-                      return (
-                        <tr key={usr.uid} className="text-center fw-bold p-2">
-                          {!home && <td className="align-middle">{++rank}</td>}
-                          <td className="text-start align-middle w-25">
-                            <div className="d-flex flex-column flex-md-row align-items-md-center">
-                              <div className="me-md-2 img-wrapper w-25">
-                                <img
-                                  src={usr.photoUrl}
-                                  alt={usr.name}
-                                  className="rounded-circle w-100"
-                                />
-                              </div>
-                              <div>{usr.name}</div>
-                            </div>
-                          </td>
-                          {!home && (
-                            <td className="text-dark align-middle">
-                              {usr.badges}
-                            </td>
-                          )}
-                          <td className="text-warning align-middle">
-                            {usr.finishedChallenges.length}
-                          </td>
-                        </tr>
-                      );
-                    })}
+                  {!home
+                    ? users
+                        .sort(
+                          (a, b) =>
+                            b.finishedChallenges.length -
+                            a.finishedChallenges.length
+                        )
+                        .map((usr) => {
+                          return (
+                            <tr
+                              key={usr.uid}
+                              className="text-center fw-bold p-2"
+                            >
+                              {<td className="align-middle">{++rank}</td>}
+                              <td className="text-start align-middle w-25">
+                                <div className="d-flex flex-column flex-md-row align-items-md-center">
+                                  <div className="me-md-2 img-wrapper w-25">
+                                    <img
+                                      src={usr.photoUrl}
+                                      alt={usr.name}
+                                      className="rounded-circle w-100"
+                                    />
+                                  </div>
+                                  <div>{usr.name}</div>
+                                </div>
+                              </td>
+                              {
+                                <td className="text-dark align-middle">
+                                  {usr.badges}
+                                </td>
+                              }
+                              <td className="text-warning align-middle">
+                                {usr.finishedChallenges.length}
+                              </td>
+                            </tr>
+                          );
+                        })
+                    : users
+                        .slice(0, 3)
+                        .sort(
+                          (a, b) =>
+                            b.finishedChallenges.length -
+                            a.finishedChallenges.length
+                        )
+                        .map((usr) => {
+                          return (
+                            <tr
+                              key={usr.uid}
+                              className="text-center fw-bold p-2"
+                            >
+                              <td className="text-start align-middle ">
+                                <Link
+                                  to={`/${usr.username}`}
+                                  className="text-decoration-none text-white"
+                                >
+                                  <div className="d-flex   align-items-md-center">
+                                    <div className="me-md-1 img-wrapper w-25">
+                                      <img
+                                        src={usr.photoUrl}
+                                        alt={usr.name}
+                                        className="rounded-circle w-100"
+                                      />
+                                    </div>
+
+                                    <div className="fs-6">{usr.name}</div>
+                                  </div>
+                                </Link>
+                              </td>
+
+                              <td className="text-warning align-middle">
+                                {usr.finishedChallenges.length}
+                              </td>
+                            </tr>
+                          );
+                        })}
                 </tbody>{" "}
               </>
             ) : (

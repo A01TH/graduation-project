@@ -12,6 +12,7 @@ import Post from "./../../components/AddPost/Post";
 import RecommendedChallengers from "./../../components/RecommendedChallengers/RecommendedChallengers";
 import RecommendedTopChallenges from "./../../components/RecommendedTopChallenges/RecommendedTopChallenges";
 import TopChallengers from "./../TopChallengers/TopChallengers";
+import { Link } from "react-router-dom";
 
 const ChallengeCard = React.lazy(() =>
   import("../../components/ChallengeCard/ChallengeCard")
@@ -101,11 +102,18 @@ const Home = () => {
                 isLoading={isLoading}
               />
             </div>
-            <div className="rounded-2 overflow-hidden bg-light ps-2">
+            <div className="rounded-2 overflow-hidden bg-light px-2">
               <h5 className="text-center mb-1 border-bottom border-light  p-3 mx-3">
                 Top Challengers
               </h5>
-              <TopChallengers home={true} className="w-100" />
+              <TopChallengers home={true} className="w-100 mb-3" />
+              <Link
+                to="/top-challengers"
+                className="text-decoration-none text-primary "
+              >
+                {" "}
+                <p className="text-center"> Explore all top challengers</p>
+              </Link>
             </div>
           </div>
         </div>
