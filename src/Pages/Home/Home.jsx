@@ -65,7 +65,7 @@ const Home = () => {
               <h1 className="text-white text-center mt-5">No Posts Yet!</h1>
             ) : null}
           </div>
-          <div className="d-none d-md-block col-3  ">
+          <div className="d-none d-md-block col-3  col-md-4 col-lg-3 ">
             <RecommendedChallengers />
             <div className="mb-5">
               <RecommendedTopChallenges
