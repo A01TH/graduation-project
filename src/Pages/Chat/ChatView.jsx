@@ -11,7 +11,7 @@ const ChatView = () => {
   const { secondUser } = useContext(SecondUserContext);
   return (
     <>
-      <div className="wrapper chat bg-dark d-flex vw-100 align-items-center justify-content-center text-white">
+      <div className="wrapper chat bg-body d-flex vw-100 align-items-center justify-content-center text-white">
         <div className="row container-chat vw-100 h-100 g-0">
           <div className="conversation-area col-4 col-md-4 col-lg-3">
             <FriendList />
