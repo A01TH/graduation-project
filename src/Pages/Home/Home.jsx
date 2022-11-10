@@ -101,7 +101,10 @@ const Home = () => {
                 isLoading={isLoading}
               />
             </div>
-            <div className="rounded-2 overflow-hidden">
+            <div className="rounded-2 overflow-hidden bg-light ps-2">
+              <h5 className="text-center mb-1 border-bottom border-light  p-3 mx-3">
+                Top Challengers
+              </h5>
               <TopChallengers home={true} className="w-100" />
             </div>
           </div>
