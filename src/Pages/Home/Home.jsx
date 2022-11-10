@@ -11,9 +11,13 @@ import Toast from "../../UI/Toast/Toast";
 import Post from "./../../components/AddPost/Post";
 import RecommendedChallengers from "./../../components/RecommendedChallengers/RecommendedChallengers";
 import RecommendedTopChallenges from "./../../components/RecommendedTopChallenges/RecommendedTopChallenges";
+import TopChallengers from "./../TopChallengers/TopChallengers";
+import { Link } from "react-router-dom";
+
 const ChallengeCard = React.lazy(() =>
   import("../../components/ChallengeCard/ChallengeCard")
 );
+
 const Home = () => {
   const { challengeCollection } = useContext(FirebaseContext);
   const [challenges, isLoading] = useCollectionData(challengeCollection);
@@ -54,7 +58,18 @@ const Home = () => {
               <Toast />
             </div>
           ) : (
-            <h1>Loading</h1>
+            <div className="col-md-2 ">
+              <ContentLoader viewBox="0 0 260 160" height={160} width={260}>
+                <circle cx="50" cy="30" r="30" />
+                <rect x="10" y="70" rx="3" ry="3" width="40" height="10" />
+                <rect x="60" y="70" rx="3" ry="3" width="70" height="10" />
+                <rect x="140" y="70" rx="3" ry="3" width="20" height="10" />
+                <rect x="10" y="90" rx="3" ry="3" width="90" height="10" />
+                <rect x="110" y="90" rx="3" ry="3" width="70" height="10" />
+                <rect x="10" y="110" rx="3" ry="3" width="70" height="10" />
+                <rect x="90" y="110" rx="3" ry="3" width="60" height="10" />
+              </ContentLoader>
+            </div>
           )}
 
           <div className="col-md-8 col-sm-12 col-lg-6  mb-2 ">
@@ -92,11 +107,24 @@ const Home = () => {
           </div>
           <div className="d-none d-md-block col-3  col-md-4 col-lg-3 ">
             <RecommendedChallengers />
-            <div className="top">
+            <div className="mb-5">
               <RecommendedTopChallenges
                 challenges={challenges}
                 isLoading={isLoading}
               />
+            </div>
+            <div className="rounded-2 overflow-hidden bg-light px-2">
+              <h5 className="text-center mb-1 border-bottom border-light  p-3 mx-3">
+                Top Challengers
+              </h5>
+              <TopChallengers home={true} className="w-100 mb-3" />
+              <Link
+                to="/top-challengers"
+                className="text-decoration-none text-primary "
+              >
+                {" "}
+                <p className="text-center"> Explore all top challengers</p>
+              </Link>
             </div>
           </div>
         </div>

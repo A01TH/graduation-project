@@ -16,7 +16,7 @@ const RecommendedTopChallenges = ({}) => {
     setTopChallenge(challenges);
   }, [challenges]);
   return (
-    <div className=" card  py-3 pb-2 text-white bg-body  text-center">
+    <div className=" card  py-3 pb-2 text-white bg-light text-center">
       <h5 className="text-center mb-1 border-bottom border-light  pb-2 mx-3">
         Top Challenges
       </h5>
