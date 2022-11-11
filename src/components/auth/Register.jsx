@@ -12,11 +12,15 @@ import { FirebaseContext } from "../../context/FirebaseContext";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
+import Login from "./Login";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Register = () => {
   const navigate = useNavigate();
   const { auth, firebase } = useContext(FirebaseContext);
   const { setUserInfo } = useContext(currentContext);
+  const [openLogin, setOpenLogin] = useState(false);
 
   const {
     register,
@@ -99,15 +103,23 @@ const Register = () => {
     },
   ];
 
+  if (openLogin) {
+    return <Login />;
+  }
+
   return (
-    <div className="px-3">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="px-3"
+    >
       <Button
         onClick={handleLoginWithGoogle}
         variant="warning"
         type="submit"
-        className="d-block mx-auto w-50 "
+        className="d-block mx-auto w-100 mb-3 "
       >
-        <FaGoogle className="me-3" /> Signup with Google
+        <FaGoogle className="me-2" /> Sign up with Google
       </Button>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="formBasicText">
@@ -223,7 +235,7 @@ const Register = () => {
             )}
           </Form.Group>
         </div>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-4" controlId="formBasicPassword">
           <Form.Label>Interests </Form.Label>
 
           <Controller
@@ -235,11 +247,20 @@ const Register = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit" className="w-100">
-          Signup
+        <Button variant="primary" type="submit" className="w-100 mb-3">
+          Sign up
         </Button>
+        <div className="d-flex gap-5 justify-content-center">
+          <p className="d-d-inline">Already a user?</p>
+          <a
+            className="btn btn-link text-decoration-none text-primary cursor-pointer p-0"
+            onClick={() => setOpenLogin(true)}
+          >
+            Login
+          </a>
+        </div>
       </Form>
-    </div>
+    </motion.div>
   );
 };
 

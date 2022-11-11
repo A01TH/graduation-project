@@ -31,6 +31,7 @@ const CurrentUserProvider = ({ children }) => {
         sentRequests: [],
         receivedRequests: [],
         finishedChallenges: [],
+        userBadge: "",
       });
     }
     setUserInfo([]);

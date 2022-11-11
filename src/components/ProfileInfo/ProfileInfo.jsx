@@ -41,7 +41,7 @@ const ProfileInfo = ({ user, self }) => {
   return (
     <div className="profile-info">
       <div className="row">
-        <div className="col-lg-3">
+        <div className="col-lg-3 d-flex justify-content-center">
           <div
             className="profile-img border rounded-circle border-4 border-primary"
             style={{ width: "200px", height: "200px" }}
@@ -103,7 +103,16 @@ const ProfileInfo = ({ user, self }) => {
           <div className="info-content py-3">
             <div className="user d-flex justify-content-between align-items-start">
               <div className="user">
-                <h2 className="name">{user.name}</h2>
+                <h2 className="name">
+                  <span className="me-2"> {user.name}</span>
+                  {user.userBadge && (
+                    <img
+                      className="custom-badge"
+                      src={user.userBadge}
+                      alt="rank"
+                    />
+                  )}
+                </h2>
                 <div className="username text-muted mb-2">@{user.username}</div>
                 {user.friends.includes(currentUser[0].uid) && (
                   <span className="badge bg-primary">Friend</span>
