@@ -95,12 +95,9 @@ const RecommendedChallengers = () => {
               <Link
                 className=" text-decoration-none text-white"
                 to={`/${user.username}`}
+                key={index}
               >
-                <ChallengerShortcut
-                  name={user.name}
-                  photoURL={user.photoUrl}
-                  key={index}
-                />
+                <ChallengerShortcut name={user.name} photoURL={user.photoUrl} />
               </Link>
             );
           })}

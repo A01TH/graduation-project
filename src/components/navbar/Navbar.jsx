@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo/Logo2.png";
-import { BsCoin, BsFillChatLeftTextFill } from "react-icons/bs";
-import { FaHome, FaRegSun, FaUserAlt } from "react-icons/fa";
+import { BsFillChatLeftTextFill } from "react-icons/bs";
+import { FaHome, FaUserAlt } from "react-icons/fa";
 import { BiCategoryAlt, BiLogOut } from "react-icons/bi";
 import { currentContext } from "../../context/CurrentUser";
 import "./Navbar.scss";
@@ -104,7 +104,7 @@ const Header = () => {
 
                     <Dropdown.Menu
                       align="end"
-                      className="dropdown-notification"
+                      className="dropdown-notification bg-body border border-primary"
                     >
                       {requestedUsers.length > 0 ? (
                         <>
@@ -142,36 +142,24 @@ const Header = () => {
                         alt="user"
                       />
                     </Dropdown.Toggle>
-
-                    <Dropdown.Menu className="bg-body">
-                      <Dropdown.Item className="d-flex align-items-center justify-content-around">
-                        <Link role="link" to="/profile">
-                          <span>Profile</span>
-                        </Link>
-                        <FaUserAlt />
-                      </Dropdown.Item>
+                    <Dropdown.Menu className="bg-body border border-primary">
                       <Dropdown.Item
-                        href="#/action-2"
+                        as={Link}
+                        to="/profile"
                         className="d-flex align-items-center justify-content-around"
                       >
-                        <span>Settings</span>
-                        <FaRegSun />
+                        <span>
+                          Profile <FaUserAlt />
+                        </span>
                       </Dropdown.Item>
-
-                      {/* <Dropdown.Item
-                        href="#/action-3"
-                        className="d-flex align-items-center justify-content-around"
-                      >
-                        <span>{currentUser[0]?.points}</span>
-                        <BsCoin />
-                      </Dropdown.Item> */}
 
                       <Dropdown.Item
                         onClick={handleSignOut}
                         className="d-flex align-items-center justify-content-around"
                       >
-                        <span>Logout</span>
-                        <BiLogOut />
+                        <span>
+                          Logout <BiLogOut />
+                        </span>
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
