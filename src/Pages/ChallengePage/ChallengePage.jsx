@@ -8,7 +8,7 @@ const ChallengePage = () => {
   return (
     <div className="challenge-page bg-body">
       <div className="container">
-        <div className="row justify-content-center">
+        <div className="row justify-content-center py-5">
           <div className="col-lg-8 col-12">
             <ChallengeTimeline />
           </div>

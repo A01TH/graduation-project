@@ -183,9 +183,7 @@ const Header = () => {
                   <NavLink to="/about">Why Challe.go</NavLink>
                 </li>
                 <li>
-                  <Button variant="outline-primary" className="text-light">
-                    Get Started
-                  </Button>
+                  <Button variant="outline-primary">Get Started</Button>
                 </li>
               </ul>
             )}
