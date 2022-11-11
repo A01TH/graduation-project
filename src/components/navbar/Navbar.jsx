@@ -12,14 +12,20 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import Notification from "../notification/Notification";
+import { OpenAuthContext } from "../../context/OpenAuthContext";
 
 const Header = () => {
+  const { authOpened, setAuthOpened } = useContext(OpenAuthContext);
   const { userData, currentUser, userLoading } = useContext(currentContext);
   const { auth, users } = useContext(FirebaseContext);
   const [requestedUsers, setRequestedUsers] = useState([]);
   const navigate = useNavigate();
   const [logged, setLogged] = useState(false);
   const [opened, Setopened] = useState(false);
+  const openAuth = () => {
+    navigate("/");
+    setAuthOpened(true);
+  };
   useEffect(() => {
     if (userData) {
       setLogged(true);
@@ -166,12 +172,18 @@ const Header = () => {
                 </li>
               </ul>
             ) : (
-              <ul className="nav-list list-unstyled  d-flex gap-4  align-items-center justify-content-center">
+              <ul
+                className={`nav-list list-unstyled  d-flex  d-flex gap-4 align-items-center justify-content-center ${
+                  mobNav && "show"
+                }`}
+              >
                 <li className="link">
                   <NavLink to="/about">Why Challe.go</NavLink>
                 </li>
                 <li>
-                  <Button variant="outline-primary">Get Started</Button>
+                  <Button onClick={openAuth} variant="outline-primary">
+                    Get Started
+                  </Button>
                 </li>
               </ul>
             )}

@@ -12,8 +12,14 @@ import Category from "./Pages/Category/Category";
 import TopChallengers from "./Pages/TopChallengers/TopChallengers";
 import ChatView from "./Pages/Chat/ChatView";
 import ChallengePage from "./Pages/ChallengePage/ChallengePage";
+import { useState } from "react";
 
 function App() {
+  const [openGetStarted, setOpenGetStarted] = useState(false);
+  const handleClick = (open) => {
+    setOpenGetStarted(open);
+    console.log("hi");
+  };
   return (
     <div className="App ">
       <BrowserRouter>
@@ -79,7 +85,7 @@ function App() {
             path="/category"
             element={
               <RequireAuth>
-                <Category />{" "}
+                <Category />
               </RequireAuth>
             }
           />

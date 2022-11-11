@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import "./Hero.scss";
 import { motion } from "framer-motion";
 import Login from "../auth/Login";
+import { useContext } from "react";
+import { OpenAuthContext } from "../../context/OpenAuthContext";
+import { useEffect } from "react";
 
-const Hero = (props) => {
-  const [authOpened, setAuthOpened] = useState(false);
+const Hero = () => {
+  const { authOpened, setAuthOpened } = useContext(OpenAuthContext);
   const openAuth = () => {
     setAuthOpened(true);
   };
-  const closeAuth = () => {
+
+  useEffect(() => {
     setAuthOpened(false);
-  };
+  }, []);
 
   return (
     <div className="hero">

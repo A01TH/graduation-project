@@ -7,17 +7,20 @@ import reportWebVitals from "./reportWebVitals";
 import FirebaseProvider from "./context/FirebaseContext";
 import CurrentUserProvider from "./context/CurrentUser";
 import SecondUserProvider from "./context/SecondUserContext";
+import OpenAuthProvider from "./context/OpenAuthContext";
 // import Navbar from "./components/navbar/Navbar";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  <FirebaseProvider>
-    <CurrentUserProvider>
-      <SecondUserProvider>
-        <App />
-      </SecondUserProvider>
-    </CurrentUserProvider>
-  </FirebaseProvider>
+  <OpenAuthProvider>
+    <FirebaseProvider>
+      <CurrentUserProvider>
+        <SecondUserProvider>
+          <App />
+        </SecondUserProvider>
+      </CurrentUserProvider>
+    </FirebaseProvider>
+  </OpenAuthProvider>
   // </React.StrictMode>
 );
 
