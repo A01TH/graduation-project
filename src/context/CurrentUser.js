@@ -3,9 +3,9 @@ import { FirebaseContext } from "./FirebaseContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { toast } from "react-toastify";
-
+import male from "../assets/profile/male.svg";
+import female from "../assets/profile/female.svg";
 export const currentContext = createContext();
-
 const CurrentUserProvider = ({ children }) => {
   const { auth, userCollection, users } = useContext(FirebaseContext);
   const [userData] = useAuthState(auth);
@@ -20,7 +20,11 @@ const CurrentUserProvider = ({ children }) => {
         uid: userData.uid,
         name: userData.displayName || userInfo.name,
         email: userData.email,
-        photoUrl: userData.photoURL,
+        photoUrl: userData.emailVerified
+          ? userData.photoURL
+          : userData.emailVerified === false && userInfo.gender.value == 1
+          ? male
+          : female,
         username: (userData.email || userInfo.email).split("@")[0],
         interests: userData.emailVerified
           ? []
