@@ -53,7 +53,7 @@ const Home = () => {
                   ?.sort((a, b) => b.startDate.toDate() - a.startDate.toDate())
                   .map((post, index) => {
                     return (
-                      <Suspense fallback={<h1>Loadin....</h1>} key={post.cid}>
+                      <Suspense fallback={<h1>Loading....</h1>} key={post.cid}>
                         <ChallengeCard
                           post={post}
                           currentUser={currentUser[0]}
@@ -94,7 +94,6 @@ const Home = () => {
                 to="/top-challengers"
                 className="text-decoration-none text-primary "
               >
-                {" "}
                 <p className="text-center"> Explore all top challengers</p>
               </Link>
             </div>

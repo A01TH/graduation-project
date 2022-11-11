@@ -5,9 +5,6 @@ import Select from "react-select";
 import { FaGoogle } from "react-icons/fa";
 import { useContext } from "react";
 import "./auth.scss";
-import male from "../../assets/profile/male.svg";
-import female from "../../assets/profile/female.svg";
-
 import { FirebaseContext } from "../../context/FirebaseContext";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +35,6 @@ const Register = () => {
       .then(() =>
         updateProfile(auth.currentUser, {
           displayName: data.name,
-          photoURL: data.gender.value === 1 ? male : female,
           email: data.email,
         })
       );
