@@ -1,19 +1,18 @@
 import React, { useContext } from "react";
-import {
-  TbBrandFacebook,
-  TbBrandGoogle,
-  TbBrandInstagram,
-  TbBrandTiktok,
-} from "react-icons/tb";
 import "./auth.scss";
 import { useForm } from "react-hook-form";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Register from "./Register";
+import { FaGoogle } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const navigate = useNavigate();
   const { auth, firebase } = useContext(FirebaseContext);
+  const [openRegister, setOpenRegister] = useState(false);
 
   const handleLoginWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -39,34 +38,30 @@ const Login = () => {
       });
   };
 
+  if (openRegister) {
+    return <Register />;
+  }
+
   return (
-    <div className="login auth">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="login auth"
+    >
       <div className="wrapper px-3">
         <div className="text-center login-methods d-flex gap-4 justify-content-center mb-3">
-          <a className="text-decoration-none fs-1 font-c-sec" href="#">
-            <TbBrandFacebook className=" " />
-          </a>
-          <a
-            className="text-decoration-none fs-1 font-c-sec"
+          <button
+            className="btn btn-warning w-100"
             onClick={handleLoginWithGoogle}
           >
-            <TbBrandGoogle className=" " />
-          </a>
-          <a className="text-decoration-none fs-1 font-c-sec" href="#">
-            <TbBrandTiktok className=" " />
-          </a>
-          <a className="text-decoration-none fs-1 font-c-sec" href="#">
-            <TbBrandInstagram className=" " />
-          </a>
+            <FaGoogle className="me-2" /> Login with Google
+          </button>
         </div>
-        <div className="d-flex justify-content-center mb-4">
-          <h3 className=" text-secondary side-lines">or</h3>
-        </div>
-        <div className="login-form text-secondary mb-4 px-1">
+        <div className="login-form mb-4 px-1">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <label className="form-label">Email address</label>
+            <label className="form-label">Email</label>
             <input
-              className="form-control text-secondary mb-1"
+              className="form-control mb-3"
               type="text"
               {...register("email", {
                 required: true,
@@ -95,21 +90,18 @@ const Login = () => {
           </form>
         </div>
         <div className="options ">
-          <a
-            className=" text-decoration-none font-c-sec text-center d-block mb-1"
-            href="#"
-          >
-            Forget Password?
-          </a>
           <div className="d-flex gap-5 justify-content-center">
             <p className="d-d-inline">Don't have an account?</p>
-            <a className=" text-decoration-none font-c-sec" href="#">
+            <a
+              className="btn btn-link text-decoration-none text-primary cursor-pointer p-0"
+              onClick={() => setOpenRegister(true)}
+            >
               SignUp
             </a>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
