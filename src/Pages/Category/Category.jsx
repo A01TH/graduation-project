@@ -11,7 +11,6 @@ function Category() {
   const [challenges] = useCollectionData(challengeCollection);
 
   const [title, setTitle] = useState("Choose a category to display");
-  console.log(challenges);
   const [renderArr, setRenderArr] = useState([]);
 
   const handleClick = (e) => {
