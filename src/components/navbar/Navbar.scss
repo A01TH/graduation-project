@@ -2,15 +2,12 @@ $breakpoint: 799px;
 $nav-height: 80px;
 $nav-background: rgba(246, 246, 246, 0);
 $nav-font-color: #ffffff;
-$link-hover-color: #36175e;
 
 .nav {
   z-index: 1;
   height: $nav-height;
   background: $nav-background;
   padding-top: 10px;
-  // backdrop-filter: blur(3px);
-  position: fixed;
   left: 0;
   right: 0;
   a {
@@ -33,7 +30,7 @@ $link-hover-color: #36175e;
     content: "";
     width: 0%;
     height: 4px;
-    background-color: #a61e3e;
+    background-color: #1a8cd8;
     left: 50%;
     transform: translateX(-50%);
     bottom: -10px;
@@ -71,10 +68,12 @@ $link-hover-color: #36175e;
       flex-direction: column;
       background: $nav-background;
       backdrop-filter: blur(10px);
+      z-index: 999;
     }
   }
   #nav-toggle {
     display: block !important;
+    z-index: 1000;
   }
 }
 
@@ -123,6 +122,7 @@ $link-hover-color: #36175e;
 @media screen and (min-width: $breakpoint) {
   .nav-list {
     display: block !important;
+    z-index: 999;
   }
 }
 
@@ -132,4 +132,62 @@ $link-hover-color: #36175e;
 
 .custom-downdown {
   background-color: red;
+}
+
+.notification {
+  position: relative;
+}
+.notification {
+  font-size: 25px;
+}
+
+$c: #ce2b37;
+$s: 10px;
+.bill-wrapper {
+  right: 15px;
+  top: 5px;
+}
+div.bill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $s;
+  height: $s;
+  background-color: $c;
+  border-radius: 50%;
+  position: relative;
+
+  &:before {
+    content: "";
+    width: inherit;
+    height: inherit;
+    border: $s/2 solid $c;
+    border-radius: inherit;
+    position: absolute;
+    z-index: -10;
+    opacity: 0;
+    animation: 2s expand cubic-bezier(0.29, 0, 0, 1) infinite;
+    animation-delay: 1s;
+  }
+}
+
+@keyframes expand {
+  /* Starting at 1 to prevent IOS flicker */
+  1% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 750%;
+    height: 750%;
+    opacity: 0;
+    border-color: #fff;
+    background-color: none;
+    border-width: 2px;
+  }
+}
+
+.dropdown-notification {
+  width: 350px !important;
 }

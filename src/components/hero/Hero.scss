@@ -1,36 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Tomorrow:wght@400;500;600&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Tomorrow:wght@400;500;600&display=swap");
 
 .hero {
-  padding-top: 4rem;
-  text-align: start;
   color: #eee;
   height: calc(100vh - 80px);
-  font-family: 'Tomorrow', sans-serif;
   h1 {
-    width: 60%;
-    font-size: 3rem;
-    padding-top: 4rem;
     margin-bottom: 2rem;
     line-height: 1.5;
     font-weight: 500;
+    z-index: 100;
 
     @media (max-width: 700px) {
       width: 100%;
       font-size: 2rem;
-    }
-  }
-  button {
-    background: #36175e;
-    color: #eee;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 5px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    &:hover {
-      background: #e45a84;
     }
   }
 }

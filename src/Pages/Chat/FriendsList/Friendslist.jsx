@@ -7,16 +7,13 @@ import FriendInbox from "./FriendInbox";
 const FriendList = () => {
   const { userCollection } = useContext(FirebaseContext);
   const [users] = useCollectionData(userCollection);
-  const { userData } = useContext(currentContext);
+  const { friends } = useContext(currentContext);
 
- 
   return (
     <div className="conversation-area  chat-sidebar pt-1">
-      {users
-        ?.filter((user) => user.uid !== userData.uid)
-        .map((user) => {
-          return <FriendInbox active key={user.uid} user={user} />;
-        })}
+      {friends?.map((user) => {
+        return <FriendInbox active key={user.uid} user={user} />;
+      })}
     </div>
   );
 };

@@ -1,23 +1,22 @@
 import React from "react";
-import { FaUserPlus } from "react-icons/fa";
-
-const ChallengerShortcut = () => {
+import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
+import "./ChallengerShortcut.scss";
+const ChallengerShortcut = ({ name, photoURL, username }) => {
   return (
-    <div className="d-flex justify-content-between border-top p-2 align-items-center">
-      <div className="d-flex">
-        <div className="me-2 rounded-5 overflow-hidden">
-          <img src="https://via.placeholder.com/50" className="w-100" />
-        </div>
-        <div>
-          <p className="mb-0">Emy organda</p>
-          <small>@emyorganda</small>
-        </div>
+    <div className="d-flex g-1  justify-content-center  align-items-center p-2">
+      <div className="col-2 ">
+        <img src={photoURL} className="w-100 rounded-circle img-fluid" alt="" />
       </div>
-      <div>
-        <button className="btn">
-          <FaUserPlus className="fs-2" />
-        </button>
+      <div className="col-7">
+        <p className="mb-0">{name}</p>
+        <small>@{name}</small>
       </div>
+      <Link className=" text-decoration-none text-white" to={`/${username}`}>
+        <div className="col-2 profile-icon">
+          <CgProfile />
+        </div>
+      </Link>
     </div>
   );
 };

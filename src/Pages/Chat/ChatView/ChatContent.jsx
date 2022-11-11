@@ -25,11 +25,6 @@ const ChatContent = () => {
     }
   }, [messages]);
 
-  // function scrollToBottom() {
-  //   const lastMessage = document.querySelector(".chat-area-main").lastChild;
-  //   lastMessage.scrollIntoView(false);
-  // }
-
   return (
     <div className="chat-area-main chat-section py-3 px-md-5 px-sm-2">
       {sortedMessages.map((data, index) => {

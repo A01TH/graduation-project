@@ -4,7 +4,6 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import GetStarted from "./Pages/GetStarted/GetStarted";
 import NotFound from "./Pages/NotFound/NotFound";
 import Home from "./Pages/Home/Home";
-import Categories from "./Pages/Categories/Categories";
 import About from "./Pages/About/About";
 import { RequireAuth } from "./components/ProtectedRoutes/RequireAuth";
 import { LoggedUser } from "./components/ProtectedRoutes/LoggedUser";
@@ -12,6 +11,7 @@ import Profile from "./Pages/Profile/Profile";
 import Category from "./Pages/Category/Category";
 import TopChallengers from "./Pages/TopChallengers/TopChallengers";
 import ChatView from "./Pages/Chat/ChatView";
+import ChallengePage from "./Pages/ChallengePage/ChallengePage";
 
 function App() {
   return (
@@ -39,7 +39,7 @@ function App() {
             path="/categories"
             element={
               <RequireAuth>
-                <Categories />
+                <Category />
               </RequireAuth>
             }
           />
@@ -52,6 +52,22 @@ function App() {
             }
           />
           <Route
+            path="/:usernameParams"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/challenge/:cid"
+            element={
+              <RequireAuth>
+                <ChallengePage />
+              </RequireAuth>
+            }
+          />
+          <Route
             path="/messages"
             element={
               <RequireAuth>
@@ -60,7 +76,7 @@ function App() {
             }
           />
           <Route path="/category" element={<Category />} />
-          <Route path="/TopChallengers" element={<TopChallengers />} />
+          <Route path="/top-challengers" element={<TopChallengers />} />
           <Route path="/about" element={<About />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>

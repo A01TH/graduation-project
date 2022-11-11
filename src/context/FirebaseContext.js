@@ -8,12 +8,12 @@ export const FirebaseContext = createContext();
 
 const FirebaseProvider = ({ children }) => {
   firebase.initializeApp({
-    apiKey: "AIzaSyBULXUYrOXpmW4TGJRZjgBwV6DRtFvqEs4",
-    authDomain: "challego-a637e.firebaseapp.com",
-    projectId: "challego-a637e",
-    storageBucket: "challego-a637e.appspot.com",
-    messagingSenderId: "172892753560",
-    appId: "1:172892753560:web:7f83912a1bb9a8627c0aed",
+    apiKey: "AIzaSyBniO851wfnruePpcFWCAsrWmP1qABOoLc",
+    authDomain: "challe-go.firebaseapp.com",
+    projectId: "challe-go",
+    storageBucket: "challe-go.appspot.com",
+    messagingSenderId: "819653236879",
+    appId: "1:819653236879:web:1ad1503cedd013e41478fa",
   });
   const auth = firebase.auth();
   const firestore = firebase.firestore();
@@ -30,6 +30,8 @@ const FirebaseProvider = ({ children }) => {
         userCollection,
         messageCollection,
         challengeCollection,
+        firestore,
+        users,
       }}
     >
       {children}

@@ -7,7 +7,6 @@ const ChatMessage = ({ owner, msgData, photoUrl, date }) => {
     >
       <div className="chat-msg-profile">
         <img className="chat-msg-img rounded-circle" src={photoUrl} alt="" />
-        {/* <div className="chat-msg-date">Message sent</div> */}
       </div>
       <div className="chat-msg-content">
         <div className="chat-msg-text  message p-1 px-2 mt-3">{msgData}</div>

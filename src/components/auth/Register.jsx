@@ -3,20 +3,24 @@ import Form from "react-bootstrap/Form";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import { FaGoogle } from "react-icons/fa";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import "./auth.scss";
+import male from "../../assets/profile/male.svg";
+import female from "../../assets/profile/female.svg";
+
 import { FirebaseContext } from "../../context/FirebaseContext";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { currentContext } from "../../context/CurrentUser";
-import male from "../../assets/profile/user-img-1.svg";
+import Login from "./Login";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Register = () => {
   const navigate = useNavigate();
   const { auth, firebase } = useContext(FirebaseContext);
   const { setUserInfo } = useContext(currentContext);
+  const [openLogin, setOpenLogin] = useState(false);
 
   const {
     register,
@@ -27,23 +31,18 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        // updateProfile(auth.currentUser, {
-        //   displayName: data.name,
-        //   photoURL: male,
-        //   interest: data.interest,
-        // })
-        //   .then(() => {})
-        //   .catch((error) => {});
-        setUserInfo(data);
-        navigate("/home");
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .then(() =>
+        updateProfile(auth.currentUser, {
+          displayName: data.name,
+          photoURL: data.gender.value === 1 ? male : female,
+          email: data.email,
+        })
+      );
+    setUserInfo(data);
   };
   const handleLoginWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -104,15 +103,23 @@ const Register = () => {
     },
   ];
 
+  if (openLogin) {
+    return <Login />;
+  }
+
   return (
-    <div className="px-3">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="px-3"
+    >
       <Button
         onClick={handleLoginWithGoogle}
         variant="warning"
         type="submit"
-        className="d-block mx-auto w-50 "
+        className="d-block mx-auto w-100 mb-3 "
       >
-        <FaGoogle className="me-3" /> Signup with Google
+        <FaGoogle className="me-2" /> Sign up with Google
       </Button>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="formBasicText">
@@ -153,17 +160,6 @@ const Register = () => {
             <Form.Text className="text-danger">Wrong Mail Format</Form.Text>
           )}
         </Form.Group>
-
-        {/* <Form.Group className="mb-3 " controlId="formBasicNumber">
-          <Form.Label>Phone Number</Form.Label>
-          <PhoneInput
-            placeholder="Enter phone number"
-            className="mb-3 phone-input form-control d-flex"
-            {...register("phoneNumber", {
-              required: true,
-            })}
-          />
-        </Form.Group> */}
 
         <div className="d-flex align-items-stretch">
           <Form.Group className="mb-3  me-2 w-50" controlId="formBasicPassword">
@@ -239,11 +235,11 @@ const Register = () => {
             )}
           </Form.Group>
         </div>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-4" controlId="formBasicPassword">
           <Form.Label>Interests </Form.Label>
 
           <Controller
-            name="intersts"
+            name="Interests"
             control={control}
             render={({ field }) => (
               <Select {...field} options={multiOptions} isMulti />
@@ -251,11 +247,20 @@ const Register = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit" className="w-100">
-          Signup
+        <Button variant="primary" type="submit" className="w-100 mb-3">
+          Sign up
         </Button>
+        <div className="d-flex gap-5 justify-content-center">
+          <p className="d-d-inline">Already a user?</p>
+          <a
+            className="btn btn-link text-decoration-none text-primary cursor-pointer p-0"
+            onClick={() => setOpenLogin(true)}
+          >
+            Login
+          </a>
+        </div>
       </Form>
-    </div>
+    </motion.div>
   );
 };
 
