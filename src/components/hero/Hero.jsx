@@ -16,7 +16,7 @@ const Hero = (props) => {
     <div className="hero">
       <div className="container mx-auto row h-100 align-items-center g-0">
         <div
-          className="col-7 align-self-center bg-body py-5"
+          className="col-12 px-sm-3 col-md-7 px-3 align-self-center bg-body py-5"
           style={{ zIndex: 100 }}
         >
           <h1>
@@ -49,7 +49,7 @@ const Hero = (props) => {
         </div>
         {authOpened ? (
           <motion.div
-            className="col-5 align-self-center"
+            className="col-12 col-md-5 align-self-center"
             initial={{ opacity: 0, x: -300, z: 0 }}
             animate={{ opacity: 1, x: 0, z: 1 }}
             transition={{ delay: 0.1, type: "spring", stiffness: 50 }}
@@ -57,7 +57,7 @@ const Hero = (props) => {
             <Login />
           </motion.div>
         ) : (
-          <div className="col-5">
+          <div className="col-12 col-md-5">
             <div className="hero-img"></div>
           </div>
         )}
