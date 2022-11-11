@@ -205,14 +205,14 @@ const ChallengeTimeline = () => {
   }
 
   return (
-    <div className="card bg-body border border-primary p-3">
+    <div className="card bg-body border border-primary p-3 overflow-hidden">
       <div className="card-header border-primary">
         <h5>{challenge[0].title}</h5>
         <p>{challenge[0].desc}</p>
       </div>
       <div className="card-body">
         <div className="card bg-body border-primary mb-3 px-3">
-          <legend>Participants</legend>
+          <legend>Challengers</legend>
           <div className="row p-2 g-2">
             {participantsList.map((participant) => (
               <OverlayTrigger
