@@ -234,6 +234,7 @@ function ChallengeCard({ post }) {
                           <Link
                             className=" text-decoration-none text-white"
                             to={`/${user.username}`}
+                            key={index}
                           >
                             <ChallengerShortcut
                               name={user.name}
