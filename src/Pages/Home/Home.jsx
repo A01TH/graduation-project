@@ -34,7 +34,7 @@ const Home = () => {
   if (userLoading) {
     return (
       <div className="mt-5 bg-body home h-100">
-        <div className="container  vh-100 d-flex align-items-start justify-content-between">
+        <div className="container vh-100 d-flex align-items-start justify-content-between">
           <Spinner name="pacman" color="blue" />
         </div>
       </div>
