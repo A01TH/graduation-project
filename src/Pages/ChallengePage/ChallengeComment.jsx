@@ -22,7 +22,7 @@ const ChallengeComment = ({ comment, challenger }) => {
   return (
     <>
       <div className="row">
-        <div className="col-1">
+        <div className="col-md-1 col-2">
           <Link to={`/${challenger.username}`}>
             <img
               src={challenger.photoUrl}
@@ -31,7 +31,7 @@ const ChallengeComment = ({ comment, challenger }) => {
             />
           </Link>
         </div>
-        <div className="col-10">
+        <div className="col-md-11  col-10">
           <div
             className={`${
               comment.progress == 100 ? "fw-bold text-success" : ""

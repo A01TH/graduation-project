@@ -98,7 +98,7 @@ function App() {
             }
           />
           <Route path="/about" element={<About />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" exact={true} element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
