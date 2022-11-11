@@ -42,8 +42,8 @@ function Category() {
         >
           <h1 className="text-center  bg mb-5">{title}</h1>
           <div className="row categroy mb-5 ">
-            <ButtonGroup aria-label="Basic example row d-flex flex-wrap">
-              <div className="col-6 bg-primary rounded-2 text-center  mx-2">
+            <div aria-label="button-group Basic example row  col-12 ">
+              <div className="col-5 my-1 mx-0 col-md-3 bg-primary rounded-2 text-center  mx-2">
                 <button
                   className="rounded-1  btn w-100 py-3 "
                   name="all"
@@ -56,7 +56,7 @@ function Category() {
                   All
                 </button>
               </div>
-              <div className="col-6 bg-primary rounded-2 text-center  mx-2">
+              <div className="col-6 col-md-3 bg-primary rounded-2 text-center  mx-2">
                 <Button
                   name="frontend"
                   className="rounded-1  btn w-100 py-3 "
@@ -68,11 +68,10 @@ function Category() {
                   Frontend
                 </Button>
               </div>
-              <div className="col-6 bg-primary rounded-2 text-center  mx-2">
+              <div className="col-6 col-md-3 bg-primary rounded-2 text-center  mx-2">
                 <Button
                   name="backend"
-                  className="rounded-1 col-3"
-                  variant="secondary   me-2 bg-color "
+                  className="rounded-1  btn w-100 py-3 "
                   onClick={(e) => {
                     handleClick(e);
                     setTitle("Backend");
@@ -81,11 +80,10 @@ function Category() {
                   Backend
                 </Button>
               </div>
-              <div className="col-6 bg-primary rounded-2 text-center  mx-2">
+              <div className="col-6 col-md-3 bg-primary rounded-2 text-center  mx-2">
                 <Button
                   name="ui/ux"
-                  className="rounded-1 col-3"
-                  variant="secondary bg-color"
+                  className="rounded-1  btn w-100 py-3 "
                   onClick={(e) => {
                     handleClick(e);
                     setTitle("UI/UX");
@@ -94,7 +92,7 @@ function Category() {
                   UI/UX
                 </Button>
               </div>
-            </ButtonGroup>
+            </div>
           </div>
         </div>
         <div>
