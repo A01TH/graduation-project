@@ -77,7 +77,6 @@ const UserAction = ({ user }) => {
   useEffect(() => {
     if (currentUser) {
       if (currentUser[0].friends.includes(user.uid)) {
-        console.log("found");
         setIsFriend(true);
       }
       if (currentUser[0].sentRequests.includes(user.uid)) {

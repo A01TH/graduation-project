@@ -17,10 +17,12 @@ const ChallengeCard = React.lazy(() =>
   import("../../components/ChallengeCard/ChallengeCard")
 );
 
+var Spinner = require("react-spinkit");
+
 const Home = () => {
   const { challengeCollection } = useContext(FirebaseContext);
   const [challenges, isLoading] = useCollectionData(challengeCollection);
-  const { currentUser } = useContext(currentContext);
+  const { currentUser, userLoading } = useContext(currentContext);
   const [currentUserPosts, setcurrentUserPosts] = useState(challenges);
 
   useEffect(() => {
@@ -28,6 +30,16 @@ const Home = () => {
       setcurrentUserPosts(challenges);
     }
   }, [challenges]);
+
+  if (userLoading) {
+    return (
+      <div className="mt-5 bg-body home h-100">
+        <div className="container  vh-100 d-flex align-items-start justify-content-between">
+          <Spinner name="pacman" color="blue" />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="mt-5 bg-body home">
       <div className=" container">

@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 function TopChallengers({ home = false }) {
   const { users } = useContext(FirebaseContext);
-  console.log(users);
   let rank = 0;
   return (
     <div
