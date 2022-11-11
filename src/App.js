@@ -75,10 +75,24 @@ function App() {
               </RequireAuth>
             }
           />
-          <Route path="/category" element={<Category />} />
-          <Route path="/top-challengers" element={<TopChallengers />} />
+          <Route
+            path="/category"
+            element={
+              <RequireAuth>
+                <Category />{" "}
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/top-challengers"
+            element={
+              <RequireAuth>
+                <TopChallengers />
+              </RequireAuth>
+            }
+          />
           <Route path="/about" element={<About />} />
-          <Route path="/*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
