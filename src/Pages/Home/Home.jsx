@@ -42,9 +42,9 @@ const Home = () => {
   }
   return (
     <div className="mt-5 bg-body home">
-      <div className=" container">
-        <div className="row align-items-start justify-content-between">
-          <div className="col-md-6 col-sm-12  mb-2 offset-1 ">
+      <div className="container-md-fluid">
+        <div className="row align-items-start justify-content-center">
+          <div className="col-md-6 col-sm-12  mb-2  ">
             <Post />
 
             {currentUserPosts ? (

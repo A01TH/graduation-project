@@ -18,7 +18,7 @@ const RecommendedTopChallenges = ({}) => {
   return (
     <div className=" card  py-3 pb-2 text-white bg-light text-center">
       <h5 className="text-center mb-1 border-bottom border-light  pb-2 mx-3">
-        Top Challenges
+        Top Challenge
       </h5>
       {isLoading ? (
         <>
@@ -37,7 +37,9 @@ const RecommendedTopChallenges = ({}) => {
             .sort((a, b) => b.postLikes.length - a.postLikes.length)
             .slice(0, 1)
             .map((chall) => (
-              <ChallengeCard post={chall} />
+              <div key={chall.cid}>
+                <ChallengeCard post={chall} />
+              </div>
             ))}
         </>
       )}

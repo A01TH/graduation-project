@@ -31,18 +31,21 @@ function Category() {
           className="wv-100 p-4 rounded-4 mb-2"
           style={
             title === "Frontend"
-              ? { "background-color": "#3a3a3a" }
+              ? { backgroundColor: "#3a3a3a" }
               : title === "Backend"
-              ? { "background-color": "#414040" }
+              ? { backgroundColor: "#414040" }
               : title === "UI/UX"
-              ? { "background-color": "#494848 " }
-              : { "background-color": "#2f2f2f" }
+              ? { backgroundColor: "#494848 " }
+              : { backgroundColor: "#2f2f2f" }
           }
         >
           <h1 className="text-center  bg mb-5">{title}</h1>
           <div className="row categroy mb-5 ">
-            <div aria-label="button-group Basic example row  col-12 ">
-              <div className="col-5 my-1 mx-0 col-md-3 bg-primary rounded-2 text-center  mx-2">
+            <div
+              aria-label="button-group Basic example "
+              className="d-flex flex-column w-25 col-2"
+            >
+              <div className=" bg-primary rounded-2 text-center  mb-3">
                 <button
                   className="rounded-1  btn w-100 py-3 "
                   name="all"
@@ -55,7 +58,7 @@ function Category() {
                   All
                 </button>
               </div>
-              <div className="col-6 col-md-3 bg-primary rounded-2 text-center  mx-2">
+              <div className=" bg-primary rounded-2 text-center  mb-3">
                 <Button
                   name="frontend"
                   className="rounded-1  btn w-100 py-3 "
@@ -67,7 +70,7 @@ function Category() {
                   Frontend
                 </Button>
               </div>
-              <div className="col-6 col-md-3 bg-primary rounded-2 text-center  mx-2">
+              <div className=" bg-primary rounded-2 text-center  mb-3">
                 <Button
                   name="backend"
                   className="rounded-1  btn w-100 py-3 "
@@ -79,7 +82,7 @@ function Category() {
                   Backend
                 </Button>
               </div>
-              <div className="col-6 col-md-3 bg-primary rounded-2 text-center  mx-2">
+              <div className="bg-primary rounded-2 text-center  mb-3">
                 <Button
                   name="ui/ux"
                   className="rounded-1  btn w-100 py-3 "
@@ -92,19 +95,27 @@ function Category() {
                 </Button>
               </div>
             </div>
-          </div>
-        </div>
-        <div>
-          <div className="row ay-7aga align-items-lg-stretch">
-            {renderArr.map((ch, i) => {
-              return (
-                <motion.div>
-                  <div className="col-md-6 col-sm-12 col-lg-4">
-                    <ChallengeCard post={ch} key={ch.cid} className="h-100" />
-                  </div>
-                </motion.div>
-              );
-            })}
+            <div className="col-9">
+              {renderArr.length > 0 ? (
+                renderArr.map((ch, i) => {
+                  return (
+                    <motion.div>
+                      <div>
+                        <ChallengeCard
+                          post={ch}
+                          key={ch.cid}
+                          className="h-100"
+                        />
+                      </div>
+                    </motion.div>
+                  );
+                })
+              ) : (
+                <p className="text-center fs-3 text-danger">
+                  No challenges yet
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </div>
