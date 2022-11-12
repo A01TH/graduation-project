@@ -16,10 +16,8 @@ const RecommendedTopChallenges = ({}) => {
     setTopChallenge(challenges);
   }, [challenges]);
   return (
-    <div className=" card  py-3 pb-2 text-white bg-light text-center">
-      <h5 className="text-center mb-1 border-bottom border-light  pb-2 mx-3">
-        Top Challenge
-      </h5>
+    <div className=" card  py-3 pb-2 text-white border border-primary bg-body  px-2">
+      <h5 className="text-center mb-1 text-white  pb-2 mx-3">Top Challenge</h5>
       {isLoading ? (
         <>
           <ContentLoader viewBox="0 0 500 475" height={475} width={500}>
@@ -43,7 +41,6 @@ const RecommendedTopChallenges = ({}) => {
             ))}
         </>
       )}
-      <div className="d-flex justify-content-around  p-2"></div>
     </div>
   );
 };

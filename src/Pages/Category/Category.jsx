@@ -6,6 +6,7 @@ import { FirebaseContext } from "./../../context/FirebaseContext";
 import { useContext, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 function Category() {
   const { challengeCollection } = useContext(FirebaseContext);
   const [challenges] = useCollectionData(challengeCollection);
@@ -25,10 +26,10 @@ function Category() {
   };
 
   return (
-    <div className="section-padding categroy bg-body text-white">
+    <div className="section-padding categroy bg-body text-white categories ">
       <div className="container">
         <div
-          className="wv-100 p-4 rounded-4 mb-2"
+          className="wv-100 p-4 rounded-4 mb-2 bg-body border  border-primary"
           style={
             title === "Frontend"
               ? { backgroundColor: "#3a3a3a" }
@@ -39,7 +40,7 @@ function Category() {
               : { backgroundColor: "#2f2f2f" }
           }
         >
-          <h1 className="text-center  bg mb-5">{title}</h1>
+          <h1 className="text-center  bg mb-5 text-white">{title}</h1>
           <div className="row categroy mb-5 ">
             <div
               aria-label="button-group Basic example "
@@ -111,8 +112,8 @@ function Category() {
                   );
                 })
               ) : (
-                <p className="text-center fs-3 text-danger">
-                  No challenges yet
+                <p className="text-center fs-3 text-primary">
+                  Select category to display
                 </p>
               )}
             </div>

@@ -59,7 +59,7 @@ const Header = () => {
   }, [currentUser]);
 
   return (
-    <section className={`nav bg-tranparent ${changeMode && "bg-white"}`}>
+    <section className={`nav  ${changeMode ? "bg-white" : "bg-body"}`}>
       <div className="container ">
         <header className="d-flex align-items-center justify-content-between w-100 h-100  ">
           <div className="brand">
@@ -67,14 +67,7 @@ const Header = () => {
               <img src={logo} alt="" />
             </Link>
           </div>
-          <Form>
-            <Form.Check
-              type="switch"
-              id="custom-switch"
-              onChange={handleChange}
-              value={changeMode}
-            />
-          </Form>
+
           <nav>
             <div className="nav-mobile ">
               <div
@@ -85,12 +78,24 @@ const Header = () => {
                 <span></span>
               </div>
             </div>
+
             {logged && !userLoading ? (
               <ul
                 className={`nav-list list-unstyled  d-flex  d-flex gap-4 align-items-center justify-content-center  ${
                   mobNav && "show"
                 }`}
               >
+                <li>
+                  <Form>
+                    <Form.Check
+                      type="switch"
+                      id="custom-switch"
+                      onChange={handleChange}
+                      value={changeMode}
+                      fill="red"
+                    />
+                  </Form>
+                </li>
                 <li className="link ">
                   <NavLink to="/home" className={changeMode && "text-muted"}>
                     <FaHome className="me-2" />
@@ -216,6 +221,17 @@ const Header = () => {
                   mobNav && "show"
                 }`}
               >
+                <li>
+                  {" "}
+                  <Form>
+                    <Form.Check
+                      type="switch"
+                      id="custom-switch"
+                      onChange={handleChange}
+                      value={changeMode}
+                    />
+                  </Form>
+                </li>
                 <li className="link">
                   <NavLink className={changeMode && "text-muted"} to="/about">
                     Why Challe.go

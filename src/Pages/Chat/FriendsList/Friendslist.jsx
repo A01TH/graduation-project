@@ -10,7 +10,7 @@ const FriendList = () => {
   const { friends } = useContext(currentContext);
 
   return (
-    <div className="conversation-area  chat-sidebar pt-1">
+    <div className="conversation-area  chat-sidebar bg-body pt-1">
       {friends?.map((user) => {
         return <FriendInbox active key={user.uid} user={user} />;
       })}

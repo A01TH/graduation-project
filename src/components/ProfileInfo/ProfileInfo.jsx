@@ -6,9 +6,11 @@ import userImgUrl from "./Sample.png";
 import { currentContext } from "../../context/CurrentUser";
 import UserAction from "./UserAction";
 import Toast from "../../UI/Toast/Toast";
+import { DarkLightContext } from "../../context/DarkLightContext";
 
 const ProfileInfo = ({ user, self }) => {
   const { currentUser, updateCurrentUser } = useContext(currentContext);
+  const { changeMode } = useContext(DarkLightContext);
 
   const [smShow, setSmShow] = useState(false);
   const [userImg, setUserImg] = useState(user.photoUrl);
@@ -65,7 +67,11 @@ const ProfileInfo = ({ user, self }) => {
                   onHide={() => setSmShow(false)}
                   aria-labelledby="example-modal-sizes-title-sm"
                 >
-                  <Modal.Body className="modalBody px-4 text-center bg-body">
+                  <Modal.Body
+                    className={`modalBody px-4 text-center ${
+                      changeMode ? "bg-white" : "bg-body "
+                    }`}
+                  >
                     <div
                       className="edit-img mx-auto mb-4 rounded-circle"
                       style={{ width: "200px", height: "200px" }}
@@ -104,7 +110,7 @@ const ProfileInfo = ({ user, self }) => {
             <div className="user d-flex justify-content-between align-items-start">
               <div className="user">
                 <h2 className="name">
-                  <span className="me-2"> {user.name}</span>
+                  <span className="me-2 text-white"> {user.name}</span>
                   {user.userBadge && (
                     <img
                       className="custom-badge"

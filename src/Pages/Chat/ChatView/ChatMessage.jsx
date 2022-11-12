@@ -9,7 +9,9 @@ const ChatMessage = ({ owner, msgData, photoUrl, date }) => {
         <img className="chat-msg-img rounded-circle" src={photoUrl} alt="" />
       </div>
       <div className="chat-msg-content">
-        <div className="chat-msg-text  message p-1 px-2 mt-3">{msgData}</div>
+        <div className="chat-msg-text bg-tranparent  message p-1 px-2 mt-3">
+          {msgData}
+        </div>
       </div>
     </div>
   );

@@ -22,7 +22,6 @@ import { DarkLightContext } from "../../context/DarkLightContext";
 function ChallengeCard({ post }) {
   const { userCollection, challengeCollection, users } =
     useContext(FirebaseContext);
-  const { changeMode } = useContext(DarkLightContext);
 
   const { currentUser } = useContext(currentContext);
   const query = userCollection.where("uid", "==", post.creatorID);
@@ -97,9 +96,7 @@ function ChallengeCard({ post }) {
     >
       {!isLoading && (
         <div
-          className={`p-3 mx-auto  w-100  border ${
-            changeMode ? "bg-white border-dark " : "bg-body border-light"
-          }`}
+          className={`p-3 mx-auto  w-100  border   bg-body border-primary card my-3  `}
         >
           <h5 className="text-primary fw-bold">{post.title}</h5>
 

@@ -75,7 +75,7 @@ const Post = () => {
         </button>
         {openForm && (
           <motion.div
-            className="row post mx-1"
+            className="row post mx-1 text-black"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
@@ -86,7 +86,7 @@ const Post = () => {
                   <FloatingLabel
                     controlId="floatingInput"
                     label="title"
-                    className="mb-3"
+                    className="mb-3 border rounded-2"
                   >
                     <Form.Control
                       type="text"
@@ -99,6 +99,7 @@ const Post = () => {
                   <FloatingLabel
                     controlId="floatingTextarea2"
                     label="Add your breif here ..."
+                    className="border rounded-2"
                   >
                     <Form.Control
                       as="textarea"
@@ -140,7 +141,7 @@ const Post = () => {
                         )}
                       />
                     </div>
-                    <div className="col-lg-4 col-6 mt-1">
+                    <div className="col-lg-4 col-6 mt-1 overflow-hidden">
                       <DatePicker
                         selected={endDate}
                         onChange={(date) => setEndDate(date)}

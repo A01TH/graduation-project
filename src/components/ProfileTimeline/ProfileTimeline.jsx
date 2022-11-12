@@ -28,7 +28,7 @@ const ProfileTimeline = ({ user, self }) => {
   }
 
   return (
-    <div className="profile-timeline">
+    <div className="profile-timeline text-white">
       <Tabs
         defaultActiveKey="home"
         id="fill-tab-example"
@@ -56,7 +56,7 @@ const ProfileTimeline = ({ user, self }) => {
                 {userChallenges.length > 0 ? (
                   userChallenges.map((challenge, index) => {
                     return (
-                      <div className="col-sm-12 col-md-6 mb-3 " >
+                      <div className="col-sm-12 col-md-6 mb-3 ">
                         <ChallengeCard post={challenge} key={index} />
                       </div>
                     );

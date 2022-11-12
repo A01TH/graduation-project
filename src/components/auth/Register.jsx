@@ -107,7 +107,7 @@ const Register = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="px-3"
+      className="px-3 text-white"
     >
       <Button
         onClick={handleLoginWithGoogle}
@@ -123,6 +123,7 @@ const Register = () => {
           <Form.Control
             type="name"
             placeholder="Enter Your Name"
+            className="border"
             {...register("name", {
               required: true,
               minLength: 2,
@@ -144,6 +145,7 @@ const Register = () => {
           <Form.Control
             type="email"
             placeholder="Enter email"
+            className="border"
             {...register("email", {
               required: true,
               pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
@@ -157,14 +159,17 @@ const Register = () => {
           )}
         </Form.Group>
 
-        <div className="d-flex align-items-stretch">
+        <div className="d-flex align-items-stretch text-white">
           <Form.Group className="mb-3  me-2 w-50" controlId="formBasicPassword">
             <Form.Label>Gender </Form.Label>
 
             <Controller
               name="gender"
               control={control}
-              render={({ field }) => <Select {...field} options={options} />}
+              className="bg-dark "
+              render={({ field }) => (
+                <Select className="text-black" {...field} options={options} />
+              )}
             />
           </Form.Group>
 
@@ -174,18 +179,19 @@ const Register = () => {
               <input
                 type="date"
                 {...register("birthDate")}
-                className="form-control "
+                className="form-control border "
               ></input>
             </div>
           </Form.Group>
         </div>
 
-        <div className="d-flex">
+        <div className="d-flex text-white">
           <Form.Group className="mb-3 w-50 me-2" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
               placeholder="Password"
+              className="border"
               {...register("password", {
                 required: true,
               })}
@@ -212,6 +218,7 @@ const Register = () => {
             <Form.Control
               type="password"
               name="confirmPass"
+              className="border"
               placeholder="Confirm Password"
               {...register("confirmPass", {
                 required: true,
@@ -238,7 +245,12 @@ const Register = () => {
             name="Interests"
             control={control}
             render={({ field }) => (
-              <Select {...field} options={multiOptions} isMulti />
+              <Select
+                className="text-black"
+                {...field}
+                options={multiOptions}
+                isMulti
+              />
             )}
           />
         </Form.Group>

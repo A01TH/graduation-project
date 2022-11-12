@@ -16,7 +16,10 @@ const ChatView = () => {
           <div className="conversation-area col-4 col-md-4 col-lg-3">
             <FriendList />
           </div>
-          <div id="fwe1fa" className="chat-area col-8 col-md-8 col-lg-9">
+          <div
+            id="fwe1fa"
+            className="chat-area bg-body col-8 col-md-8 col-lg-9"
+          >
             {secondUser ? (
               <>
                 <div>
@@ -31,7 +34,7 @@ const ChatView = () => {
               </>
             ) : (
               <div>
-                <div className="welcome-msg text-center mt-5 fw-bold fs-2">
+                <div className="welcome-msg text-white text-center mt-5 fw-bold fs-2">
                   Welcome In Our Chat{" "}
                 </div>
                 {/* <video  width="320" height="240" autoplay src={chatchathello} /> */}

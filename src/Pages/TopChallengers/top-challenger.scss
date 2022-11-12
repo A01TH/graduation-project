@@ -1,5 +1,5 @@
 .page-height {
-  height: 85vh;
+  height: calc(100vh - 80px);
 }
 
 ::-webkit-scrollbar-thumb {

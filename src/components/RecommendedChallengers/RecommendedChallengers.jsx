@@ -12,7 +12,6 @@ const RecommendedChallengers = () => {
   const { users } = useContext(FirebaseContext);
   const { currentUser } = useContext(currentContext);
   const { changeMode } = useContext(DarkLightContext);
-
   let currentUserInterests = [];
   let currentUserFriends = [];
   let strangeUsers = [];
@@ -49,18 +48,15 @@ const RecommendedChallengers = () => {
 
   return (
     <motion.div
-      className={`py-3 pb-2 mb-5   border-light card text-center bg-light ${
-        changeMode && "bg-white"
-      } `}
+      className={`py-3 pb-2 mb-5   card text-center bg-body border-primary`}
       initial={{ x: 100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <div className={`mb-2  `}>
         <h5
-          className={`text-center mb-3 border-light border-bottom pb-2 mx-2 ${
-            changeMode ? "text-black" : "text-white"
-          }`}
+          className={`text-center mb-3 border-primary border-bottom pb-2 mx-2 text-white 
+          `}
         >
           Recommended Challengers
         </h5>
@@ -94,15 +90,27 @@ const RecommendedChallengers = () => {
       <Modal show={show} onHide={handleClose}>
         <Modal.Header
           closeButton
-          className="bg-body border-primary border-bottom"
+          className={` border-primary border-bottom  ${
+            changeMode ? "bg-white" : "bg-body "
+          }`}
         >
-          <Modal.Title>Recommended Challengers</Modal.Title>
+          <Modal.Title
+            className={` ${changeMode ? "text-black" : "text-white "}`}
+          >
+            Recommended Challengers
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="bg-body border-primary border-bottom">
+        <Modal.Body
+          className={`border-primary border-bottom ${
+            changeMode ? "bg-white" : "bg-body "
+          }`}
+        >
           {mayKnowUsers.map((user, index) => {
             return (
               <Link
-                className=" text-decoration-none text-white"
+                className={` text-decoration-none   ${
+                  changeMode ? "text-black" : "text-white "
+                }`}
                 to={`/${user.username}`}
                 key={index}
               >
@@ -111,7 +119,7 @@ const RecommendedChallengers = () => {
             );
           })}
         </Modal.Body>
-        <Modal.Footer className="bg-body">
+        <Modal.Footer className={`${changeMode ? "bg-white" : "bg-body "}`}>
           <Button variant="danger" onClick={handleClose}>
             Close
           </Button>

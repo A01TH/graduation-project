@@ -14,7 +14,7 @@
     height: 200px !important;
     width: 200px !important;
     img {
-      object-fit: cover
+      object-fit: cover;
     }
   }
 
@@ -28,7 +28,7 @@
     border: none;
     outline: none;
     &:hover {
-      color: white !important;
+      color: rgb(184, 184, 184) !important;
     }
   }
 }

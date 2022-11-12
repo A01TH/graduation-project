@@ -41,10 +41,10 @@ const ChatFooter = () => {
   return (
     <div className="chat-area-footer chat-input">
       <form
-        className=" d-flex p-2 gap-4 bg-transparent justify-content-center "
+        className=" d-flex p-2 gap-4 bg-pri justify-content-center "
         onSubmit={handleSendMsg}
       >
-        <div className="w-50 position-relative input-continer d-flex align-items-center py-2 ">
+        <div className="w-50 position-relative input-continer d-flex align-items-center py-2 bg-light border border-light ">
           {showEmojis && (
             <div className="emoji">
               <Picker onEmojiSelect={addEmoji} />
@@ -66,7 +66,7 @@ const ChatFooter = () => {
             placeholder="Type something here..."
           />
           <button
-            className="btn d-flex justify-content-center align-items-center p-2 msg-send"
+            className="btn bg-primary d-flex justify-content-center align-items-center p-2 msg-send"
             type="submit"
           >
             <IoSend />

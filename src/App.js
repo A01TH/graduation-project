@@ -12,10 +12,13 @@ import Category from "./Pages/Category/Category";
 import TopChallengers from "./Pages/TopChallengers/TopChallengers";
 import ChatView from "./Pages/Chat/ChatView";
 import ChallengePage from "./Pages/ChallengePage/ChallengePage";
+import { useContext } from "react";
+import { DarkLightContext } from "./context/DarkLightContext";
 
 function App() {
+  const { changeMode } = useContext(DarkLightContext);
   return (
-    <div className="App ">
+    <div className={`App ${changeMode ? "light" : "dark"}`}>
       <BrowserRouter>
         <Navbar />
         <Routes>

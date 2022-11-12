@@ -46,7 +46,7 @@ const Login = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="login auth"
+      className="login auth text-white"
     >
       <div className="wrapper px-3">
         <div className="text-center login-methods d-flex gap-4 justify-content-center mb-3">
@@ -61,7 +61,7 @@ const Login = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <label className="form-label">Email</label>
             <input
-              className="form-control mb-3"
+              className="form-control mb-3 border"
               type="text"
               {...register("email", {
                 required: true,
@@ -75,7 +75,7 @@ const Login = () => {
             <label className="form-label">Password</label>
             <input
               type="password"
-              className="form-control mb-2"
+              className="form-control mb-2 border"
               {...register("password", { required: true })}
             />
             {errors.password && (

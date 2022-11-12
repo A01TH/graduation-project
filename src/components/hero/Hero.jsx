@@ -17,7 +17,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="hero">
+    <div className="hero bg-body">
       <div className="container mx-auto row h-100 align-items-center g-0">
         <div
           className="col-12 px-sm-3 col-md-7 px-3 align-self-center bg-body py-5"
@@ -28,7 +28,7 @@ const Hero = () => {
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-uppercase"
+              className="text-uppercase text-primary"
             >
               Challenge yourself
             </motion.div>

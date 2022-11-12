@@ -142,7 +142,7 @@ $nav-font-color: #ffffff;
   font-size: 25px;
 }
 
-$c: #ce2b37;
+$c: #1a8cd8;
 $s: 10px;
 .bill-wrapper {
   right: 15px;
@@ -173,7 +173,6 @@ div.bill {
 }
 
 @keyframes expand {
-  /* Starting at 1 to prevent IOS flicker */
   1% {
     width: 0;
     height: 0;
@@ -191,4 +190,16 @@ div.bill {
 
 .dropdown-notification {
   width: 350px !important;
+}
+.form-switch .form-check-input {
+  width: 100px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(181, 181, 181);
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(255,255,255,1.0)'/></svg>");
+}
+
+.form-switch .form-check-input:checked {
+  border: none;
+  background-color: black;
+  border: 1px solid white;
 }

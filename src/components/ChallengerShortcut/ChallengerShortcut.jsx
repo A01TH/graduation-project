@@ -9,9 +9,7 @@ const ChallengerShortcut = ({ name, photoURL, username }) => {
 
   return (
     <div
-      className={`d-flex g-1  justify-content-center  align-items-center p-2 ${
-        changeMode && "text-muted"
-      }`}
+      className={`d-flex g-1  justify-content-center  align-items-center p-2 `}
     >
       <div className="col-2 ">
         <img src={photoURL} className="w-100 rounded-circle img-fluid" alt="" />

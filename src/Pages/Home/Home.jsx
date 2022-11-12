@@ -13,7 +13,6 @@ import RecommendedChallengers from "./../../components/RecommendedChallengers/Re
 import RecommendedTopChallenges from "./../../components/RecommendedTopChallenges/RecommendedTopChallenges";
 import TopChallengers from "./../TopChallengers/TopChallengers";
 import { Link } from "react-router-dom";
-import { DarkLightContext } from "../../context/DarkLightContext";
 const ChallengeCard = React.lazy(() =>
   import("../../components/ChallengeCard/ChallengeCard")
 );
@@ -25,7 +24,6 @@ const Home = () => {
   const [challenges, isLoading] = useCollectionData(challengeCollection);
   const { currentUser, userLoading } = useContext(currentContext);
   const [currentUserPosts, setcurrentUserPosts] = useState(challenges);
-  const { changeMode } = useContext(DarkLightContext);
 
   useEffect(() => {
     if (currentUser) {
@@ -43,7 +41,7 @@ const Home = () => {
     );
   }
   return (
-    <div className={` py-3  home ${changeMode ? "bg-white" : "bg-body"}`}>
+    <div className={` py-3  home  bg-body`}>
       <div className="container-fluid">
         <div className="row align-items-start justify-content-center">
           <div className="col-md-6 col-sm-12  mb-2  ">
@@ -55,7 +53,19 @@ const Home = () => {
                   ?.sort((a, b) => b.startDate.toDate() - a.startDate.toDate())
                   .map((post, index) => {
                     return (
-                      <Suspense fallback={<h1>Loading....</h1>} key={post.cid}>
+                      <Suspense
+                        fallback={
+                          <ContentLoader viewBox="0 0 476 124">
+                            <rect x="48" y="8" width="88" height="6" rx="3" />
+                            <rect x="48" y="26" width="52" height="6" rx="3" />
+                            <rect x="0" y="56" width="410" height="6" rx="3" />
+                            <rect x="0" y="72" width="380" height="6" rx="3" />
+                            <rect x="0" y="88" width="178" height="6" rx="3" />
+                            <circle cx="20" cy="20" r="20" />
+                          </ContentLoader>
+                        }
+                        key={post.cid}
+                      >
                         <ChallengeCard
                           post={post}
                           currentUser={currentUser[0]}
@@ -87,16 +97,18 @@ const Home = () => {
                 isLoading={isLoading}
               />
             </div>
-            <div className="rounded-2 overflow-hidden bg-light px-2">
-              <h5 className="text-center mb-1 border-bottom border-light  p-3 mx-3">
+            <div className="rounded-2 overflow-hidden bg-body px-2 border border-primary text-center">
+              <h5 className="text-center mb-1 text-white  p-3 mx-3">
                 Top Challengers
               </h5>
-              <TopChallengers home={true} className="w-100 mb-3" />
+              <TopChallengers home={true} className="w-100  " />
               <Link
                 to="/top-challengers"
                 className="text-decoration-none text-primary "
               >
-                <p className="text-center"> Explore all top challengers</p>
+                <p className=" btn btn-primary  text-center mt-3">
+                  Explore all top challengers
+                </p>
               </Link>
             </div>
           </div>
