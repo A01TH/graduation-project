@@ -6,10 +6,13 @@ import { currentContext } from "../../context/CurrentUser";
 import { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { motion } from "framer-motion";
+import { DarkLightContext } from "../../context/DarkLightContext";
 
 const RecommendedChallengers = () => {
   const { users } = useContext(FirebaseContext);
   const { currentUser } = useContext(currentContext);
+  const { changeMode } = useContext(DarkLightContext);
+
   let currentUserInterests = [];
   let currentUserFriends = [];
   let strangeUsers = [];
@@ -46,13 +49,19 @@ const RecommendedChallengers = () => {
 
   return (
     <motion.div
-      className="  py-3 pb-2 mb-5   border-light card text-center bg-light"
+      className={`py-3 pb-2 mb-5   border-light card text-center bg-light ${
+        changeMode && "bg-white"
+      } `}
       initial={{ x: 100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="mb-2 text-white ">
-        <h5 className="text-center mb-3 border-light border-bottom pb-2 mx-2">
+      <div className={`mb-2  `}>
+        <h5
+          className={`text-center mb-3 border-light border-bottom pb-2 mx-2 ${
+            changeMode ? "text-black" : "text-white"
+          }`}
+        >
           Recommended Challengers
         </h5>
         {mayKnowUsers.slice(0, 4).map((usr, index) => {

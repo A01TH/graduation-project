@@ -13,6 +13,7 @@ import RecommendedChallengers from "./../../components/RecommendedChallengers/Re
 import RecommendedTopChallenges from "./../../components/RecommendedTopChallenges/RecommendedTopChallenges";
 import TopChallengers from "./../TopChallengers/TopChallengers";
 import { Link } from "react-router-dom";
+import { DarkLightContext } from "../../context/DarkLightContext";
 const ChallengeCard = React.lazy(() =>
   import("../../components/ChallengeCard/ChallengeCard")
 );
@@ -24,6 +25,7 @@ const Home = () => {
   const [challenges, isLoading] = useCollectionData(challengeCollection);
   const { currentUser, userLoading } = useContext(currentContext);
   const [currentUserPosts, setcurrentUserPosts] = useState(challenges);
+  const { changeMode } = useContext(DarkLightContext);
 
   useEffect(() => {
     if (currentUser) {
@@ -41,7 +43,7 @@ const Home = () => {
     );
   }
   return (
-    <div className="mt-5 bg-body home">
+    <div className={` py-3  home ${changeMode ? "bg-white" : "bg-body"}`}>
       <div className="container-fluid">
         <div className="row align-items-start justify-content-center">
           <div className="col-md-6 col-sm-12  mb-2  ">

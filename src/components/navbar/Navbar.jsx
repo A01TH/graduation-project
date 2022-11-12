@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Form } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo/Logo2.png";
 import { BsFillChatLeftTextFill } from "react-icons/bs";
@@ -13,15 +13,23 @@ import Button from "react-bootstrap/Button";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import Notification from "../notification/Notification";
 import { OpenAuthContext } from "../../context/OpenAuthContext";
+import { DarkLightContext } from "../../context/DarkLightContext";
 
 const Header = () => {
   const { authOpened, setAuthOpened } = useContext(OpenAuthContext);
   const { userData, currentUser, userLoading } = useContext(currentContext);
+  const { changeMode, setChangeMode } = useContext(DarkLightContext);
+
   const { auth, users } = useContext(FirebaseContext);
   const [requestedUsers, setRequestedUsers] = useState([]);
   const navigate = useNavigate();
   const [logged, setLogged] = useState(false);
   const [opened, Setopened] = useState(false);
+  const [mobNav, setMobNav] = useState(false);
+
+  const handleChange = () => {
+    setChangeMode((prev) => !prev);
+  };
   const openAuth = () => {
     navigate("/");
     setAuthOpened(true);
@@ -37,7 +45,6 @@ const Header = () => {
     auth.signOut();
     navigate("/");
   };
-  const [mobNav, setMobNav] = useState(false);
   const handleMobileNav = () => {
     setMobNav((prev) => !prev);
   };
@@ -52,14 +59,22 @@ const Header = () => {
   }, [currentUser]);
 
   return (
-    <section className="nav bg-tranparent">
-      <div className="container">
-        <header className="d-flex align-items-center justify-content-between w-100 h-100">
+    <section className={`nav bg-tranparent ${changeMode && "bg-white"}`}>
+      <div className="container ">
+        <header className="d-flex align-items-center justify-content-between w-100 h-100  ">
           <div className="brand">
             <Link to={`${logged ? "/home" : "/"}`}>
               <img src={logo} alt="" />
             </Link>
           </div>
+          <Form>
+            <Form.Check
+              type="switch"
+              id="custom-switch"
+              onChange={handleChange}
+              value={changeMode}
+            />
+          </Form>
           <nav>
             <div className="nav-mobile ">
               <div
@@ -72,24 +87,30 @@ const Header = () => {
             </div>
             {logged && !userLoading ? (
               <ul
-                className={`nav-list list-unstyled  d-flex  d-flex gap-4 align-items-center justify-content-center ${
+                className={`nav-list list-unstyled  d-flex  d-flex gap-4 align-items-center justify-content-center  ${
                   mobNav && "show"
                 }`}
               >
-                <li className="link">
-                  <NavLink to="/home">
+                <li className="link ">
+                  <NavLink to="/home" className={changeMode && "text-muted"}>
                     <FaHome className="me-2" />
                     Home
                   </NavLink>
                 </li>
                 <li className="link">
-                  <NavLink to="/categories">
+                  <NavLink
+                    to="/categories"
+                    className={changeMode && "text-muted"}
+                  >
                     <BiCategoryAlt className="me-2" />
                     Categories
                   </NavLink>
                 </li>
                 <li className="link">
-                  <NavLink to="/messages">
+                  <NavLink
+                    to="/messages"
+                    className={changeMode && "text-muted"}
+                  >
                     <BsFillChatLeftTextFill className="me-2" />
                     Messages
                   </NavLink>
@@ -110,14 +131,18 @@ const Header = () => {
 
                     <Dropdown.Menu
                       align="end"
-                      className="dropdown-notification bg-body border border-primary"
+                      className={`dropdown-notification   border border-primary ${
+                        changeMode ? "bg-white" : "bg-body"
+                      }`}
                     >
                       {requestedUsers.length > 0 ? (
                         <>
                           {requestedUsers?.map((user) => {
                             return (
                               <Dropdown.Item
-                                className="noti-item"
+                                className={`noti-item ${
+                                  changeMode && "text-muted"
+                                }`}
                                 key={user.uid}
                               >
                                 <Notification
@@ -130,7 +155,13 @@ const Header = () => {
                           })}
                         </>
                       ) : (
-                        <h6 className="text-center">No Notifications</h6>
+                        <h6
+                          className={`text-center ${
+                            changeMode && "text-muted"
+                          }`}
+                        >
+                          No Notifications
+                        </h6>
                       )}
                     </Dropdown.Menu>
                   </Dropdown>
@@ -148,11 +179,17 @@ const Header = () => {
                         alt="user"
                       />
                     </Dropdown.Toggle>
-                    <Dropdown.Menu className="bg-body border border-primary">
+                    <Dropdown.Menu
+                      className={`border border-primary ${
+                        changeMode ? "bg-white" : "bg-body"
+                      }`}
+                    >
                       <Dropdown.Item
                         as={Link}
                         to="/profile"
-                        className="d-flex align-items-center justify-content-around"
+                        className={`d-flex align-items-center justify-content-around ${
+                          changeMode && "text-muted"
+                        }`}
                       >
                         <span>
                           Profile <FaUserAlt />
@@ -161,7 +198,9 @@ const Header = () => {
 
                       <Dropdown.Item
                         onClick={handleSignOut}
-                        className="d-flex align-items-center justify-content-around"
+                        className={`d-flex align-items-center justify-content-around ${
+                          changeMode && "text-muted"
+                        }`}
                       >
                         <span>
                           Logout <BiLogOut />
@@ -178,7 +217,9 @@ const Header = () => {
                 }`}
               >
                 <li className="link">
-                  <NavLink to="/about">Why Challe.go</NavLink>
+                  <NavLink className={changeMode && "text-muted"} to="/about">
+                    Why Challe.go
+                  </NavLink>
                 </li>
                 <li>
                   <Button onClick={openAuth} variant="outline-primary">

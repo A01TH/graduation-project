@@ -17,10 +17,12 @@ import { SiCoursera, SiUdemy, SiYoutube } from "react-icons/si";
 import { motion } from "framer-motion";
 import { Button, Modal } from "react-bootstrap";
 import ChallengerShortcut from "../ChallengerShortcut/ChallengerShortcut";
+import { DarkLightContext } from "../../context/DarkLightContext";
 
 function ChallengeCard({ post }) {
   const { userCollection, challengeCollection, users } =
     useContext(FirebaseContext);
+  const { changeMode } = useContext(DarkLightContext);
 
   const { currentUser } = useContext(currentContext);
   const query = userCollection.where("uid", "==", post.creatorID);
@@ -94,7 +96,11 @@ function ChallengeCard({ post }) {
       transition={{ duration: 0.5 }}
     >
       {!isLoading && (
-        <div className="p-3    mx-auto  w-100 bg-body  border-light border">
+        <div
+          className={`p-3 mx-auto  w-100  border ${
+            changeMode ? "bg-white border-dark " : "bg-body border-light"
+          }`}
+        >
           <h5 className="text-primary fw-bold">{post.title}</h5>
 
           <div className="chall-owner d-flex justify-content-between mb-3 flex-wrap align-items-center   ">

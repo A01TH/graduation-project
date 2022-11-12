@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,19 +8,21 @@ import FirebaseProvider from "./context/FirebaseContext";
 import CurrentUserProvider from "./context/CurrentUser";
 import SecondUserProvider from "./context/SecondUserContext";
 import OpenAuthProvider from "./context/OpenAuthContext";
-// import Navbar from "./components/navbar/Navbar";
+import DarkLightProvider from "./context/DarkLightContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  <OpenAuthProvider>
-    <FirebaseProvider>
-      <CurrentUserProvider>
-        <SecondUserProvider>
-          <App />
-        </SecondUserProvider>
-      </CurrentUserProvider>
-    </FirebaseProvider>
-  </OpenAuthProvider>
+  <DarkLightProvider>
+    <OpenAuthProvider>
+      <FirebaseProvider>
+        <CurrentUserProvider>
+          <SecondUserProvider>
+            <App />
+          </SecondUserProvider>
+        </CurrentUserProvider>
+      </FirebaseProvider>
+    </OpenAuthProvider>
+  </DarkLightProvider>
   // </React.StrictMode>
 );
 
