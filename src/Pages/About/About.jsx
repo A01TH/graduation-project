@@ -2,7 +2,7 @@ import React from "react";
 import "./About.scss";
 const About = () => {
   return (
-    <div className="bg-body about-page py-5 ">
+    <div className="bg-body page-about py-5 ">
       <div className=" container d-flex justify-content-start align-items-center ">
         <div className="content h-100">
           <h3 className="text-primary">About Challe.go</h3>
