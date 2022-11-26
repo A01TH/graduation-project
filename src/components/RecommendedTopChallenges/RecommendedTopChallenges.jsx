@@ -7,17 +7,13 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import { FirebaseContext } from "../../context/FirebaseContext";
 import ChallengeCard from "../ChallengeCard/ChallengeCard";
 
-const RecommendedTopChallenges = ({}) => {
+const RecommendedTopChallenges = () => {
   const { challengeCollection } = useContext(FirebaseContext);
   const [challenges, isLoading] = useCollectionData(challengeCollection);
 
-  const [topChallenge, setTopChallenge] = useState([]);
-  useEffect(() => {
-    setTopChallenge(challenges);
-  }, [challenges]);
   return (
-    <div className=" card  py-3 pb-2 text-white border border-primary bg-body  px-2">
-      <h5 className="text-center mb-1 text-white  pb-2 mx-3">Top Challenge</h5>
+    <div className=" card  p-3 text-white border border-primary bg-body overflow-hidden">
+      <h5 className="text-center mb-3 text-white  pb-2 mx-3">Top Challenges</h5>
       {isLoading ? (
         <>
           <ContentLoader viewBox="0 0 500 475" height={475} width={500}>
@@ -33,10 +29,14 @@ const RecommendedTopChallenges = ({}) => {
           {challenges
 
             .sort((a, b) => b.postLikes.length - a.postLikes.length)
-            .slice(0, 1)
+            .slice(0, 3)
             .map((chall) => (
-              <div key={chall.cid}>
-                <ChallengeCard post={chall} />
+              <div
+                key={chall.cid}
+                className="d-flex justify-content-between align-items-center mb-3"
+              >
+                <h6 className="text-primary text-capitalize">{chall.title}</h6>
+                <button className="btn btn-sm btn-primary">View</button>
               </div>
             ))}
         </>

@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { Suspense } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import ContentLoader from "react-content-loader";
@@ -12,7 +11,11 @@ import Post from "./../../components/AddPost/Post";
 import RecommendedChallengers from "./../../components/RecommendedChallengers/RecommendedChallengers";
 import RecommendedTopChallenges from "./../../components/RecommendedTopChallenges/RecommendedTopChallenges";
 import TopChallengers from "./../TopChallengers/TopChallengers";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
+import SideBar from "../../components/SideBar/SideBar";
+import { async } from "emoji-mart";
+import { Suspense } from "react";
 const ChallengeCard = React.lazy(() =>
   import("../../components/ChallengeCard/ChallengeCard")
 );
@@ -23,11 +26,12 @@ const Home = () => {
   const { challengeCollection } = useContext(FirebaseContext);
   const [challenges, isLoading] = useCollectionData(challengeCollection);
   const { currentUser, userLoading } = useContext(currentContext);
-  const [currentUserPosts, setcurrentUserPosts] = useState(challenges);
+  const [allPosts, setAllPosts] = useState(challenges);
+  const [counter, setCounter] = useState(2);
 
   useEffect(() => {
     if (currentUser) {
-      setcurrentUserPosts(challenges);
+      setAllPosts(challenges);
     }
   }, [challenges]);
 
@@ -40,16 +44,23 @@ const Home = () => {
       </div>
     );
   }
+
   return (
     <div className={` py-3  home  bg-body`}>
-      <div className="container-fluid">
+      <div className="container">
         <div className="row align-items-start justify-content-center">
+          <div className="col-md-2">
+            <SideBar />
+          </div>
           <div className="col-md-6 col-sm-12  mb-2  ">
-            <Post />
+            <h3 className="text-dark">
+              Welcome, {currentUser[0].name.split(" ")[0]}
+            </h3>
 
-            {currentUserPosts ? (
+            <Post />
+            {allPosts ? (
               <>
-                {currentUserPosts
+                {allPosts
                   ?.sort((a, b) => b.startDate.toDate() - a.startDate.toDate())
                   .map((post, index) => {
                     return (
@@ -85,17 +96,14 @@ const Home = () => {
               </ContentLoader>
             )}
 
-            {currentUserPosts?.length === 0 ? (
+            {allPosts?.length === 0 ? (
               <h1 className="text-white text-center mt-5">No Posts Yet!</h1>
             ) : null}
           </div>
-          <div className="d-none d-md-block col-3  col-md-4 col-lg-3 ">
+          <div className="d-none d-md-block col-3  col-md-4 col-lg-4 ">
             <RecommendedChallengers />
             <div className="mb-5">
-              <RecommendedTopChallenges
-                challenges={challenges}
-                isLoading={isLoading}
-              />
+              <RecommendedTopChallenges />
             </div>
             <div className="rounded-2 overflow-hidden bg-body px-2 border border-primary text-center">
               <h5 className="text-center mb-1 text-white  p-3 mx-3">
